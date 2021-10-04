@@ -1,5 +1,3 @@
-
-
 /*
  * string_parser.c
  *
@@ -7,9 +5,6 @@
  *      Author: gguan, Monil
  *
  */
-
-
-
 
 #include <stdio.h>
 #include <stdlib.h>
