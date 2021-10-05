@@ -25,6 +25,33 @@ int count_token (char* buf, const char* delim)
 	*			c.	account NULL for the last token
 	*	#3. return the number of token (note not number of delimeter)
 	*/
+
+	// To see if NULL String
+	if (buf == NULL){
+		return EXIT_FAILURE;
+	}
+
+
+	// String start with delimeter
+	else if (strcmp(buf[0], delim) == 0)
+	{
+		return EXIT_FAILURE;
+	}
+
+
+	// String ends with delimeter
+	else if (strcmp(buf[-1], delim) == 0)
+	{
+		return EXIT_FAILURE;
+	}
+
+	else{
+		count = 0;
+		while(strtok_r(buf, delim, &buf)){
+			count++;
+		}
+	}
+	return count;
 }
 
 command_line str_filler (char* buf, const char* delim)
@@ -41,6 +68,12 @@ command_line str_filler (char* buf, const char* delim)
 	*			fill command_list array with tokens, and fill last spot with NULL.
 	*	#6. return the variable.
 	*/
+
+	char answer;
+	int num_token;
+	num_token = strtok_r(count_token(buf, delim));
+	
+	
 }
 
 
