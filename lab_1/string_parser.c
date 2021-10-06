@@ -35,12 +35,22 @@ int count_token (char* buf, const char* delim)
 	while(count <= strlen(buf))
 	{
 	
-		if (strcmp(buf[0], delim) == 0)
-		{
+		if (strcmp(buf[0], delim) == 0){
 			continue;
 		}
+
+		else if(strcmp(buf[-1], delim) == 0){
+			continue;
+		}
+
+		
+		
 		count++;
+
+
 	}
+
+	return count + 1;
 	
 	
 
