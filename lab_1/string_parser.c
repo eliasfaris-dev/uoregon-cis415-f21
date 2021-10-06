@@ -31,27 +31,21 @@ int count_token (char* buf, const char* delim)
 		return EXIT_FAILURE;
 	}
 
-
-	// String start with delimeter
-	else if (strcmp(buf[0], delim) == 0)
+	int count;
+	while(count <= strlen(buf))
 	{
-		return EXIT_FAILURE;
-	}
-
-
-	// String ends with delimeter
-	else if (strcmp(buf[-1], delim) == 0)
-	{
-		return EXIT_FAILURE;
-	}
-
-	else{
-		count = 0;
-		while(strtok_r(buf, delim, &buf)){
-			count++;
+	
+		if (strcmp(buf[0], delim) == 0)
+		{
+			continue;
 		}
+		count++;
 	}
-	return count;
+	
+	
+
+
+
 }
 
 command_line str_filler (char* buf, const char* delim)
@@ -72,7 +66,7 @@ command_line str_filler (char* buf, const char* delim)
 	char answer;
 	int num_token;
 	num_token = strtok_r(count_token(buf, delim));
-	
+
 	
 }
 
