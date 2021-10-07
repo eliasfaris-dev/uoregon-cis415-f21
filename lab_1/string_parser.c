@@ -32,18 +32,33 @@ int count_token (char* buf, const char* delim)
 	}
 
 	int count = 0;
-	while(count <= strlen(buf))
+
+	if(buf[0] == *delim){
+		count=- 1;
+	}
+	for(int i = 0; i < strlen(buf); i++)
 	{
 	
-		if (strcmp(buf[0], *delim) == 0){
+		/*if (buf[i] != *delim){i
 			continue;
 		}
 
-		else if(strcmp(buf[strlen(buf)-1], *delim) == 0){
+		else if(buf[strlen(buf)-1] != *delim){
 			continue;
 		}
+		*/
+		if(buf[i] == *delim){
 
-		count++;
+		count+= 1;
+		
+		}
+
+		
+	}
+
+	if(buf[strlen(buf)-2] != ";" && *delim == ";"){
+		
+		count+= 1;
 	}
 
 	return count + 1;
@@ -66,7 +81,28 @@ command_line str_filler (char* buf, const char* delim)
 	*	#6. return the variable.
 	*/
 
-	
+	command_line answer;
+	char* saved;
+	char* token;
+
+	int total_tokens = count_token(buf, delim);
+	answer.command_list = (char**)malloc(sizeof(char*) * total_tokens);
+	answer.num_token = total_tokens;
+	buf = strtok_r(buf,"\n",&saved);
+	if( *delim == " ") {
+		total_tokens+= 1;
+	}
+	for(int i = 0; i < total_tokens - 1; i++){
+		token = strtok_r(buf, delim, &saved);
+		buf = NULL;
+		answer.command_list[i] = (char*)malloc(sizeof(char) * (strlen(token)+ 1));
+		strcpy(answer.command_list[i],token);
+
+	}
+
+	answer.command_list[total_tokens -1] = NULL;
+
+	return answer;
 }
 
 
@@ -76,4 +112,10 @@ void free_command_line(command_line* command)
 	/*
 	*	#1.	free the array base num_token
 	*/
+
+	for(int i = 0; i < command->num_token; i++){
+		free(command->command_list[i]);
+	}
+
+	free(command->command_list);
 }
