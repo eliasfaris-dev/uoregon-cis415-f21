@@ -73,10 +73,6 @@ command_line str_filler (char* buf, const char* delim)
 	*	#6. return the variable.
 	*/
 
-	char answer;
-	int num_token;
-	num_token = strtok_r(count_token(buf, delim));
-
 	
 }
 
