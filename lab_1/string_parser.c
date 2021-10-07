@@ -43,11 +43,7 @@ int count_token (char* buf, const char* delim)
 			continue;
 		}
 
-		
-		
 		count++;
-
-
 	}
 
 	return count + 1;
