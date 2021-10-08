@@ -34,15 +34,15 @@ int count_token (char* buf, const char* delim)
 	int count = 1;
 
 	
-	char* copy = strdup(buf);
+	//char* copy = strdup(buf);
 
 	char* token;
 	char* saved;
 	char* ptr;
 
-	strtok_r(copy, "\n", &saved);
+	strtok_r(buf, "\n", &saved);
 
-	for(ptr = copy;; ptr = NULL){
+	for(ptr = buf;; ptr = NULL){
 		token = strtok_r(ptr, delim, &saved);
 		if(token != NULL){
 			count++;
@@ -73,7 +73,7 @@ command_line str_filler (char* buf, const char* delim)
 	*/
 
 	command_line answer;
-	char* copy = strdup(buf);
+	//char* copy = strdup(buf);
 	int tokens = count_token(buf, delim);
 	answer.num_token = tokens;
 
@@ -82,15 +82,15 @@ command_line str_filler (char* buf, const char* delim)
 	char* saved;
 	char* ptr;
 
-	strtok_r(copy, "\n", &saved);
+	strtok_r(buf, "\n", &saved);
 
 	int i = 0;
-	for(ptr = copy;; ptr = NULL, i++){
+	for(ptr = buf;; ptr = NULL, i++){
 		char* tok = strtok_r(ptr,delim,&saved);
 		if(tok == NULL){
 			break;
 		}
-		answer.command_list[i] = strdup(tok);
+		answer.command_list[i] = tok;
 	}
 
 	answer.command_list[(answer.num_token) - 1] = NULL;
