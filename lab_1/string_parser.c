@@ -73,7 +73,6 @@ command_line str_filler (char* buf, const char* delim)
 	*/
 
 	command_line answer;
-	// For some reason I have to make a copy of buf. It "Aborted (core dumped) without the strdup"
 	
 	int tokens = count_token(buf, delim);
 	answer.num_token = tokens;
@@ -81,12 +80,12 @@ command_line str_filler (char* buf, const char* delim)
 	answer.command_list = (char**)malloc(sizeof(char*) * answer.num_token);
 
 	char* saved;
-	char* ptr;
+	char* ptr = buf;
 
 	strtok_r(buf, "\n", &saved);
 
 	int i = 0;
-	for(ptr = buf;; ptr = NULL, i++){
+	for(ptr;; ptr = NULL, i++){
 		char* tok = strtok_r(ptr,delim,&saved);
 		if(tok != NULL){
 			// For some reason I have to make a copy of buf. It "Aborted (core dumped) without the strdup"
