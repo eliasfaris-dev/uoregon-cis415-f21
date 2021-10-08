@@ -31,9 +31,9 @@ int count_token (char* buf, const char* delim)
 		return EXIT_FAILURE;
 	}
 
-	int count = 1;
+	int count = 0;
 
-	// For some reason I have to make a copy of buf. It "Aborted (core dumped) without the strdup"
+	// For some reason I have to make a copy of buf. It "Aborted (core dumped) without the strdup, I am not sure why."
 	char* copy = strdup(buf);
 
 	char* token;
@@ -52,7 +52,7 @@ int count_token (char* buf, const char* delim)
 		}
 	}
 	
-	return count;
+	return count + 1;
 	
 
 }
@@ -88,7 +88,7 @@ command_line str_filler (char* buf, const char* delim)
 	for(ptr;; ptr = NULL, i++){
 		char* tok = strtok_r(ptr,delim,&saved);
 		if(tok != NULL){
-			// For some reason I have to make a copy of buf. It "Aborted (core dumped) without the strdup"
+			// For some reason I have to make a copy of buf. It "Aborted (core dumped) without the strdup, I am not sure why."
 			answer.command_list[i] = strdup(tok);
 		}
 		else{
