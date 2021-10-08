@@ -34,15 +34,15 @@ int count_token (char* buf, const char* delim)
 	int count = 1;
 
 	// For some reason I have to make a copy of buf. It "Aborted (core dumped) without the strdup"
-	//char* copy = strdup(buf);
+	char* copy = strdup(buf);
 
 	char* token;
 	char* saved;
 	char* ptr;
 
-	strtok_r(buf, "\n", &saved);
+	strtok_r(copy, "\n", &saved);
 
-	for(ptr = buf;; ptr = NULL){
+	for(ptr = copy;; ptr = NULL){
 		token = strtok_r(ptr, delim, &saved);
 		if(token != NULL){
 			count++;
