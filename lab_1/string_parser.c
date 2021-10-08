@@ -89,7 +89,7 @@ command_line str_filler (char* buf, const char* delim)
 	for(ptr = copy;; ptr = NULL, i++){
 		char* tok = strtok_r(ptr,delim,&saved);
 		if(tok != NULL){
-			answer.command_list[i] = strdup(tok);
+			answer.command_list[i] = tok;
 		}
 		else{
 			break;
