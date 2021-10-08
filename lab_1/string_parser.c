@@ -85,7 +85,7 @@ command_line str_filler (char* buf, const char* delim)
 	strtok_r(copy, "\n", &saved);
 
 	int i = 0;
-	for(i;; copy == NULL, i++){
+	for(i; i < answer.num_token i++){
 		char* tok = strtok_r(copy,delim,&saved);
 		if(tok == NULL){
 			break;
