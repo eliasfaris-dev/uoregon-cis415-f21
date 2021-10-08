@@ -31,37 +31,28 @@ int count_token (char* buf, const char* delim)
 		return EXIT_FAILURE;
 	}
 
-	int count = 0;
+	int count = 1;
 
-	if(buf[0] == *delim){
-		count=- 1;
-	}
-	for(int i = 0; i < strlen(buf); i++)
-	{
 	
-		/*if (buf[i] != *delim){i
-			continue;
-		}
+	char* copy = strdup(buf);
 
-		else if(buf[strlen(buf)-1] != *delim){
-			continue;
-		}
-		*/
-		if(buf[i] == *delim){
+	char* token;
+	char* saved;
+	// char* ptr;
 
-		count+= 1;
-		
-		}
+	strtok_r(copy, "\n", &saved);
 
-		
+	for(copy;; copy = NULL){
+		token = strtok_r(copy, delim, &saved);
+		if(token != NULL){
+			count++;
+		}
+		else{
+			break;
+		}
 	}
-
-	if(buf[strlen(buf)-2] != ";" && *delim == ";"){
-		
-		count+= 1;
-	}
-
-	return count + 1;
+	
+	return count;
 	
 
 }
@@ -82,25 +73,27 @@ command_line str_filler (char* buf, const char* delim)
 	*/
 
 	command_line answer;
+	char* copy = strdup(buf);
+	int tokens = count_token(buf, delim);
+	answer.num_token = tokens;
+
+	answer.command_list = (char**)malloc(sizeof(char*) * answer.num_token);
+
 	char* saved;
-	char* token;
+	char* str;
 
-	int total_tokens = count_token(buf, delim);
-	answer.command_list = (char**)malloc(sizeof(char*) * total_tokens);
-	answer.num_token = total_tokens;
-	buf = strtok_r(buf,"\n",&saved);
-	if( *delim == " ") {
-		total_tokens+= 1;
-	}
-	for(int i = 0; i < total_tokens - 1; i++){
-		token = strtok_r(buf, delim, &saved);
-		buf = NULL;
-		answer.command_list[i] = (char*)malloc(sizeof(char) * (strlen(token)+ 1));
-		strcpy(answer.command_list[i],token);
+	strtok_r(copy, "\n", &saved);
 
+	int i = 0;
+	for(i; copy == NUll, i++){
+		char* tok = strtok_r(copy,delim,&saved);
+		if(tok == NULL){
+			break;
+		}
+		answer.command_list[i] = strdup(tok);
 	}
 
-	answer.command_list[total_tokens -1] = NULL;
+	answer.command_list[answer.num_token - 1] = NULL;
 
 	return answer;
 }
