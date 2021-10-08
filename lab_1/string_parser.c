@@ -43,7 +43,7 @@ int count_token (char* buf, const char* delim)
 	strtok_r(buf, "\n", &saved);
 
 	for(buf;; buf = NULL){
-		token = strtok_r(copy, delim, &saved);
+		token = strtok_r(buf, delim, &saved);
 		if(token != NULL){
 			count++;
 		}
