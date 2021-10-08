@@ -85,12 +85,12 @@ command_line str_filler (char* buf, const char* delim)
 	strtok_r(buf, "\n", &saved);
 
 	int i = 0;
-	for(buf;; buf = NULL, i++){
-		char* tok = strtok_r(buf,delim,&saved);
+	for(str = buf;; str = NULL, i++){
+		char* tok = strtok_r(str,delim,&saved);
 		if(tok == NULL){
 			break;
 		}
-		answer.command_list[i] = strdup(tok);
+		answer.command_list[i] = tok;
 	}
 
 	answer.command_list[answer.num_token - 1] = NULL;
