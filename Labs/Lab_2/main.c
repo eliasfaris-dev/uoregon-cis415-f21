@@ -9,11 +9,11 @@ int main(){
     char str[100];
 
     printf(">>>");
-    str = gets(str)
+    str = gets(str);
 
     while (str != "lfcat")
     {
-        printf("Error: Unrecognized command!\n")
+        printf("Error: Unrecognized command!\n");
 
         printf(">>>");
 
