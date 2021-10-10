@@ -5,17 +5,16 @@
 
 #define _GNU_SOURCE
 
-int main(){
+int main(int argc, char *argv[]){
 
     char str[1048];
 
-    printf(">>>");
-    gets(str);
+    printf(">>> ");
 
-    while(get(str) != "lfcat"){
+    while(fgets(str, 1048, stdin) != lfcat){
         printf("Error: Unrecognized command!\n");
-        printf(">>>");
-        gets(str);
+        printf(">>> ");
+        fgets(str, 1048, stdin)
     }
 
 
