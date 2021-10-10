@@ -12,8 +12,8 @@ int main(){
     printf(">>>");
     gets(str);
 
-    while(str != "lfcat"){
-        printf("Error: Unrecognized command!");
+    while(get(str) != "lfcat"){
+        printf("Error: Unrecognized command!\n");
         printf(">>>");
         gets(str);
     }
