@@ -10,13 +10,13 @@ int main(){
     char str[1048];
 
     printf(">>>");
-    str = scanf("%c",&str);
+    str = gets(str);
 
     while(str != "lfcat"){
-        printf("Error: Unrecognized command!")
+        printf("Error: Unrecognized command!");
         printf(">>>");
-        str = scanf("%c",&str);
+        str = gets(str);
     }
 
-    
+
 }

@@ -5,7 +5,7 @@ lab2.exe: main.o
 	gcc -o lab2.exe main.o
 
 
-main.o : main.c
+main.o: main.c
 	gcc -c main.c
 
 clean:
