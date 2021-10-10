@@ -6,18 +6,17 @@
 #define _GNU_SOURCE
 
 int main(){
-    char str[100];
+
+    char str[1048];
 
     printf(">>>");
-    str = gets(str);
+    str = scanf("%c",&str);
 
-    while (str != "lfcat")
-    {
-        printf("Error: Unrecognized command!\n");
-
+    while(str != "lfcat"){
+        printf("Error: Unrecognized command!")
         printf(">>>");
-
+        str = scanf("%c",&str);
     }
-        
+
     
 }
