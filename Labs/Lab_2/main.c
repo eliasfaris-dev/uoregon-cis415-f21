@@ -9,11 +9,23 @@ int main(int argc, char *argv[]){
 
     char str[1048];
 
-    printf(">>> ");
+    //printf(">>> ");
 
-    while(fgets(str, 1048, stdin) != 'lfcat'){
-        printf("Error: Unrecognized command!\n");
+    //while(fgets(str, 1048, stdin) != 'lfcat'){
+    //    printf("Error: Unrecognized command!\n");
+    //    printf(">>> ");
+    //}
+
+    while(1){
         printf(">>> ");
+        fgets(str, 1048, stdin);
+        if(strcmp(str, "lfcat") == 1){
+            break;
+        }
+        else{
+            printf("Error: Unrecognized command!\n");
+            continue;
+        }
     }
 
 
