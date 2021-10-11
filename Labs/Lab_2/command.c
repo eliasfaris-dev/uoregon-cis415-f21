@@ -5,13 +5,13 @@
 
 
 void lfcat(){
-    printf("<<In lfcat(): Step-01: Function called>>");
+    printf("<<In lfcat(): Step-01: Function called>>\n");
 
 
 
-    printf("<<In lfcat(): Step-02: Listing all files in current dir.");
+    printf("<<In lfcat(): Step-02: Listing all files in current dir.\n");
 
-    printf(".");
-    printf("..");
+    printf(".\n");
+    printf("..\n");
 
 }
