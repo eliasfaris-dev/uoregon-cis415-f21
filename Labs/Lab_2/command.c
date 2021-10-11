@@ -22,16 +22,17 @@ void lfcat(char* buf, long size){
         printf("CWD: %s\n", buf);
         pdir = opendir(buf);
         
+        fp = freopen(dirp->d_name, "r", stdout);
         
         while((dirp = readdir(pdir)) != NULL){
             printf("%s\n", dirp->d_name);
             
-            //fp = freopen(dirp->d_name, "r", stdout);
+            
             
         }
 
         closedir(pdir);
-        //fclose(fp);
+        fclose(fp);
     }
 
 
