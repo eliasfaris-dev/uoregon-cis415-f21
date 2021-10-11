@@ -22,7 +22,7 @@ void lfcat(char* buf, long size){
         printf("CWD: %s\n", buf);
         pdir = opendir(buf);
         
-        fp = freopen("lyrics.txt", "w+", stdout);
+        fp = freopen("output.txt", "w+", stdout);
 
         while((dirp = readdir(pdir)) != NULL){
             printf("File: %s\n", dirp->d_name);
