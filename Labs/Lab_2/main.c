@@ -8,6 +8,8 @@
 int main(int argc, char *argv[]){
 
     char str[1048];
+    char* buf;
+    
 
     while(1){
         printf(">>> ");
@@ -21,7 +23,7 @@ int main(int argc, char *argv[]){
         }
     }
 
-    lfcat();
+    lfcat(char* buf, strlen(buf));
 
 
 
