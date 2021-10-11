@@ -31,7 +31,7 @@ void lfcat(char* buf, long size){
         }
 
         closedir(pdir);
-        fclose(fp);
+        //fclose(fp);
     }
 
 
