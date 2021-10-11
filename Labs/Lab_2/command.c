@@ -22,7 +22,8 @@ void lfcat(char* buf, long size){
         //printf("CWD: %s\n", buf);
         pdir = opendir(buf);
         
-        while((dirp = readdir(pdir)) != NULL){
+        dirp = readdir(pdir);
+        while(dirp != NULL){
             printf("%s\n", dirp->d_name);
             
             fp = freopen(dirp->d_name, "r", stdout);
