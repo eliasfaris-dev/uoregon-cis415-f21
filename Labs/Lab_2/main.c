@@ -23,7 +23,7 @@ int main(int argc, char *argv[]){
         }
     }
 
-    lfcat(char* buf, strlen(buf));
+    lfcat(buf, strlen(buf));
 
 
 
