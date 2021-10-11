@@ -20,14 +20,14 @@ void lfcat(char* buf, long size){
         ptr = getcwd(buf, (size_t) size);
         printf("<<In lfcat(): Step-02: Listing all files in current dir.\n");
         //printf("CWD: %s\n", buf);
-        pdir = opendir(buf);
+        pdir = opendir(cwd);
         
         
         while((dirp = readdir(pdir)) != NULL){
             printf("%s\n", dirp->d_name);
             
             fp = freopen(dirp->d_name, "r", stdout);
-
+            
         }
 
         closedir(pdir);
