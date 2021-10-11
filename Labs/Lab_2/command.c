@@ -17,7 +17,8 @@ void lfcat(char* buf, long size){
     printf("<<In lfcat(): Step-01: Function called>>\n");
     if ((buf = (char *)malloc((size_t)size)) != NULL){
         ptr = getcwd(buf, (size_t) size);
-        printf("CWD: %s\n", buf);
+        printf("<<In lfcat(): Step-02: Listing all files in current dir.\n");
+        //printf("CWD: %s\n", buf);
         pdir = opendir(buf);
         
         while((dirp = readdir(pdir)) != NULL){
@@ -27,7 +28,5 @@ void lfcat(char* buf, long size){
         closedir(pdir);
     }
 
-
-    printf("<<In lfcat(): Step-02: Listing all files in current dir.\n");
 
 }
