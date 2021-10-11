@@ -19,8 +19,9 @@ int main(int argc, char *argv[]){
     while(1){
         printf(">>> ");
         fgets(str, 1048, stdin);
-        if((strcmp(str, "lfcat")) == 1){
-            break;
+        if((strncmp(str, "lfcat", 6)) == 1){
+            //break;
+            return 0;
         }
         else{
             printf("Error: Unrecognized command!\n");
