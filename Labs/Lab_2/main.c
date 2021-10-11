@@ -19,7 +19,7 @@ int main(int argc, char *argv[]){
     while(1){
         printf(">>> ");
         fgets(str, 1048, stdin);
-        if(strncmp(str, "lfcat", 5) == 1){
+        if((strcmp(str, "lfcat")) == 1){
             break;
         }
         else{
