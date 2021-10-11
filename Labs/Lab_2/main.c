@@ -11,7 +11,7 @@ int main(int argc, char *argv[]){
 
     printf(">>> ");
 
-    while(fgets(str, 1048, stdin) != "lfcat"){
+    while(fgets(str, 1048, stdin) != "lfcat\n"){
         printf("Error: Unrecognized command!\n");
         printf(">>> ");
     }
