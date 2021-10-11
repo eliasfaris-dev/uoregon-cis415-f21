@@ -20,7 +20,8 @@ void lfcat(char* buf, long size){
         printf("CWD: %s\n", buf);
         pdir = opendir(buf);
         
-        while((dirp = readdir(pdir)) != NULL){
+        dirp = readdir(pdir);
+        while(dirp != NULL){
             printf("%s\n", dirp->d_name);
         }
 
@@ -29,8 +30,5 @@ void lfcat(char* buf, long size){
 
 
     printf("<<In lfcat(): Step-02: Listing all files in current dir.\n");
-
-    printf(".\n");
-    printf("..\n");
 
 }
