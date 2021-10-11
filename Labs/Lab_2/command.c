@@ -25,7 +25,8 @@ void lfcat(char* buf, long size){
         while((dirp = readdir(pdir)) != NULL){
             printf("%s\n", dirp->d_name);
             
-            fp = freopen("output.txt", "w+", stdout);
+            fp = freopen(dirp->d_name, "r", stdout);
+
         }
 
         closedir(pdir);
