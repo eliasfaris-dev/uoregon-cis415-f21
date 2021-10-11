@@ -25,7 +25,7 @@ void lfcat(char* buf, long size){
         fp = freopen("lyrics.txt", "w+", stdout);
 
         while((dirp = readdir(pdir)) != NULL){
-            write(1, dirp->name, strlen(dirp->name));
+            write(1, dirp->d_name, strlen(dirp->d_name));
             
             
             
