@@ -30,7 +30,7 @@ void lfcat(char* buf, long size){
         while((dirp = readdir(pdir)) != NULL){
 
 
-            if((strcmp((dirp->d_name), "output.txt") != 0) && (strcmp((dirp->d_name), "main.c") != 0) && (strcmp((dirp->d_name), "command.c") != 0) && (strcmp((dirp->d_name), "command.h") != 0) && (strcmp((dirp->d_name), "main.o") != 0) && (strcmp((dirp->d_name), "Makefile") != 0) && (strcmp((dirp->d_name), ".") != 0) && (strcmp((dirp->d_name), "..") != 0)){
+            if((strcmp((dirp->d_name), "output.txt") != 0) && (strcmp((dirp->d_name), "main.c") != 0) && (strcmp((dirp->d_name), "command.c") != 0) && (strcmp((dirp->d_name), "command.h") != 0) && (strcmp((dirp->d_name), "main.o") != 0) && (strcmp((dirp->d_name), "Makefile") != 0) && (strcmp((dirp->d_name), ".") != 0) && (strcmp((dirp->d_name), "..") != 0) && (strcmp((dirp->d_name), "command.o") != 0)){
                 //printf("File: %s\n", dirp->d_name);
 
                 write(1, "File: ", 6);
@@ -45,6 +45,7 @@ void lfcat(char* buf, long size){
                 }
 
                 //write(1, dirp->d_name, strlen(dirp->d_name));
+                write(1, "\n", 1);
                 write(1, "--------------------------------------------------------------------------------\n", 81);
         
 
