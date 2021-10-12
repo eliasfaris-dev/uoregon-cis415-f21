@@ -25,8 +25,5 @@ int main(int argc, char *argv[]){
 
     lfcat(buf, size);
 
-
-
-
-
+    return 0;
 }
