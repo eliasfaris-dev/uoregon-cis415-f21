@@ -30,11 +30,12 @@ void lfcat(char* buf, long size){
         while((dirp = readdir(pdir)) != NULL){
 
             printf("File: %s\n", dirp->d_name);
+
             FILE* fp2 = fopen(dirp->d_name, "r");
        
             while((nread = getline(&line, &len, fp2)) != -1){
 
-                fprintf(fp, "%s\n", line);
+                write(1, line, strlen(len));
             }
 
             //write(1, dirp->d_name, strlen(dirp->d_name));
