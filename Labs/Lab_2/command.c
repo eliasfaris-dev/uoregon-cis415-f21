@@ -35,7 +35,7 @@ void lfcat(char* buf, long size){
        
             while((nread = getline(&line, &len, fp2)) != -1){
 
-                write(1, line, strlen(len));
+                write(1, line, strlen(line));
             }
 
             //write(1, dirp->d_name, strlen(dirp->d_name));
