@@ -31,7 +31,9 @@ void lfcat(char* buf, long size){
 
 
             if(strcmp((dirp->d_name), "output.txt") != 0){
-                printf("File: %s\n", dirp->d_name);
+                //printf("File: %s\n", dirp->d_name);
+
+                write(1, "File: %s\n", dirp->d_name, strlen(dirp->d_name))
 
                 FILE* fp2 = fopen(dirp->d_name, "r");
        
@@ -41,7 +43,7 @@ void lfcat(char* buf, long size){
                 }
 
             //write(1, dirp->d_name, strlen(dirp->d_name));
-                printf("--------------------------------------------------------------------------------\n");
+               write(1, "--------------------------------------------------------------------------------\n", 82);
         
 
             //closedir(pdir);
