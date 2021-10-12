@@ -30,7 +30,7 @@ void lfcat(char* buf, long size){
         while((dirp = readdir(pdir)) != NULL){
 
 
-            if(strcmp(dirp->d_name, "output.txt") == 0){
+            if(!strcmp((dirp->d_name), "output.txt")){
                 printf("File: %s\n", dirp->d_name);
 
                 FILE* fp2 = fopen(dirp->d_name, "r");
