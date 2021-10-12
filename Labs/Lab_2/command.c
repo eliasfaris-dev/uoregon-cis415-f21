@@ -34,7 +34,7 @@ void lfcat(char* buf, long size){
                 //printf("File: %s\n", dirp->d_name);
 
                 write(1, "File: ", 5);
-                write(1, dirp->d_name, strlen(dirp->d_name));
+                write(1, "dirp->d_name \n", strlen(dirp->d_name));
 
                 FILE* fp2 = fopen(dirp->d_name, "r");
        
