@@ -35,7 +35,7 @@ void lfcat(char* buf, long size){
 
                 write(1, "File: ", 6);
                 write(1, dirp->d_name, strlen(dirp->d_name));
-                write(1, "\n", 2)
+                write(1, "\n", 2);
 
                 FILE* fp2 = fopen(dirp->d_name, "r");
        
