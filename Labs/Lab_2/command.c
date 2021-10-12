@@ -12,7 +12,7 @@ void lfcat(char* buf, long size){
     DIR* pdir;
     char* ptr;
     FILE* fp;
-    ssize-t nread;
+    ssize_t nread;
     size_t len = 0;
     char* line = NULL;
 
