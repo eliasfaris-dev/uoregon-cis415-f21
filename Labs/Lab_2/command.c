@@ -28,9 +28,10 @@ void lfcat(char* buf, long size){
         fp = freopen("output.txt", "w+", stdout);
 
         while((dirp = readdir(pdir)) != NULL){
+            FILE* fp2;
             printf("File: %s\n", dirp->d_name);
-            while((nread = getline(&line, &len, fp) != -1)){
-                printf("%s\n", line);
+            while((nread = getline(&line, &len, fp2)) != -1){
+                fprintf("%s\n", line);
             }
 
             //write(1, dirp->d_name, strlen(dirp->d_name));
