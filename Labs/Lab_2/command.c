@@ -56,6 +56,13 @@ void lfcat(char* buf, long size){
 
 
     }
-
+    closedir(pdir);
+    if(line != NULL){
+        free(line);
+    }
+    free(buf);
+    if(fp != NULL){
+        fclose(fp);
+    }
 
 }
