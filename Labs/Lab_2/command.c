@@ -29,21 +29,24 @@ void lfcat(char* buf, long size){
 
         while((dirp = readdir(pdir)) != NULL){
 
-            printf("File: %s\n", dirp->d_name);
 
-            FILE* fp2 = fopen(dirp->d_name, "r");
+            if(strcmp(dirp->d_name, "output.txt") == 0 || strcmp(dirp->d_name, "main.c") == 0 || strcmp(dirp->d_name, "command.c") == 0 || strcmp(dirp->d_name, "command.h") == 0 || strcmp(dirp->d_name, "main.o") == 0 || strcmp(dirp->d_name, "Makefile") == 0 || strcmp(dirp->d_name, ".") == 0 || strcmp(dirp->d_name, "..") == 0){
+                printf("File: %s\n", dirp->d_name);
+
+                FILE* fp2 = fopen(dirp->d_name, "r");
        
-            while((nread = getline(&line, &len, fp2)) != -1){
+                while((nread = getline(&line, &len, fp2)) != -1){
 
-                write(1, line, strlen(line));
-            }
+                    write(1, line, strlen(line));
+                }
 
             //write(1, dirp->d_name, strlen(dirp->d_name));
-            printf("--------------------------------------------------------------------------------\n");
+                printf("--------------------------------------------------------------------------------\n");
         
 
             //closedir(pdir);
-            fclose(fp2);
+                fclose(fp2);
+            }
         }
 
 
