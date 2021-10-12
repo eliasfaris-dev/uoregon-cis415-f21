@@ -31,7 +31,7 @@ void lfcat(char* buf, long size){
 
             printf("File: %s\n", dirp->d_name);
             FILE* fp2 = fopen(dirp->d_name, "r");
-        if(1){
+       
             while((nread = getline(&line, &len, fp2) != -1)){
 
                 fprintf(fp, "%s\n", line);
@@ -39,11 +39,13 @@ void lfcat(char* buf, long size){
 
             //write(1, dirp->d_name, strlen(dirp->d_name));
             printf("--------------------------------------------------------------------------------\n");
+        
+
+            //closedir(pdir);
+            fclose(fp2);
         }
 
-        closedir(pdir);
-        fclose(fp);
-        }
+
     }
 
 
