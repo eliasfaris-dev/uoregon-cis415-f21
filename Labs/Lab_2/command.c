@@ -31,7 +31,7 @@ void lfcat(char* buf, long size){
             FILE* fp2 = fopen(dirp->d_name, "r");
             printf("File: %s\n", dirp->d_name);
             while((nread = getline(&line, &len, fp2)) != -1){
-                fprintf("%s\n", line);
+                fprintf(fp, "%s\n", line);
             }
 
             //write(1, dirp->d_name, strlen(dirp->d_name));
