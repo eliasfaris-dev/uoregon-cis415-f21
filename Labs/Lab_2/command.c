@@ -33,8 +33,8 @@ void lfcat(char* buf, long size){
             if(strcmp((dirp->d_name), "output.txt") != 0){
                 //printf("File: %s\n", dirp->d_name);
 
-                write(1, "File: ", 5);
-                write(1, "dirp->d_name \n", strlen(dirp->d_name));
+                write(1, "File: ", 6);
+                write(1, dirp->d_name"\n", strlen(dirp->d_name) + 2);
 
                 FILE* fp2 = fopen(dirp->d_name, "r");
        
