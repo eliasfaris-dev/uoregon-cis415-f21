@@ -18,10 +18,10 @@ void lfcat(char* buf, long size){
 
     struct dirent *dirp;
 
-    printf("<<In lfcat(): Step-01: Function called>>\n");
+    //printf("<<In lfcat(): Step-01: Function called>>\n");
     if ((buf = (char *)malloc((size_t)size)) != NULL){
         ptr = getcwd(buf, (size_t) size);
-        printf("<<In lfcat(): Step-02: Listing all files in current dir.\n");
+        //printf("<<In lfcat(): Step-02: Listing all files in current dir.\n");
         //printf("CWD: %s\n", buf);
         pdir = opendir(buf);
         
