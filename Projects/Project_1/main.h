@@ -1,0 +1,3 @@
+void interactiveMode();
+
+void fileMode();
