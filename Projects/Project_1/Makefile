@@ -1,8 +1,8 @@
-all : pseudo-shell
+all: pseudo-shell
 
 
 pseudo-shell: main.o command.o
-	gcc -o lab2.exe main.o command.o
+	gcc -o pseudo-shell main.o command.o
 
 main.o: main.c main.h
 	gcc -c main.c
