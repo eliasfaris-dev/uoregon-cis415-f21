@@ -130,8 +130,6 @@ int count_token (char* buf, const char* delim)
 		}
 	}
 	
-
-	// Mem leaks cus of strdup
 	free(copy);
 	return count + 1;
 
@@ -163,8 +161,6 @@ command_line str_filler (char* buf, const char* delim)
 	}
 
 	answer.command_list[(answer.num_token) - 1] = NULL;
-
-	
 	
 	return answer;
 }
