@@ -3,7 +3,8 @@
 #include <string.h>
 #include "command.h"
 #include "main.h"
-#include "string_parser.h" //Header file from lab 1
+#include "string_parser.h" 
+
 
 
 #define _GNU_SOURCE
@@ -19,60 +20,108 @@ int main(int argc, char **argv){
 
 }
 
-void interactiveMode(){
+void interactiveMode(int argc){
+	if(argc == 1){
+		char* buf = malloc(1048);
+		char** commands;
+		int length = 1048;
+		command_line first;
+		command_line second;
+		size_t responce;
+		char** tokens;
 
+		while(1){
+			write(1, ">>> ", 4);
+			responce = getline(&buf,&length, stdin);
+			first = str_filler(buf, ";");
+               		commands = first.command_list;
+	                for(int i = 0; commands[i] != NULL; i++){
+                       		second = str_filler(*commands, " ");
+                        	tokens = second.command_list;
+                        	if(vaildate(tokens)){
+                                	if(strcmp(tokens[0], "exit") == 0){
+                                        	free(buf);
+                                        	free_commands(tokens);
+                                        	memset(&second, 0, 0);
+                                        	free_commands(commands);
+                                        	memset(&first, 0, 0);
+                                       		 return;
+                                	}
+                                	else{
+                                        call(tokens);
+                                        free_commands(tokens);
+                                        memset(&second, 0, 0);
+                                	}
+                        	}
+                        	else{
+                                	free_commands(tokens);
+                                	memset(&second, 0, 0);
+                                	break;
+                        	}
+                	}
+                	free_commands(commands);
+                	memset(&first, 0, 0);
+        	}
+        	free(buf);
+        	return;
+
+		
+	}
+	else{
+		exit(EXIT_FAILURE);
+	}
 }
 
 void fileMode(char **argv){
 	FILE* fp;
 	fp = fopen(argv[2], "r");
 	
+	FILE* out_fp;
+	out_fp = fopen("output.txt", "w+");
+	fclose(out_fp);
+			
 	// Got from my Lab 1
 	
 	char* buf = malloc(1048);
 	char** commands;
-
+	int length = 1048;
 	command_line first;
 	command_line second;
 
 	char** tokens;
 
-	while(getline(&buf, 1048, fp) != -1){
+	while(getline(&buf, &length, fp) != -1){
 		first = str_filler(buf, ";");
 		commands = first.command_list;
-		for(int i = 0; first[i] != NULL; i++){
-			second = str_filler(*first, " ");
+		for(int i = 0; commands[i] != NULL; i++){
+			second = str_filler(*commands, " ");
 			tokens = second.command_list;
 			if(vaildate(tokens)){
-				if(strcmp(tokens[0], "exit") == 0){
-					free(commands);
-					free(tokens);
+				if(strcmp(tokens[0], "exit") == 0){	
 					fclose(fp);
 					free(buf);
-					free_command_line(&second);
+					free_commands(tokens);
 					memset(&second, 0, 0);
-					free_command_line(&first);
+					free_commands(commands);
 					memset(&first, 0, 0);
 					return;
 				}
 				else{
 					call(tokens);
-					free_command_line(&second);
+					free_commands(tokens);
 					memset(&second, 0, 0);
 				}
 			}
 			else{
-				free_command_line(&second);
+				free_commands(tokens);
 				memset(&second, 0, 0);
 				break;
 			}
 		}
-		free_command_line(&first);
+		free_commands(commands);
 		memset(&first, 0, 0);
 	}
 	free(buf);
-	free(commands);
-	free(tokens);
 	fclose(fp);
 	return;
 }
@@ -166,13 +215,13 @@ command_line str_filler (char* buf, const char* delim)
 }
 
 
-void free_command_line(command_line* command)
+void free_commands(char** command)
 {
-	for(int i = 0; i < command->num_token; i++){
-		free(command->command_list[i]);
+	for(int i = 0; command[i] != NULL; i++){
+		free(command[i]);
 	}
 
-	free(command->command_list);
+	free(command);
 }
 
 int vaildate(char** tokens){
@@ -186,6 +235,7 @@ int vaildate(char** tokens){
 			answer =  1;
 		}
 		else{
+			// Figure out a way to implement where this is printing in a file or on console depending on file mode or not
 			printf("Error! Unsupported parameters for command: %s\n", tokens[0]);
 			answer = 0;
 		}

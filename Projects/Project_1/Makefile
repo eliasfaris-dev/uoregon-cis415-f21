@@ -11,4 +11,4 @@ command.o: command.c command.h
 	gcc -c command.c
 
 clean:
-	rm -f core *.o pseudo-shell
+	rm -f core *.o pseudo-shell output.txt
