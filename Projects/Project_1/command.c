@@ -47,7 +47,7 @@ void makeDir(char *dirName){
     holder = mkdir(dirName, 0777);
 
     if(holder == -1){
-        write(2, "Error! directory could not be created.\n", 39));
+        write(2, "Error! directory could not be created.\n", 39);
     }
 }
 
