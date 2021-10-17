@@ -42,7 +42,13 @@ void showCurrentDir(){
 }
 
 void makeDir(char *dirName){
+    int holder;
 
+    holder = mkdir(dirName, 0777);
+
+    if(holder == -1){
+        write(2, "Error! directory could not be created.\n", 39));
+    }
 }
 
 void changeDir(char *dirName){
