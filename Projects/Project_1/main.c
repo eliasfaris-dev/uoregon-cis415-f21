@@ -240,8 +240,6 @@ int vaildate(char** tokens){
 			answer = 0;
 		}
 	}
-	// strcmp the rest of the chart here and make sure the count is possible. This will be a long code.
-	// also check for exit and count should equal 1
 	else if(strcmp(tokens[0], "pwd") == 0){
 		if(counter == 1){
 			answer = 1;
@@ -330,6 +328,29 @@ int vaildate(char** tokens){
 	return answer;
 }
 
-void call(tokens){
-	// Do the command(list of tokens for 1 command)
+void call(char** tokens){
+	if(strcmp(tokens[0], "ls") == 0){
+		listDir();
+	}
+	else if(strcmp(tokens[0], "pwd") == 0){
+		changeDir();
+	}
+	else if(strcmp(tokens[0], "mkdir") == 0){
+		makeDir(tokens[1]);
+	}
+	else if(strcmp(tokens[0], "cd") == 0){
+		changeDir(tokens[1]);
+	}
+	else if(strcmp(tokens[0], "cp") == 0){
+		copyFile(tokens[1], tokens[2]);
+	}
+	else if(strcmp(tokens[0], "mv") == 0){
+		moveFile(tokens[1],tokens[2]);
+	}
+	else if(strcmp(tokens[0], "rm") == 0){
+		deleteFile(tokens[1]);
+	}
+	else if(strcmp(tokens[0], "cat") == 0){
+		displayFile(tokens[1]);
+	}
 }
