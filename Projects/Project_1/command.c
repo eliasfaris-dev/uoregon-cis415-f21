@@ -52,7 +52,7 @@ void makeDir(char *dirName){
 }
 
 void changeDir(char *dirName){
-    int holer;
+    int holder;
 
     holder = chdir(dirName);
 
