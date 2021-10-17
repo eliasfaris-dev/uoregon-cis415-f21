@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "command.h"
-#include "main.h"
-#include "string_parser.h"
+#include <unistd.h>
+#include <dirent.h>
+#include <sys/types.h>
+#include <fcntl.h>
 #include <sys/dir.h>
 
 void listDir(){
@@ -27,6 +29,15 @@ void listDir(){
 }
 
 void showCurrentDir(){
+    
+    char* ptr = NULL;
+
+    long len = pathconf(".", _PC_PATH_MAX);
+    char buf[len];
+    ptr = getcwd(buf, len);
+
+    write(1, ptr, strlen(ptr));
+    write(1, "\n", 1);
 
 }
 
