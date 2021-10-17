@@ -47,12 +47,18 @@ void makeDir(char *dirName){
     holder = mkdir(dirName, 0777);
 
     if(holder == -1){
-        write(2, "Error! directory could not be created.\n", 39);
+        write(2, "Error! Directory could not be created.\n", 39);
     }
 }
 
 void changeDir(char *dirName){
+    int holer;
 
+    holder = chdir(dirName);
+
+    if(holder == -1){
+        write(2, "Error! Directory could not be changed.\n", 39);
+    }
 }
 
 void copyFile(char *sourcePath, char *destinationPath){
@@ -64,7 +70,13 @@ void moveFile(char *sourcePath, char *destinationPath){
 }
 
 void deleteFile(char *filename){
+    int holder = 1;
 
+    holder = remove(filename);
+
+    if(holder == -1){
+        write(2, "Error! Directory could not be removed.\n", 39);
+    }
 }
 
 void displayFile(char *filename){
