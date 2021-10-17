@@ -333,7 +333,7 @@ void call(char** tokens){
 		listDir();
 	}
 	else if(strcmp(tokens[0], "pwd") == 0){
-		changeDir();
+		showCurrentDir();
 	}
 	else if(strcmp(tokens[0], "mkdir") == 0){
 		makeDir(tokens[1]);
