@@ -15,7 +15,7 @@ void listDir(){
     getcwd(cwd, 1048);
     dir = opendir(cwd);
 
-    while(rdir = readdir(dir)) != NULL) {
+    while((rdir = readdir(dir)) != NULL) {
         strcpy(buf, rdir->d_name);
         strcat(buf, " ");
         write(1, buf, strlen(buf));
