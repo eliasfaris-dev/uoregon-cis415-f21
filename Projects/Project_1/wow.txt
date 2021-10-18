@@ -1,3 +1,4 @@
-cd ../; pwd; ls
-rm gj; rm; ls
+pwd ;; ls;
+mkidr testttt
+ls a 
 exit
