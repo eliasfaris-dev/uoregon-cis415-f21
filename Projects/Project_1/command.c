@@ -85,7 +85,7 @@ void copyFile(char *sourcePath, char *destinationPath){
         }
 
         while((holder = read(source, buf, BUFSIZ)) > 0){
-            write(destinationPath, buf, holder);
+            write(destination, buf, holder);
         }
 
         close(source);
