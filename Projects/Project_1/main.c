@@ -31,36 +31,38 @@ void interactiveMode(int argc){
 		command_line second;
 		size_t responce;
 		char** tokens;
+		
 		while(1){
 			write(1, ">>> ", 4);
 			responce = getline(&buf,&length, stdin);
 			first = str_filler(buf, ";");
-	        for(int i = 0; commands[i] != NULL; i++){
-                second = str_filler(*commands, " ");
-                tokens = second.command_list;
-                if(vaildate(tokens)){
-                    if(strcmp(tokens[0], "exit") == 0){
-                        free(buf);
-                        free_commands(tokens);
-                        memset(&second, 0, 0);
-                        free_commands(commands);
-                        memset(&first, 0, 0);
-                        return;
-                    }
-                    else{
-                    	call(tokens);
-                        free_commands(tokens);
-                        memset(&second, 0, 0);
-                    }
-                }
-                else{
-                    free_commands(tokens);
-                    memset(&second, 0, 0);
-                    break;
-                    }
-                }
-                free_commands(commands);
-                memset(&first, 0, 0);
+               		commands = first.command_list;
+	                for(int i = 0; commands[i] != NULL; i++){
+                       		second = str_filler(*commands, " ");
+                        	tokens = second.command_list;
+                        	if(vaildate(tokens)){
+                                	if(strcmp(tokens[0], "exit") == 0){
+                                        	free(buf);
+                                        	free_commands(tokens);
+                                        	memset(&second, 0, 0);
+                                        	free_commands(commands);
+                                        	memset(&first, 0, 0);
+                                       		return;
+                                	}
+                                	else{
+                                        call(tokens);
+                                        free_commands(tokens);
+                                        memset(&second, 0, 0);
+                                	}
+                        	}
+                        	else{
+                                	free_commands(tokens);
+                                	memset(&second, 0, 0);
+                                	break;
+                        	}
+                	}
+                	free_commands(commands);
+                	memset(&first, 0, 0);
         	}
         	free(buf);
         	return;
@@ -322,7 +324,7 @@ int vaildate(char** tokens){
 }
 
 void call(char** tokens){
-	printf("here: %s\n", *tokens);
+	printf("here: %s", *tokens);
 	char* element = tokens[0];
 	if(strcmp(element, "ls") == 0){
 		listDir();
