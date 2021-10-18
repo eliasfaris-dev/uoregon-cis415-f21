@@ -12,7 +12,7 @@
 int main(int argc, char **argv){
 
     if(argc == 1){
-        interactiveMode();
+        interactiveMode(argc);
     }
     else if(inFileMode(argc, argv)){
        freopen("output.txt", "w+", stdout);
@@ -42,7 +42,7 @@ void interactiveMode(int argc){
 				
                        		second = str_filler(commands[i], " ");
                         	tokens = second.command_list;
-                        	if(vaildate(tokens)){
+                        	if(validate(tokens)){
                                 	if(strcmp(tokens[0], "exit") == 0){
                                         	free(buf);
                                         	free_commands(tokens);
@@ -93,7 +93,7 @@ void fileMode(char **argv){
 		for(int i = 0; commands[i] != NULL; i++){
 			second = str_filler(commands[i], " ");
 			tokens = second.command_list;
-			if(vaildate(tokens)){
+			if(validate(tokens)){
 				if(strcmp(tokens[0], "exit") == 0){	
 					fclose(fp);
 					free(buf);
@@ -221,7 +221,7 @@ void free_commands(char** command)
 	free(command);
 }
 
-int vaildate(char** tokens){
+int validate(char** tokens){
 	int answer = 0;
 	int counter;
 	for(int i = 0; tokens[i] != NULL; i++){
