@@ -15,8 +15,9 @@ int main(int argc, char **argv){
         interactiveMode(argc);
     }
     else if(inFileMode(argc, argv)){
-       freopen("output.txt", "w+", stdout);
+       FILE* fp = freopen("output.txt", "w+", stdout);
 	   fileMode(argv);
+	   close(fp);
     }
 
 }
