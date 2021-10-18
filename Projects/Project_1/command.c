@@ -66,7 +66,28 @@ void copyFile(char *sourcePath, char *destinationPath){
 }
 
 void moveFile(char *sourcePath, char *destinationPath){
+    int holder = 1;
 
+    DIR* dir = opendir(destinationPath);
+
+    //If directory is not there
+
+    if(dir == NULL){
+        holder = rename(sourcePath, destinationPath);
+    }
+    else{
+        char new[BUFSIZ];
+        strcpy(new, destinationPath);
+        strcat(new, "/");
+        strcat(new, sourcePath);
+        holder = rename(sourcePath, new);
+    }
+
+    if(holder == -1){
+        write(1, "Error! Cannot move file.\n", 25);
+    }
+
+    free(dir);
 }
 
 void deleteFile(char *filename){
@@ -87,8 +108,6 @@ void displayFile(char *filename){
     if(read(file, buf, BUFSIZ) < 0){
         write(1, "Error! Cannot read file.\n", strlen("Error! Cannot read file.\n"));
     }
-    //write(1, "\n", strlen("\n"));
     write(2, buf, strlen(buf));
-    //write(2, "\n", strlen("\n"));
     close(file);
 }
