@@ -77,7 +77,7 @@ void fileMode(char **argv){
 	fp = fopen(argv[2], "r");
 			
 	// Got from my Lab 1
-	int length = 1048;
+	size_t length = 1048;
 	char* buf = malloc(length);
 	char** commands;
 	
