@@ -332,19 +332,15 @@ void call(char** tokens){
 	char* element = tokens[0];
 	if(strcmp(element, "ls") == 0){
 		listDir();
-		continue;
 	}
 	else if(strcmp(element, "pwd") == 0){
 		showCurrentDir();
-		continue;
 	}
 	else if(strcmp(element, "mkdir") == 0){
 		makeDir(tokens[1]);
-		continue;
 	}
 	else if(strcmp(element, "cd") == 0){
 		changeDir(tokens[1]);
-		continue;
 	}
 	else if(strcmp(element, "cp") == 0){
 		copyFile(tokens[1], tokens[2]);
