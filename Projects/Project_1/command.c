@@ -67,7 +67,7 @@ void copyFile(char *sourcePath, char *destinationPath){
     char* buf[BUFSIZ];
     source = open(sourcePath, O_RDONLY);
 
-    if(source == NULL){
+    if(*source == NULL){
         write(1, "Error! Cannot find source file\n", 31);
     }
 
