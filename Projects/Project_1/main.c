@@ -33,7 +33,7 @@ void interactiveMode(int argc){
 		char** tokens;
 
 		while(1){
-			write(1, ">>> ", 3);
+			write(1, ">>> ", 4);
 			responce = getline(&buf,&length, stdin);
 			first = str_filler(buf, ";");
                		commands = first.command_list;
