@@ -47,7 +47,7 @@ void makeDir(char *dirName){
     holder = mkdir(dirName, 0777);
 
     if(holder == -1){
-        write(2, "Error! Directory could not be created.\n", 39);
+        write(1, "Error! Directory could not be created.\n", 39);
     }
 }
 
@@ -57,7 +57,7 @@ void changeDir(char *dirName){
     holder = chdir(dirName);
 
     if(holder == -1){
-        write(2, "Error! Directory could not be changed.\n", 39);
+        write(1, "Error! Directory could not be changed.\n", 39);
     }
 }
 
@@ -80,5 +80,15 @@ void deleteFile(char *filename){
 }
 
 void displayFile(char *filename){
+    char buf[1048];
 
+    int file = open(filename, O_RDONLY);
+
+    if(read(file, buf, 1048) < 0){
+        write(1, "Error! Cannot read file.\n", 25);
+    }
+    write(1, "\n", 1);
+    write(1, buf, strlen(buf));
+
+    close(file);
 }
