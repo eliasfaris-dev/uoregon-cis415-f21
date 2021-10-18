@@ -17,7 +17,7 @@ int main(int argc, char **argv){
     else if(inFileMode(argc, argv)){
        FILE* fp = freopen("output.txt", "w+", stdout);
 	   fileMode(argv[2]);
-
+		close(fp);
     }
 
 }
@@ -34,7 +34,7 @@ void interactiveMode(int argc){
 		char** tokens;
 
 		while(1){
-			write(1, ">>> ", 4);
+			write(1, ">>> ", 3);
 			responce = getline(&buf,&length, stdin);
 			first = str_filler(buf, ";");
                		commands = first.command_list;
@@ -133,9 +133,9 @@ int inFileMode(int argc, char **argv){
 			FILE* fp;
 			fp = fopen(argv[2], "r");
 			if(fp != NULL){
-				fclose(fp);
 				answer = 1;
 			}
+
 			else{
 				answer = 0;
 			}
