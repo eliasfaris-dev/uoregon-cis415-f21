@@ -87,8 +87,8 @@ void displayFile(char *filename){
     if(read(file, buf, 1048) < 0){
         write(1, "Error! Cannot read file.\n", strlen("Error! Cannot read file.\n"));
     }
-    write(1, "\n", strlen("\n"));
-    write(1, buf, strlen(buf));
-
+    //write(1, "\n", strlen("\n"));
+    write(2, buf, strlen(buf));
+    //write(2, "\n", strlen("\n"));
     close(file);
 }
