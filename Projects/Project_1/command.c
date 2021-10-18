@@ -64,6 +64,7 @@ void changeDir(char *dirName){
 void copyFile(char *sourcePath, char *destinationPath){
     int source, destination, holder;
 
+    char* buf[BUFSIZ];
     source = open(sourcePath, O_RDONLY);
 
     if(source == NULL){
@@ -83,8 +84,8 @@ void copyFile(char *sourcePath, char *destinationPath){
             write(1, "Error! Cannot find destination file\n", 36);
         }
 
-        while((holder = read(source, new, BUFSIZ)) > 0){
-            write(destination, new, holder);
+        while((holder = read(source, buf, BUFSIZ)) > 0){
+            write(destination, buf, holder);
         }
 
         close(source);
