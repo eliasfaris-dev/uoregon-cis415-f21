@@ -38,7 +38,7 @@ void interactiveMode(int argc){
 			first = str_filler(buf, ";");
                		commands = first.command_list;
 	                for(int i = 0; commands[i] != NULL; i++){
-                       		second = str_filler(first.command_list, " ");
+                       		second = str_filler(*commands, " ");
                         	tokens = second.command_list;
                         	if(vaildate(tokens)){
                                 	if(strcmp(tokens[0], "exit") == 0){
@@ -57,12 +57,12 @@ void interactiveMode(int argc){
                         	}
                         	else{
                                 	free_commands(tokens);
-                                	memset(&second, 0, 0);
+                                	//memset(&second, 0, 0);
                                 	break;
                         	}
                 	}
                 	free_commands(commands);
-                	memset(&first, 0, 0);
+                	//memset(&first, 0, 0);
         	}
         	free(buf);
         	return;
@@ -324,8 +324,6 @@ int vaildate(char** tokens){
 }
 
 void call(char** tokens){
-	printf("here: %s", *tokens);
-	printf("here: %s", tokens[1]);
 	char* element = tokens[0];
 	if(strcmp(element, "ls") == 0){
 		listDir();
