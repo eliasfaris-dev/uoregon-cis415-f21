@@ -15,7 +15,9 @@ int main(int argc, char **argv){
         interactiveMode();
     }
     else if(inFileMode(argc, argv)){
-       fileMode(argv[2]);
+       FILE* fp = freopen("output.txt", "w+", stdout);
+	   fileMode(argv[2]);
+
     }
 
 }
@@ -64,8 +66,6 @@ void interactiveMode(int argc){
         	}
         	free(buf);
         	return;
-
-		
 	}
 	else{
 		exit(EXIT_FAILURE);
@@ -75,10 +75,6 @@ void interactiveMode(int argc){
 void fileMode(char **argv){
 	FILE* fp;
 	fp = fopen(argv[2], "r");
-	
-	FILE* out_fp;
-	out_fp = fopen("output.txt", "w+");
-	fclose(out_fp);
 			
 	// Got from my Lab 1
 	
