@@ -75,7 +75,6 @@ void interactiveMode(int argc){
 void fileMode(char **argv){
 	FILE* fp;
 	fp = fopen(argv[2], "r");
-			
 	// Got from my Lab 1
 	size_t length = 128;
 	char* buf = malloc(length);
@@ -118,7 +117,6 @@ void fileMode(char **argv){
 		memset(&first, 0, 0);
 	}
 	free(buf);
-	fclose(fp);
 	return;
 }
 
