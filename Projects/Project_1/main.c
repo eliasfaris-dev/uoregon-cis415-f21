@@ -95,9 +95,10 @@ void fileMode(char **argv){
 				if(strcmp(tokens[0], "exit") == 0){	
 					fclose(fp);
 					free(buf);
+					free_commands(commands);
 					free_commands(tokens);
 					memset(&second, 0, 0);
-					free_commands(commands);
+					//free_commands(commands);
 					memset(&first, 0, 0);
 					return;
 				}
