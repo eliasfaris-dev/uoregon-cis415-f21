@@ -324,6 +324,7 @@ int vaildate(char** tokens){
 }
 
 void call(char** tokens){
+	printf("here: %s", *tokens);
 	char* element = tokens[0];
 	if(strcmp(element, "ls") == 0){
 		listDir();
