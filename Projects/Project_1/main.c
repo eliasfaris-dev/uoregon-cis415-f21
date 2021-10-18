@@ -51,12 +51,12 @@ void interactiveMode(int argc){
                                 	}
                                 	else{
                                         call(tokens);
-                                        free_commands(tokens);
-                                        memset(&second, 0, 0);
+                                        //free_commands(tokens);
+                                        //memset(&second, 0, 0);
                                 	}
                         	}
                         	else{
-                                	free_commands(tokens);
+                                	//free_commands(tokens);
                                 	//memset(&second, 0, 0);
                                 	break;
                         	}
