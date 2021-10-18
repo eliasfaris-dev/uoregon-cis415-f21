@@ -77,7 +77,7 @@ void copyFile(char *sourcePath, char *destinationPath){
         strcat(new, "/");
         strcat(new, sourcePath);
 
-        destination = open(new, O_WRONLY | O_CREAT | O_TRUNC, S_IWOTH | S_IWGRP | S_IROTH | S_IRGRP | S_IWUSR, S_IRUSR);
+        destination = open(new, O_CREAT | O_WRONLY, 0666);
         //destination = open(new);
 
         if(destination < 0){
@@ -86,7 +86,6 @@ void copyFile(char *sourcePath, char *destinationPath){
 
         while((holder = read(source, buf, BUFSIZ)) > 0){
             write(destination, buf, holder);
-            printf("test");
         }
 
         close(source);
