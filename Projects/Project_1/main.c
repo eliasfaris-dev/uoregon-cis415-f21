@@ -24,9 +24,10 @@ int main(int argc, char **argv){
 
 void interactiveMode(int argc){
 	if(argc == 1){
-		char* buf = malloc(1048);
+		size_t length = 128;
+		char* buf = malloc(length);
 		char** commands;
-		int length = 1048;
+		
 		command_line first;
 		command_line second;
 		size_t responce;
