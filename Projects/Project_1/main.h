@@ -8,5 +8,5 @@ void call();
 
 void free_commmands();
 
-int vaildate();
+int validate();
 
