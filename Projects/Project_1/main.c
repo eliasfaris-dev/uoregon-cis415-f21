@@ -329,7 +329,7 @@ int vaildate(char** tokens){
 }
 
 void call(char** tokens){
-	char element = tokens[0];
+	char* element = tokens[0];
 	if(strcmp(element, "ls") == 0){
 		listDir();
 	}
