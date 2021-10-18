@@ -72,15 +72,15 @@ void copyFile(char *sourcePath, char *destinationPath){
     }
 
     else{
-        char new[BUFSIZ];
+        int s = strlen(strrchr(sourcePath, '/')) + strlen(destinationPath);
+        char new[s];
         strcpy(new, destinationPath);
-        strcat(new, "/");
-        strcat(new, sourcePath);
+        strcat(new, strrchr(sourcePath, '/'));
 
         destination = open(new, O_WRONLY | O_CREAT | O_TRUNC, S_IWOTH | S_IWGRP | S_IROTH | S_IRGRP | S_IWUSR, S_IRUSR);
         //destination = open(new);
 
-        if(destination == NULL){
+        if(destination < 0){
             write(1, "Error! Cannot find destination file\n", 36);
         }
 
