@@ -77,10 +77,10 @@ void fileMode(char **argv){
 	fp = fopen(argv[2], "r");
 			
 	// Got from my Lab 1
-	
-	char* buf = malloc(1048);
-	char** commands;
 	int length = 1048;
+	char* buf = malloc(length);
+	char** commands;
+	
 	command_line first;
 	command_line second;
 
