@@ -332,26 +332,34 @@ void call(char** tokens){
 	char* element = tokens[0];
 	if(strcmp(element, "ls") == 0){
 		listDir();
+		break;
 	}
 	else if(strcmp(element, "pwd") == 0){
 		showCurrentDir();
+		break;
 	}
 	else if(strcmp(element, "mkdir") == 0){
 		makeDir(tokens[1]);
+		break;
 	}
 	else if(strcmp(element, "cd") == 0){
 		changeDir(tokens[1]);
+		break;
 	}
 	else if(strcmp(element, "cp") == 0){
 		copyFile(tokens[1], tokens[2]);
+		break;
 	}
 	else if(strcmp(element, "mv") == 0){
 		moveFile(tokens[1],tokens[2]);
+		break;
 	}
 	else if(strcmp(element, "rm") == 0){
 		deleteFile(tokens[1]);
+		break;
 	}
 	else if(strcmp(element, "cat") == 0){
 		displayFile(tokens[1]);
+		break;
 	}
 }
