@@ -210,7 +210,7 @@ command_line str_filler (char* buf, const char* delim)
 }
 
 
-void free_commands(command_line* command)
+void free_commands(char** command)
 {
 	for(int i = 0; command[i] != NULL; i++){
 		free(command[i]);
