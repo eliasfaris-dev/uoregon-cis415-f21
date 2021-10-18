@@ -31,7 +31,8 @@ void interactiveMode(int argc){
 		command_line second;
 		size_t responce;
 		char** tokens;
-
+		commands = (char**)malloc(1048);
+		
 		while(1){
 			write(1, ">>> ", 4);
 			responce = getline(&buf,&length, stdin);
@@ -47,7 +48,7 @@ void interactiveMode(int argc){
                                         	memset(&second, 0, 0);
                                         	free_commands(commands);
                                         	memset(&first, 0, 0);
-                                       		 return;
+                                       		return;
                                 	}
                                 	else{
                                         call(tokens);
