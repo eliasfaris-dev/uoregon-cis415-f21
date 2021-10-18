@@ -1,0 +1,3 @@
+cd ../; pwd; ls
+rm gj; rm; ls
+exit

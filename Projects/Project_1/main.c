@@ -37,8 +37,10 @@ void interactiveMode(int argc){
 			responce = getline(&buf,&length, stdin);
 			first = str_filler(buf, ";");
                		commands = first.command_list;
+			
 	                for(int i = 0; commands[i] != NULL; i++){
-                       		second = str_filler(*commands, " ");
+				
+                       		second = str_filler(commands[i], " ");
                         	tokens = second.command_list;
                         	if(vaildate(tokens)){
                                 	if(strcmp(tokens[0], "exit") == 0){
@@ -89,7 +91,7 @@ void fileMode(char **argv){
 		first = str_filler(buf, ";");
 		commands = first.command_list;
 		for(int i = 0; commands[i] != NULL; i++){
-			second = str_filler(*commands, " ");
+			second = str_filler(commands[i], " ");
 			tokens = second.command_list;
 			if(vaildate(tokens)){
 				if(strcmp(tokens[0], "exit") == 0){	
