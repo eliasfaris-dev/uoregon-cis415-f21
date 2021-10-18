@@ -72,10 +72,10 @@ void copyFile(char *sourcePath, char *destinationPath){
     }
 
     else{
-        int s = strlen(strrchr(sourcePath, '/')) + strlen(destinationPath);
-        char new[s];
+        char new[BUFSIZ];
         strcpy(new, destinationPath);
-        strcat(new, strrchr(sourcePath, '/'));
+        strcat(new, "/");
+        strcat(new, sourcePath);
 
         destination = open(new, O_WRONLY | O_CREAT | O_TRUNC, S_IWOTH | S_IWGRP | S_IROTH | S_IRGRP | S_IWUSR, S_IRUSR);
         //destination = open(new);
