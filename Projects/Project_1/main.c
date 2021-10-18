@@ -329,28 +329,29 @@ int vaildate(char** tokens){
 }
 
 void call(char** tokens){
-	if(strcmp(tokens[0], "ls") == 0){
+	char element = tokens[0];
+	if(strcmp(element, "ls") == 0){
 		listDir();
 	}
-	else if(strcmp(tokens[0], "pwd") == 0){
+	else if(strcmp(element, "pwd") == 0){
 		showCurrentDir();
 	}
-	else if(strcmp(tokens[0], "mkdir") == 0){
+	else if(strcmp(element, "mkdir") == 0){
 		makeDir(tokens[1]);
 	}
-	else if(strcmp(tokens[0], "cd") == 0){
+	else if(strcmp(element, "cd") == 0){
 		changeDir(tokens[1]);
 	}
-	else if(strcmp(tokens[0], "cp") == 0){
+	else if(strcmp(element, "cp") == 0){
 		copyFile(tokens[1], tokens[2]);
 	}
-	else if(strcmp(tokens[0], "mv") == 0){
+	else if(strcmp(element, "mv") == 0){
 		moveFile(tokens[1],tokens[2]);
 	}
-	else if(strcmp(tokens[0], "rm") == 0){
+	else if(strcmp(element, "rm") == 0){
 		deleteFile(tokens[1]);
 	}
-	else if(strcmp(tokens[0], "cat") == 0){
+	else if(strcmp(element, "cat") == 0){
 		displayFile(tokens[1]);
 	}
 }
