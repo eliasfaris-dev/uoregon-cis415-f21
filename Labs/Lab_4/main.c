@@ -22,12 +22,12 @@ int main(int argc,char*argv[]){
     * #4 wait for children processes to finish
     * #5 free any dynamic memories
     */
-        num_proc = atoi(argv[2]);
+        int num_proc = atoi(argv[2]);
         for(int i = 0; i < num_proc; i++){
-            pid_ary[i] = fork();
+            pid_t pid_ary[i] = fork();
 
             if(pid_ary[i] < 0){
-                printf("Unable to declare child process") 
+                printf("Unable to declare child process"); 
             }
 
             if(pid_ary[i] == 0){
