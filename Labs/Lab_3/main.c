@@ -22,7 +22,8 @@ int main(int argc,char*argv[]){
     * #4 wait for children processes to finish
     * #5 free any dynamic memories
     */
-        for(int i = 0; i < ; i++){
+        num_proc = atoi(argv[2]);
+        for(int i = 0; i < num_proc; i++){
             pid_ary[i] = fork();
 
             if(pid_ary[i] < 0){
@@ -31,17 +32,17 @@ int main(int argc,char*argv[]){
 
             if(pid_ary[i] == 0){
             
-                if(execvp(path, arg) == -1){
-                    printf("New process couldn't be made\n");
-                }
+                //if(execvp(path, arg) == -1){
+                    //printf("New process couldn't be made\n");
+                //}
 
-                exit(-1);
+                exit(0);
             }
         }
+        int size = sizeof(pid_ary);
+        script_print(pid_ary, size);
 
-        script_print(pid_ary, sizeof(pid_ary));
-
-        for(int j = 0; j < ; j++){
+        for(int j = 0; j < size; j++){
             wait(pid_ary[j]);
         }
 
