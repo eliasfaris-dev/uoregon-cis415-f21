@@ -26,26 +26,28 @@ int main(int argc,char*argv[]){
             pid_ary[i] = fork();
 
             if(pid_ary[i] < 0){
-                // ERROR HANDLING 
+                printf("Unable to declare child process") 
             }
 
             if(pid_ary[i] == 0){
             
                 if(execvp(path, arg) == -1){
-                    // ERROR HANDLING
+                    printf("New process couldn't be made\n");
                 }
+
                 exit(-1);
             }
         }
 
-    script_print();
+        script_print(pid_ary, sizeof(pid_ary));
 
-    for(int j = 0; j < ; j++){
-        wait(NULL);
+        for(int j = 0; j < ; j++){
+            wait(pid_ary[j]);
+        }
+
+        
     }
-
     return 0;
-    }
 }
 
 void script_print (pid_t* pid_ary, int size){
