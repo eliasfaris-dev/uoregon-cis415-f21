@@ -39,7 +39,7 @@ int main(int argc,char*argv[]){
                 exit(0);
             }
         }
-        int size = sizeof(pid_ary);
+        int size = sizeof(pid_t pid_ary);
         script_print(pid_ary, size);
 
         for(int j = 0; j < size; j++){
