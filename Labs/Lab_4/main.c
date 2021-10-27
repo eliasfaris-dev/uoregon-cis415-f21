@@ -47,7 +47,7 @@ int main(int argc,char*argv[]){
     script_print(pid_ary, num_proc);
 
     for(int j = 0; j < num_proc; j++){
-        waitpid(pid_ary[j], &count, 0);)
+        waitpid(pid_ary[j], &count, 0);
     }
 
     return 0;
