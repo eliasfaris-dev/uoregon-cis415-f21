@@ -22,6 +22,10 @@ int main(int argc,char*argv[]){
     * #4 wait for children processes to finish
     * #5 free any dynamic memories
     */
+
+
+
+    freopen("log.txt", "w", stdout);
     char* arg_list[] = {"./iobound", "-seconds", "5", NULL};
     int num_proc = atoi(argv[1]);
     int count;
