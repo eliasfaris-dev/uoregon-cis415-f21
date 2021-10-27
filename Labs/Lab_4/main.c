@@ -22,10 +22,12 @@ int main(int argc,char*argv[]){
     * #4 wait for children processes to finish
     * #5 free any dynamic memories
     */
-    char* arg_list[] = {"iobound", "-seconds", "5", NULL};
-    int num_proc = atoi(argv[2]);
+    char* arg_list[] = {"./iobound", "-seconds", "5", NULL};
+    int num_proc = atoi(argv[1]);
+    int count;
+    int found = getpid();
 
-    pid_t pid_ary;
+    pid_t* pid_ary = (pid_t*)malloc(sizeof(pid_t) * num_proc);
     for(int i = 0; i < num_proc; i++){
         pid_ary[i] = fork();
 
@@ -33,23 +35,23 @@ int main(int argc,char*argv[]){
             printf("Unable to declare child process"); 
         }
 
-        if(pid_ary[i] == 0){
+        if(found != getpid()){
         
-            if(execvp("iobound", arg_list) == -1){
+            if(execvp("./iobound", arg_list) == -1){
                 printf("New process couldn't be made\n");
             }
 
             exit(0);
         }
     }
-    int size = sizeof(pid_t pid_ary);
-    script_print(pid_ary, size);
+    script_print(pid_ary, num_proc);
 
-    for(int j = 0; j < size; j++){
-        wait(pid_ary[j]);
+    for(int j = 0; j < num_proc; j++){
+        waitpid(pid_ary[j], &count, 0);)
     }
 
     return 0;
+    free(pid_ary);
 }
 
 void script_print (pid_t* pid_ary, int size){

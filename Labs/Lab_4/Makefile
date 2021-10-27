@@ -1,13 +1,7 @@
-all: iobound
+all: main iobound
 
-iobound: main.o iobound.o
-	gcc -o iobound main.o iobound.o
+iobound: iobound.c
+	gcc -o iobound iobound.c
 
-main.o: main.c
-	gcc -c main.c
-
-iobound.o: iobound.c
-	gcc -c iobound.c
-
-clean:
-	rm -f core *.o iobound
+main: main.c
+	gcc -o main main.c
