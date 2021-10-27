@@ -36,13 +36,15 @@ int main(int argc,char*argv[]){
         pid_ary[i] = fork();
 
         if(pid_ary[i] < 0){
-            printf("Unable to declare child process"); 
+            printf("Unable to declare child process");
+            free(pid_ary); 
         }
 
         if(found != getpid()){
         
             if(execvp("./iobound", arg_list) == -1){
                 printf("New process couldn't be made\n");
+                free(pid_ary);
             }
 
             exit(0);
@@ -54,9 +56,10 @@ int main(int argc,char*argv[]){
         waitpid(pid_ary[j], &count, 0);
     }
 
-    return 0;
+    
     free(pid_ary);
     fclose(fd);
+    return 0;
 }
 
 void script_print (pid_t* pid_ary, int size){
