@@ -25,7 +25,7 @@ int main(int argc,char*argv[]){
 
 
 
-    freopen("log.txt", "w", stdout);
+    FILE* fd = freopen("log.txt", "w", stdout);
     char* arg_list[] = {"./iobound", "-seconds", "5", NULL};
     int num_proc = atoi(argv[1]);
     int count;
@@ -56,6 +56,7 @@ int main(int argc,char*argv[]){
 
     return 0;
     free(pid_ary);
+    close(fd);
 }
 
 void script_print (pid_t* pid_ary, int size){
