@@ -56,7 +56,7 @@ int main(int argc,char*argv[]){
 
     return 0;
     free(pid_ary);
-    close(fd);
+    fclose(fd);
 }
 
 void script_print (pid_t* pid_ary, int size){
