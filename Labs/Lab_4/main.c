@@ -11,7 +11,7 @@ int main(int argc,char*argv[]){
         printf ("Wrong number of argument\n");
         exit (0);
     }
-    else if(argc == 3){
+    
     /*
     * TODO
     * #1 declear child process pool
@@ -22,32 +22,33 @@ int main(int argc,char*argv[]){
     * #4 wait for children processes to finish
     * #5 free any dynamic memories
     */
-        int num_proc = atoi(argv[2]);
-        for(int i = 0; i < num_proc; i++){
-            pid_t pid_ary[i] = fork();
+    char* arg_list[] = {"iobound", "-seconds", "5", NULL};
+    int num_proc = atoi(argv[2]);
 
-            if(pid_ary[i] < 0){
-                printf("Unable to declare child process"); 
-            }
+    pid_t pid_ary;
+    for(int i = 0; i < num_proc; i++){
+        pid_ary[i] = fork();
 
-            if(pid_ary[i] == 0){
-            
-                //if(execvp(path, arg) == -1){
-                    //printf("New process couldn't be made\n");
-                //}
-
-                exit(0);
-            }
-        }
-        int size = sizeof(pid_t pid_ary);
-        script_print(pid_ary, size);
-
-        for(int j = 0; j < size; j++){
-            wait(pid_ary[j]);
+        if(pid_ary[i] < 0){
+            printf("Unable to declare child process"); 
         }
 
+        if(pid_ary[i] == 0){
         
+            if(execvp("iobound", arg_list) == -1){
+                printf("New process couldn't be made\n");
+            }
+
+            exit(0);
+        }
     }
+    int size = sizeof(pid_t pid_ary);
+    script_print(pid_ary, size);
+
+    for(int j = 0; j < size; j++){
+        wait(pid_ary[j]);
+    }
+
     return 0;
 }
 
