@@ -32,6 +32,8 @@ int count_token (char* buf, const char* delim);
 command_line str_filler (char* buf, const char* delim);
 
 
+void free_commmands();
+
 //this function safely free all the tokens within the array.
 void free_command_line(command_line* command);
 
