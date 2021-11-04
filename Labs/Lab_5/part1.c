@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include<unistd.h>
 #include<sys/wait.h>
+#include "string_parser.h"
 
 int count_token (char* buf, const char* delim)
 {
