@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <stringlib.h>
+#include <string.h>
 #include "string_parser.h"
 
 int main(int argc, char const *argv[])
