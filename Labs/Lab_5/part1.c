@@ -23,28 +23,22 @@ void fileMode(int argc, char **argv){
 		for(int i = 0; commands[i] != NULL; i++){
 			second = str_filler(commands[i], " ");
 			tokens = second.command_list;
-			if(validate(tokens)){
-				if(strcmp(tokens[0], "exit") == 0){	
-					fclose(fp);
-					free(buf);
-					free_commands(commands);
-					free_commands(tokens);
-					memset(&second, 0, 0);
-					//free_commands(commands);
-					memset(&first, 0, 0);
-					return;
-				}
-				else{
-					call(tokens);
-					free_commands(tokens);
-					memset(&second, 0, 0);
-				}
-			}
-			else{
+			if(strcmp(tokens[0], "exit") == 0){	
+				fclose(fp);
+				free(buf);
+				free_commands(commands);
 				free_commands(tokens);
 				memset(&second, 0, 0);
-				break;
+				//free_commands(commands);
+				memset(&first, 0, 0);
+				return;
 			}
+			else{
+				//call(tokens);
+				free_commands(tokens);
+				memset(&second, 0, 0);
+			}
+			
 		}
 		free_commands(commands);
 		memset(&first, 0, 0);
