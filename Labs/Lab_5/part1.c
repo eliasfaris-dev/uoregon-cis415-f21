@@ -185,7 +185,7 @@ void call(char** tokens){
 	}
 }
 
-int processes(int argc,char*argv[]){
+int processes(char*argv[]){
     //FILE* fd = freopen("log.txt", "w", stdout);
     char* arg_list[] = {"./iobound", "-seconds", "5", NULL};
     int num_proc = atoi(argv[1]);
@@ -207,12 +207,10 @@ int processes(int argc,char*argv[]){
                 printf("New process couldn't be made\n");
                 free(pid_ary);
             }
-
             exit(0);
         }
     }
     script_print(pid_ary, num_proc);
-
     for(int j = 0; j < num_proc; j++){
         waitpid(pid_ary[j], &count, 0);
     }
