@@ -4,7 +4,7 @@
 #include <string.h>
 #include "string_parser.h"
 
-void fileMode(int argc, char **argv){
+void main(int argc, char **argv){
 	FILE* fp;
 	fp = fopen(argv[2], "r");
 	// Got from my Lab 1
