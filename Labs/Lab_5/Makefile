@@ -10,4 +10,4 @@ part1: part1.c
 	gcc -o part1 part1.c
 
 clean:
-	rm -f core *.o iobound part1
+	rm -f core *.o iobound cpubound part1
