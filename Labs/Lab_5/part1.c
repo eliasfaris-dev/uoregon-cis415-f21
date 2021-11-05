@@ -43,6 +43,7 @@ void fileMode(char **argv){
 			}
 			else{
 			    //call(tokens);
+                processes(argv);
 				free_commands(tokens);
 				memset(&second, 0, 0);
 			}
