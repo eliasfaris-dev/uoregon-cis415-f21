@@ -63,8 +63,9 @@ void fileMode(char **argv, int num_proc){
 	while(getline(&buf, &length, fp) != -1){
 		first = str_filler(buf, " ");
 		tokens = first.command_list;
-		write(1, buf, strlen(buf));
 		call(tokens, num_proc);
+		write(1, buf, strlen(buf));
+
 		free_command_line(&first);
         memset(&tokens, 0, 0);
 	}
