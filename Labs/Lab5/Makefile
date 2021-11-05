@@ -1,4 +1,4 @@
-all: part1
+all: part1 iobound cpubound
 
 iobound: iobound.c
 	gcc -o iobound iobound.c

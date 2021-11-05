@@ -26,10 +26,6 @@ int main(int argc,char*argv[]){
 		n++;
         pid_ary[n] = fork();
 
-        if(pid_ary[n] < 0){
-            printf("Unable to declare child process");
-            free(pid_ary); 
-        }
 		//printf(tokens.command_list[0]);
 		//printf(tokens.command_list);
 		//printf(tokens);
