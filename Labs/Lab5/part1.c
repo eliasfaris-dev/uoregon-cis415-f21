@@ -11,13 +11,13 @@ int main(int argc,char*argv[]){
     }
 
 	int count;
-	int n = 0;
+	int n = -1;
     size_t length = 128;
 	char* buf = malloc(length);
 	FILE* fp = fopen(argv[1], "r");
 
-	command_line tokens;
 	int found = getpid();
+	command_line tokens;
 	pid_t* pid_ary = (pid_t*)malloc(sizeof(pid_t) * 50);
 
     while(getline(&buf, &length, fp) != -1){
@@ -27,7 +27,7 @@ int main(int argc,char*argv[]){
 
         if(pid_ary[n] < 0){
             printf("Unable to declare child process");
-            free(pid_ary); 
+            //free(pid_ary); 
         }
 
         if(found != getpid()){
