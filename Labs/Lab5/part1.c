@@ -12,7 +12,7 @@ int main(int argc,char*argv[]){
 
 	int count;
 	int n = -1;
-    int length = 128;
+    size_t length = 128;
 	char* buf = malloc(length);
 	FILE* fp = fopen(argv[1], "r");
 
@@ -22,7 +22,6 @@ int main(int argc,char*argv[]){
 
     while((getline(&buf, &length, fp)) != -1){
 		tokens = str_filler(buf, " ");
-		char** token = tokens.command_list;
 		n++;
         pid_ary[n] = fork();
 
@@ -35,7 +34,7 @@ int main(int argc,char*argv[]){
 		//printf(tokens);
         if(found != getpid()){
         
-            if(execvp(token[0], token) == -1){
+            if(execvp(tokens.comand_list[0], tokens.command_list) == -1){
                 printf("New process couldn't be made\n");
                 free(pid_ary);
             }
