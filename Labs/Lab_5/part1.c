@@ -6,7 +6,7 @@
 
 int main(int argc, char** argv){
     if(argc == 2){
-        filemode(argv);
+        fileMode(argv);
     }
     else{
         printf("Error! Unsupported parameters to open file. Try ./part1 <filename>\n");
