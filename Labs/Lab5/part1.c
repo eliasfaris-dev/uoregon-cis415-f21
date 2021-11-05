@@ -22,6 +22,7 @@ int main(int argc,char*argv[]){
 
     while(getline(&buf, &length, fp) != -1){
 		tokens = str_filler(buf, " ");
+		tokens = tokens.command_list;
 		n++;
         pid_ary[n] = fork();
 
@@ -34,7 +35,7 @@ int main(int argc,char*argv[]){
 		//printf(tokens);
         if(found != getpid()){
         
-            if(execvp(tokens.command_list[0], tokens.command_list) == -1){
+            if(execvp(tokens[0], tokens) == -1){
                 printf("New process couldn't be made\n");
                 free(pid_ary);
             }
