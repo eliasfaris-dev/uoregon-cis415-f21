@@ -142,7 +142,7 @@ int main(int argc, char** argv){
 		//iterate through each large token
 		for (int i = 0; large_token_buffer.command_list[i] != NULL; i++)
 		{
-		1	//tokenize large buffer
+			//tokenize large buffer
 			//smaller token is seperated by " "(space bar)
 			small_token_buffer = str_filler (large_token_buffer.command_list[i], " ");
 
