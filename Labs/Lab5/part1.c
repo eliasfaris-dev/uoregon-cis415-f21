@@ -42,7 +42,7 @@ int main(int argc,char*argv[]){
     for(int j = 0; j < n; j++){
         waitpid(pid_ary[j], &count, 0);
     }
-
+	free(buf);
     free(pid_ary);
     fclose(fp);
     return 0;
