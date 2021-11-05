@@ -11,7 +11,7 @@ int main(int argc,char*argv[]){
     }
 
 	int count;
-	int n = -1;
+	int n = 0;
     size_t length = 128;
 	char* buf = malloc(length);
 	FILE* fp = fopen(argv[1], "r");
