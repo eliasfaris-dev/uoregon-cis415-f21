@@ -31,10 +31,10 @@ int main(int argc,char*argv[]){
         }
 		//printf(tokens.command_list[0]);
 		//printf(tokens.command_list);
-		printf(tokens);
+		//printf(tokens);
         if(found != getpid()){
         
-            if(execvp(tokens.command_list[0], tokens.command_list) == -1){
+            if(execvp(tokens[0], tokens) == -1){
                 printf("New process couldn't be made\n");
                 free(pid_ary);
             }
