@@ -27,7 +27,7 @@ int main(int argc,char*argv[]){
 
         if(pid_ary[n] < 0){
             printf("Unable to declare child process");
-            //free(pid_ary); 
+            free(pid_ary); 
         }
 
         if(found != getpid()){
@@ -46,7 +46,6 @@ int main(int argc,char*argv[]){
         waitpid(pid_ary[j], &count, 0);
     }
 
-    
     free(pid_ary);
     fclose(fp);
     return 0;
