@@ -22,7 +22,7 @@ int main(int argc,char*argv[]){
 
     while(getline(&buf, &length, fp) != -1){
 		tokens = str_filler(buf, " ");
-		token = tokens.command_list;
+		char** token = tokens.command_list;
 		n++;
         pid_ary[n] = fork();
 
