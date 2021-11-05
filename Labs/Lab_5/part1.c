@@ -44,7 +44,7 @@ int main(int argc, char*argv[]){
         printf("Error! You have the wrong number of paramaters\n");
     }
     else{
-        //int num_proc = atoi(argv[1]);
+        int num_proc = atoi(argv[1]);
         fileMode(argv, num_proc);
     }
 
