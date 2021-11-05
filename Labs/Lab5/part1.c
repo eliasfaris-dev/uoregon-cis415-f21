@@ -29,7 +29,8 @@ int main(int argc,char*argv[]){
             printf("Unable to declare child process");
             free(pid_ary); 
         }
-
+		printf(tokens.command_list[0]);
+		printf(tokens.command_list);
         if(found != getpid()){
         
             if(execvp(tokens.command_list[0], tokens.command_list) == -1){
