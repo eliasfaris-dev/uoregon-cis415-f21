@@ -15,7 +15,7 @@ int main(int argc, char** argv){
 
 void fileMode(char **argv){
 	FILE* fp;
-	fp = fopen(argv[2], "r");
+	fp = fopen(argv[1], "r");
 	// Got from my Lab 1
 	size_t length = 128;
 	char* buf = malloc(length);
