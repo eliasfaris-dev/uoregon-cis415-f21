@@ -20,7 +20,7 @@ int main(int argc,char*argv[]){
 	command_line tokens;
 	pid_t* pid_ary = (pid_t*)malloc(sizeof(pid_t) * 50);
 
-    while(getline(&buf, &length, fp) != -1){
+    while((getline(&buf, &length, fp)) != -1){
 		tokens = str_filler(buf, " ");
 		char** token = tokens.command_list;
 		n++;
