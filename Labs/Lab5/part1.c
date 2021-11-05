@@ -3,9 +3,9 @@
 #include <unistd.h>
 #include <string.h>
 #include "string_parser.h"
-
+/*
 int main(int argc, char*argv[]){
-    /*
+    
     char* arg_list[] = {"./iobound", "-seconds", "5", NULL};
     int num_proc = atoi(argv[1]);
     int count;
@@ -39,7 +39,7 @@ int main(int argc, char*argv[]){
     */
 
 
-    
+    /*
     if(argc != 2){
         printf("Error! You have the wrong number of paramaters\n");
     }
@@ -104,9 +104,86 @@ void call(char** tokens, int num_proc){
     free(pid_ary);
     //printf("Successful\n");
 }
+*/
 
+int main(int argc, char** argv){
+	 FILE* fw = stdout;  // output file
+    FILE* fr = stdin;   // input file
+    char *linebuf = NULL;   // read line buffer
+    size_t linecap = 0;
+    char write_buf[BUFSIZ]; // output write buffer
+    command_line large_token_buffer;
+	command_line small_token_buffer;
+    int parent = getpid();
+    pid_t pid_new;
 
+    if ((argc == 3) && (strcmp(argv[1],"-f") == 0))
+	{   // file mode
+        //fw = freopen("output.txt", "w", stdout);
+        fr = freopen(argv[2], "r", stdin);
+	}
+	else
+	{   // error handling
+		strcpy(write_buf, "Usage ./pseudo-shell -f <filename>\n");
+		write(1, write_buf, strlen(write_buf));
+		goto cleanup;
+	}
+	strcpy(write_buf, ">>> ");
+    write(1, write_buf, strlen(write_buf));     // output initial prompt
 
+    //loop until interactive exit or input command file ends
+	while (getline (&linebuf, &linecap, fr) != -1)
+	{
+	    write(1, linebuf, strlen(linebuf));
+		//tokenize line buffer
+		//large token is seperated by ";"
+		large_token_buffer = str_filler (linebuf, ";");
+
+		//iterate through each large token
+		for (int i = 0; large_token_buffer.command_list[i] != NULL; i++)
+		{
+		1	//tokenize large buffer
+			//smaller token is seperated by " "(space bar)
+			small_token_buffer = str_filler (large_token_buffer.command_list[i], " ");
+
+            pid_new = fork();
+            if(pid_new < 0){
+                printf("Unable to declare child process");
+                //free(pid_ary);
+            }
+
+            if (parent != getpid()) {
+
+                if(execvp(small_token_buffer.command_list[0], small_token_buffer.command_list) == -1){
+                    printf("New process couldn't be made\n");
+                    //free(pid_ary);
+                }
+
+                exit(0);
+            }
+
+			//free smaller tokens and reset variable
+			free_command_line(&small_token_buffer);
+			memset (&small_token_buffer, 0, 0);
+		}
+
+		//free smaller tokens and reset variable
+		free_command_line (&large_token_buffer);
+		memset (&large_token_buffer, 0, 0);
+        strcpy(write_buf, ">>> ");
+        write(1, write_buf, strlen(write_buf));
+
+	}
+
+cleanup:
+    //strcpy(write_buf, "Exiting pseudo-shell\n");
+    //write(1, write_buf, 21);
+    //fclose(fw);
+    fclose(fr);
+    free(linebuf);
+    return 0;
+}
+}
 
 
 int count_token (char* buf, const char* delim)
