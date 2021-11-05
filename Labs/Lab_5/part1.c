@@ -236,11 +236,12 @@ command_line str_filler (char* buf, const char* delim)
 }
 
 
-void free_command_line(command_line command)
+void free_command_line(command_line* command)
 {
-	for(int i = 0; command[i] != NULL; i++){
-		free(command[i]);
+
+	for(int i = 0; i < command->num_token; i++){
+		free(command->command_list[i]);
 	}
 
-	free(command);
+	free(command->command_list);
 }
