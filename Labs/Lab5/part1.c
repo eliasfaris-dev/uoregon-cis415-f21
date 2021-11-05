@@ -26,9 +26,7 @@ int main(int argc,char*argv[]){
 		n++;
         pid_ary[n] = fork();
 
-		//printf(tokens.command_list[0]);
-		//printf(tokens.command_list);
-		//printf(tokens);
+		
         if(found != getpid()){
         
             if(execvp(tokens.command_list[0], tokens.command_list) == -1){
