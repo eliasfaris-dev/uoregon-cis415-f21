@@ -44,7 +44,7 @@ int main(int argc, char*argv[]){
         printf("Error! You have the wrong number of paramaters\n");
     }
     else{
-        int num_proc = atoi(argv[1]);
+        //int num_proc = atoi(argv[1]);
         fileMode(argv, num_proc);
     }
 
@@ -52,7 +52,7 @@ int main(int argc, char*argv[]){
 
 void fileMode(char **argv, int num_proc){
 	FILE* fp;
-	fp = fopen(argv[2], "r");
+	fp = fopen(argv[1], "r");
 	// Got from my Lab 1
 	size_t length = 128;
 	char* buf = malloc(length);
