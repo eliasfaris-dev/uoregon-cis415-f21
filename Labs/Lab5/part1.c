@@ -34,7 +34,7 @@ int main(int argc,char*argv[]){
 		//printf(tokens);
         if(found != getpid()){
         
-            if(execvp(tokens.comand_list[0], tokens.command_list) == -1){
+            if(execvp(tokens.command_list[0], tokens.command_list) == -1){
                 printf("New process couldn't be made\n");
                 free(pid_ary);
             }
