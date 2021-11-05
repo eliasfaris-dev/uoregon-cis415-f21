@@ -236,7 +236,7 @@ command_line str_filler (char* buf, const char* delim)
 }
 
 
-void free_command_line(char** command)
+void free_command_line(command_line command)
 {
 	for(int i = 0; command[i] != NULL; i++){
 		free(command[i]);
