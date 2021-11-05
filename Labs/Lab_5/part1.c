@@ -94,6 +94,13 @@ void call(char** tokens, int num_proc){
             exit(-1);
         }
     }
+    int count;
+    for(int j = 0; j < num_proc; j++){
+        waitpid(pid_ary[j], &count, 0);
+    }
+
+    free(pid_ary);
+    printf("Successful\n");
 }
 
 int count_token (char* buf, const char* delim)
