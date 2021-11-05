@@ -18,6 +18,7 @@ int main(int argc,char*argv[]){
 
 	command_line tokens;
 	int found = getpid();
+	pid_t* pid_ary = (pid_t*)malloc(sizeof(pid_t) * num_proc);
 
     while(getline(&buf, &length, fp) != -1){
 		tokens = str_filler(buf, " ");
@@ -41,7 +42,7 @@ int main(int argc,char*argv[]){
     }
     
 
-    for(int j = 0; j < num_proc; j++){
+    for(int j = 0; j < n; j++){
         waitpid(pid_ary[j], &count, 0);
     }
 
