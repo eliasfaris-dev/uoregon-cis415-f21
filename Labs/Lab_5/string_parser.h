@@ -23,6 +23,8 @@ typedef struct
     int num_token;
 }command_line;
 
+void filemode();
+
 //this functions returns the number of tokens needed for the string array
 //based on the delimeter
 int count_token (char* buf, const char* delim);
