@@ -31,7 +31,6 @@ void fileMode(char **argv){
 		for(int i = 0; commands[i] != NULL; i++){
 			second = str_filler(commands[i], " ");
 			tokens = second.command_list;
-			
 			if(strcmp(tokens[0], "exit") == 0){	
 				fclose(fp);
 				free(buf);
@@ -46,12 +45,6 @@ void fileMode(char **argv){
 			    //call(tokens);
 				free_commands(tokens);
 				memset(&second, 0, 0);
-			}
-			
-			else{
-				free_commands(tokens);
-				memset(&second, 0, 0);
-				break;
 			}
 		}
 		free_commands(commands);
