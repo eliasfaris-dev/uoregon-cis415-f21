@@ -31,6 +31,7 @@ int main(int argc,char*argv[]){
         }
 		printf(tokens.command_list[0]);
 		printf(tokens.command_list);
+		printf(tokens);
         if(found != getpid()){
         
             if(execvp(tokens.command_list[0], tokens.command_list) == -1){
