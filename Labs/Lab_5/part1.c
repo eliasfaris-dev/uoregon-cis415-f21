@@ -4,60 +4,117 @@
 #include <string.h>
 #include "string_parser.h"
 
-int main(int argc, char** argv){
-    if(argc == 2){
-        fileMode(argv);
-    }
-    else{
-        printf("Error! Unsupported parameters to open file. Try ./part1 <filename>\n");
-    }
-}
+int main(int argc, char*argv[]){
 
-void fileMode(char **argv){
-	FILE* fp;
-	fp = fopen(argv[1], "r");
-	// Got from my Lab 1
-	size_t length = 128;
-	char* buf = malloc(length);
-	char** commands;
-	
-	command_line first;
-	command_line second;
-	char** tokens;
+    FILE* fw = stdout;  // output file
+    FILE* fr = stdin;   // input file
+    char *linebuf = NULL;   // read line buffer
+    size_t linecap = 0;
+    char write_buf[BUFSIZ]; // output write buffer
+    command_line large_token_buffer;
+	command_line small_token_buffer;
+    int parent = getpid();
+    pid_t pid_new;
 
-	while(getline(&buf, &length, fp) != -1){
-		first = str_filler(buf, ";");
-		commands = first.command_list;
-		for(int i = 0; commands[i] != NULL; i++){
-			second = str_filler(commands[i], " ");
-			tokens = second.command_list;
-			if(strcmp(tokens[0], "exit") == 0){	
-				fclose(fp);
-				free(buf);
-				free_commands(commands);
-				free_commands(tokens);
-				memset(&second, 0, 0);
-				free_commands(commands);
-				memset(&first, 0, 0);
-				return;
-			}
-			else{
-			    //call(tokens);
-                processes(argv);
-				free_commands(tokens);
-				memset(&second, 0, 0);
-			}
-		}
-		free_commands(commands);
-		memset(&first, 0, 0);
+    if ((argc == 3) && (strcmp(argv[1],"-f") == 0))
+	{   // file mode
+        //fw = freopen("output.txt", "w", stdout);
+        fr = freopen(argv[2], "r", stdin);
 	}
-	free(buf);
-	return;
+	else
+	{   // error handling
+		strcpy(write_buf, "Usage ./pseudo-shell -f <filename>\n");
+		write(1, write_buf, strlen(write_buf));
+		goto cleanup;
+	}
+	strcpy(write_buf, ">>> ");
+    write(1, write_buf, strlen(write_buf));     // output initial prompt
+
+    //loop until interactive exit or input command file ends
+	while (getline (&linebuf, &linecap, fr) != -1)
+	{
+	    write(1, linebuf, strlen(linebuf));
+		//tokenize line buffer
+		//large token is seperated by ";"
+		large_token_buffer = str_filler (linebuf, ";");
+
+		//iterate through each large token
+		for (int i = 0; large_token_buffer.command_list[i] != NULL; i++)
+		{
+			//tokenize large buffer
+			//smaller token is seperated by " "(space bar)
+			small_token_buffer = str_filler (large_token_buffer.command_list[i], " ");
+
+            pid_new = fork();
+            if(pid_new < 0){
+                printf("Unable to declare child process");
+                //free(pid_ary);
+            }
+
+            if (parent != getpid()) {
+
+                if(execvp(small_token_buffer.command_list[0], small_token_buffer.command_list) == -1){
+                    printf("New process couldn't be made\n");
+                    //free(pid_ary);
+                }
+
+                exit(0);
+            }
+
+			//free smaller tokens and reset variable
+			free_command_line(&small_token_buffer);
+			memset (&small_token_buffer, 0, 0);
+		}
+
+		//free smaller tokens and reset variable
+		free_command_line (&large_token_buffer);
+		memset (&large_token_buffer, 0, 0);
+        strcpy(write_buf, ">>> ");
+        write(1, write_buf, strlen(write_buf));
+
+	}
+
+cleanup:
+    //strcpy(write_buf, "Exiting pseudo-shell\n");
+    //write(1, write_buf, 21);
+    //fclose(fw);
+    fclose(fr);
+    free(linebuf);
+    return 0;
 }
 
 
-int processes(char*argv[]){
-    //FILE* fd = freopen("log.txt", "w", stdout);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
     char* arg_list[] = {"./iobound", "-seconds", "5", NULL};
     int num_proc = atoi(argv[1]);
     int count;
@@ -115,6 +172,7 @@ void script_print (pid_t* pid_ary, int size){
         }
     }
 }
+*/
 
 int count_token (char* buf, const char* delim)
 {
