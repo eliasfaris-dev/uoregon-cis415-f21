@@ -63,6 +63,7 @@ void fileMode(char **argv, int num_proc){
 	while(getline(&buf, &length, fp) != -1){
 		first = str_filler(buf, " ");
 		tokens = first.command_list;
+		write(1, buf, strlen(buf));
 		call(tokens, num_proc);
 		free_command_line(&first);
         memset(&tokens, 0, 0);
@@ -100,8 +101,12 @@ void call(char** tokens, int num_proc){
     }
 
     free(pid_ary);
-    printf("Successful\n");
+    //printf("Successful\n");
 }
+
+
+
+
 
 int count_token (char* buf, const char* delim)
 {
