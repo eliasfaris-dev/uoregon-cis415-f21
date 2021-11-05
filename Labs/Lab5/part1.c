@@ -34,7 +34,7 @@ int main(int argc,char*argv[]){
 		//printf(tokens);
         if(found != getpid()){
         
-            if(execvp(tokens[0], tokens) == -1){
+            if(execvp(tokens.command_list[0], tokens.command_list) == -1){
                 printf("New process couldn't be made\n");
                 free(pid_ary);
             }
@@ -55,6 +55,7 @@ int main(int argc,char*argv[]){
 
 int count_token (char* buf, const char* delim)
 {
+
 	if (buf == NULL){
 		return EXIT_FAILURE;
 	}
@@ -79,6 +80,8 @@ int count_token (char* buf, const char* delim)
 		}
 	}
 	
+
+	// Mem leaks cus of strdup
 	free(copy);
 	return count + 1;
 
@@ -86,6 +89,7 @@ int count_token (char* buf, const char* delim)
 
 command_line str_filler (char* buf, const char* delim)
 {
+
 	command_line answer;
 	
 	int tokens = count_token(buf, delim);
@@ -102,6 +106,7 @@ command_line str_filler (char* buf, const char* delim)
 	for(ptr;; ptr = NULL, i++){
 		char* tok = strtok_r(ptr,delim,&saved);
 		if(tok != NULL){
+			// For some reason I have to make a copy of buf. It "Aborted (core dumped) without the strdup, I am not sure why."
 			answer.command_list[i] = strdup(tok);
 		}
 		else{
@@ -110,6 +115,8 @@ command_line str_filler (char* buf, const char* delim)
 	}
 
 	answer.command_list[(answer.num_token) - 1] = NULL;
+
+	
 	
 	return answer;
 }
@@ -117,14 +124,11 @@ command_line str_filler (char* buf, const char* delim)
 
 void free_command_line(command_line* command)
 {
-	//TODO：
-	/*
-	*	#1.	free the array base num_token
-	*/
-
+	
 	for(int i = 0; i < command->num_token; i++){
 		free(command->command_list[i]);
 	}
 
 	free(command->command_list);
 }
+
