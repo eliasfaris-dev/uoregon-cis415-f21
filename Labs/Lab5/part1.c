@@ -4,6 +4,8 @@
 #include <string.h>
 #include "string_parser.h"
 
+void script_print();
+
 int main(int argc,char*argv[]){
     if (argc == 1){
         printf ("Wrong number of argument\n");

@@ -5,6 +5,8 @@
 #include "string_parser.h"
 #include <signal.h>
 
+void script_print();
+
 
 int main(int argc,char*argv[]){
     if (argc == 1){
