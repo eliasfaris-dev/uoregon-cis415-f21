@@ -46,6 +46,8 @@ int main(int argc,char*argv[]){
             if(execvp(tokens.command_list[0], tokens.command_list) == -1){
                 printf("New process couldn't be made\n");
                 free(pid_ary);
+                free(fp);
+				free(buf);
             }
 
             exit(0);
@@ -53,7 +55,7 @@ int main(int argc,char*argv[]){
         
     }
     
-    script_print(pid_ary, n);
+    //script_print(pid_ary, n);
     //sleep(2);
     //for(int i = 0; i < n; i++){
         //kill(pid_ary[i], SIGUSR1);
