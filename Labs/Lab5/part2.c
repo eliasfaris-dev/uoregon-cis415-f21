@@ -66,7 +66,7 @@ int main(int argc,char*argv[]){
 
     for(int i = 0; i < n; i++){
         waitpid(pid_ary[i], &count, 0);
-    }2
+    }
 	free(buf);
     free(pid_ary);
     fclose(fp);
