@@ -30,7 +30,7 @@ int main(int argc,char*argv[]){
 
 	int found = getpid();
 	command_line tokens;
-	pid_t* pid_ary = (pid_t*)malloc(sizeof(pid_t) * 50);
+	pid_t* pid_ary = (pid_t*)malloc(sizeof(pid_t) * 100);
 
     while((getline(&buf, &length, fp)) != -1){
 		tokens = str_filler(buf, " ");
