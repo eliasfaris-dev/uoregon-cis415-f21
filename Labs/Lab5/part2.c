@@ -15,7 +15,7 @@ int main(int argc,char*argv[]){
     
     sigset_t signal_set;
     sigemptyset(&signal_set);
-    sigaddset(&sigset, SIGUSR1);
+    sigaddset(&signal_set, SIGUSR1);
     sigaddset(&signal_set, SIGALRM);
     sigprocmask(SIG_BLOCK, &signal_set, NULL);
 
