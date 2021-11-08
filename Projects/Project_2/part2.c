@@ -6,6 +6,7 @@
 #include <signal.h>
 
 void script_print();
+void print_command_line();
 
 
 int main(int argc,char*argv[]){
