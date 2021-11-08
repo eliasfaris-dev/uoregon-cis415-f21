@@ -34,7 +34,7 @@ int main(int argc,char*argv[]){
 
     while((getline(&buf, &length, fp)) != -1){
 		tokens = str_filler(buf, " ");
-		//print_command_line(&tokens);
+		print_command_line(&tokens);
 		n++;
         pid_ary[n] = fork();
 
@@ -50,7 +50,9 @@ int main(int argc,char*argv[]){
 
             exit(0);
         }
+        
     }
+    
     script_print(pid_ary, n);
     //sleep(2);
     for(int i = 0; i < n; i++){
@@ -181,10 +183,10 @@ void free_command_line(command_line* command)
 
 	free(command->command_list);
 }
-/*
+
 void print_command_line(command_line* command){
 	for(int i = 0; i < command->num_token; i++){
 		printf("%dth: '%s'\n", i, command->command_list[i]);
 	}
 }
-*/
+
