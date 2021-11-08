@@ -55,9 +55,11 @@ int main(int argc,char*argv[]){
     
     script_print(pid_ary, n);
     //sleep(2);
-    for(int i = 0; i < n; i++){
-        kill(pid_ary[i], SIGUSR1);
-    }
+    //for(int i = 0; i < n; i++){
+        //kill(pid_ary[i], SIGUSR1);
+    //}
+
+    kill(0, SIGUSR1);
 
     for(int i = 0; i < n; i++){
         kill(pid_ary[i], SIGSTOP);
