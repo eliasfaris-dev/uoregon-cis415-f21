@@ -37,6 +37,7 @@ int main(int argc,char*argv[]){
                 free(pid_ary);
 				free(fp);
 				free(buf);
+				free_command_line(&tokens);
             }
 
             exit(0);
