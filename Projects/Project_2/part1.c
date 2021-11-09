@@ -35,7 +35,7 @@ int main(int argc,char*argv[]){
             if(execvp(tokens.command_list[0], tokens.command_list) == -1){
                 printf("New process couldn't be made\n");
                 free(pid_ary);
-				free(fp);
+				fclose(fp);
 				free(buf);
 				free_command_line(&tokens);
 				exit(0);
