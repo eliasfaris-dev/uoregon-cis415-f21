@@ -78,7 +78,14 @@ int main(int argc,char*argv[]){
     for(int i = 0; i < n; i++){
         waitpid(pid_ary[i], &count, 0);
     }
-    
+
+    for(int i = 0; i < n; i++){
+
+        for(int j = 0; j < n; j++){
+            
+        }
+    }
+
 	free(buf);
     free(pid_ary);
     fclose(fp);
@@ -175,8 +182,6 @@ command_line str_filler (char* buf, const char* delim)
 
 	answer.command_list[(answer.num_token) - 1] = NULL;
 
-	
-	
 	return answer;
 }
 

@@ -38,10 +38,10 @@ int main(int argc,char*argv[]){
 				free(fp);
 				free(buf);
 				free_command_line(&tokens);
+				exit(0);
             }
-
-            exit(0);
         }
+		free_command_line(&tokens);
     }
     
 	script_print(pid_ary, n);
