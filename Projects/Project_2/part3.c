@@ -63,8 +63,8 @@ int main(int argc,char*argv[]){
         //kill(pid_ary[i], SIGUSR1);
     //}
 
-    kill(0, SIGUSR1);
-
+    //kill(0, SIGUSR1);
+    /*
     for(int i = 0; i < n; i++){
         kill(pid_ary[i], SIGSTOP);
     }
@@ -74,16 +74,20 @@ int main(int argc,char*argv[]){
     for(int i = 0; i < n; i++){
         kill(pid_ary[i], SIGCONT);
     }
-
+    */
     for(int i = 0; i < n; i++){
-        waitpid(pid_ary[i], &count, 0);
+
+        kill(pid_ary[i], SIGUSR1);
+        kill(pid_ary[i], SIGSTOP);
+        alarm(2);
+        
+        for(int j = 0; j < n; j++){
+
+        }
     }
 
     for(int i = 0; i < n; i++){
-
-        for(int j = 0; j < n; j++){
-            
-        }
+        waitpid(pid_ary[i], &count, 0);
     }
 
 	free(buf);
