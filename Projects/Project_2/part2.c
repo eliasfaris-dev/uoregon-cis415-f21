@@ -35,7 +35,7 @@ int main(int argc,char*argv[]){
 
     while((getline(&buf, &length, fp)) != -1){
 		tokens = str_filler(buf, " ");
-		print_command_line(&tokens);
+		//print_command_line(&tokens);
 		n++;
         pid_ary[n] = fork();
 
@@ -80,7 +80,6 @@ int main(int argc,char*argv[]){
 	free(buf);
     free(pid_ary);
     fclose(fp);
-	//free_command_line(&tokens);
     return 0;
 }
 
