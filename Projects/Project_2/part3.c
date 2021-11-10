@@ -32,7 +32,7 @@ int main(int argc,char*argv[]){
 
 	int found = getpid();
 	command_line tokens;
-	pid_t* pid_ary = (pid_t*)malloc(sizeof(pid_t) * 10000);
+	pid_t* pid_ary = (pid_t*)malloc(sizeof(pid_t) * 100);
 
     while((getline(&buf, &length, fp)) != -1){
 		tokens = str_filler(buf, " ");
@@ -92,7 +92,7 @@ int main(int argc,char*argv[]){
     }
     */
     script_print(pid_ary, n);
-    int done;
+    int done = 0;
     int* done_ary = (int*)malloc(sizeof(int)* n);
     for(int i = 0; i < n; i++){
         done_ary[i] = 0;
