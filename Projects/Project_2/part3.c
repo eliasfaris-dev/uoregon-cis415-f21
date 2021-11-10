@@ -79,7 +79,8 @@ int main(int argc,char*argv[]){
         else{
             next = -1;
         }
-        int answer = sigwait(&signal_set, alarm(2));
+        alarm(2);
+        int answer = sigwait(&signal_set, &signal);
         kill(pid_ary[current], SIGSTOP);
         kill(pid_ary[next], SIGCONT);
         current = next;
