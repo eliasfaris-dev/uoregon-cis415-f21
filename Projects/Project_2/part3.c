@@ -58,7 +58,7 @@ int main(int argc,char*argv[]){
     }
     
     
-    int current;
+    int current = pid_ary[0];
     int next = -1;
     char test = 1;
     int total_p;
@@ -83,7 +83,7 @@ int main(int argc,char*argv[]){
 
         }
         else if(total_p == n){
-            break;
+            test = 0;
         }
         else{
             next = -1;
