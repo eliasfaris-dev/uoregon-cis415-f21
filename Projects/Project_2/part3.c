@@ -19,6 +19,7 @@ int main(int argc,char*argv[]){
     sigset_t signal_set;
     sigemptyset(&signal_set);
     sigaddset(&signal_set, SIGUSR1);
+    sigaddset(&signal_set, SIGCONT);
     sigaddset(&signal_set, SIGALRM);
     sigprocmask(SIG_BLOCK, &signal_set, NULL);
 
@@ -42,58 +43,50 @@ int main(int argc,char*argv[]){
 		
         if(found != getpid()){
             
-            int answer = sigwait(&signal_set, &signal);
+            //int answer = sigwait(&signal_set, &signal);
 
             if(execvp(tokens.command_list[0], tokens.command_list) == -1){
                 printf("New process couldn't be made\n");
                 free(pid_ary);
-                free(fp);
+                fclose(fp);
 				free(buf);
                 free_command_line(&tokens);
+                exit(0);
             }
-
-            exit(0);
         }
-        
+        free_command_line(&tokens);
     }
     
-    //script_print(pid_ary, n);
-    //sleep(2);
-    //for(int i = 0; i < n; i++){
-        //kill(pid_ary[i], SIGUSR1);
-    //}
-
-    //kill(0, SIGUSR1);
-    /*
-    for(int i = 0; i < n; i++){
-        kill(pid_ary[i], SIGSTOP);
-    }
-
-    //sleep(2);
-
-    for(int i = 0; i < n; i++){
-        kill(pid_ary[i], SIGCONT);
-    }
-    */
-    for(int i = 0; i < n; i++){
-
-        kill(pid_ary[i], SIGUSR1);
-        kill(pid_ary[i], SIGSTOP);
-        alarm(2);
-        
-        for(int j = 0; j < n; j++){
-
+    
+    int current = pid_ary[0];
+    int next;
+    while(1){
+        if(current != n-1){
+            for(int j = next + 1; j < n; j++){
+            
+            if((waitpid(pid_ary[j], &count, WNOHANG))){
+                next = pid_ary[j];
+                break;
+            }
+            else if(current == n - 1){
+                j = 0;
+            }
+            else{
+                continue;
+            }
         }
+        else{
+            next = -1;
+        }
+        kill(pid_ary[current], SIGSTOP);
+        kill(pid_ary[next], SIGCONT);
+        current = next;
     }
 
-    for(int i = 0; i < n; i++){
-        waitpid(pid_ary[i], &count, 0);
-    }
 
 	free(buf);
     free(pid_ary);
     fclose(fp);
-	free_command_line(&tokens);
     return 0;
 }
 
