@@ -109,7 +109,7 @@ int main(int argc,char*argv[]){
             
 
                 if((waitpid(pid_ary[i]), &count, WNOHANG) != 0){
-                    printf("process %d DONE\n", j);
+                    printf("process %d DONE\n", i);
                     done += 1;
                     done_ary[i] = 100;
                 }
