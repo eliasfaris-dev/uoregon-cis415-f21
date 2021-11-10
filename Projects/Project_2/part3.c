@@ -59,6 +59,7 @@ int main(int argc,char*argv[]){
     
 
     script_print(pid_ary, n);
+    // Need this to know when the RR is done
     int done = 0;
     int* done_ary = (int*)malloc(sizeof(int)* n);
     for(int i = 0; i < n; i++){
@@ -67,9 +68,6 @@ int main(int argc,char*argv[]){
     int check = 1;
     while(check){
         for(int i = 0; i < n; i++){
-            if(done == n){
-                break;
-            }
             if(done_ary[i] != 99){
                 kill(pid_ary[i], SIGCONT);
                 alarm(2);
@@ -80,6 +78,10 @@ int main(int argc,char*argv[]){
                     done += 1;
                     done_ary[i] = 99;
                 }
+            }
+            if(done == n){
+                //To break out of for loop
+                break;
             }
             
         }
