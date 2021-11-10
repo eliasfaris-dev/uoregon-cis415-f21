@@ -60,7 +60,6 @@ int main(int argc,char*argv[]){
     
     int current = pid_ary[0];
     int next = -1;
-    int total_p;
     while(1){
         //script_print(pid_ary, n);
         if(current != n-1){
@@ -77,18 +76,20 @@ int main(int argc,char*argv[]){
                 else{
                     continue;
                 }
+
             }
 
         }
-        
         else{
             next = -1;
         }
+        script_print(pid_ary, n);
         alarm(2);
         int answer = sigwait(&signal_set, &signal);
         kill(pid_ary[current], SIGSTOP);
         kill(pid_ary[next], SIGCONT);
         current = next;
+
     }
 
 
