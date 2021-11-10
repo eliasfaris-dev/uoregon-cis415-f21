@@ -91,6 +91,7 @@ int main(int argc,char*argv[]){
         current = next;
     }
     */
+    script_print(pid_ary, n);
     int done;
     int* done_ary = (int*)malloc(sizeof(int)* n);
     for(int i = 0; i < n; i++){
