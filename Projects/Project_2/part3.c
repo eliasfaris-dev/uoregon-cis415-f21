@@ -36,7 +36,7 @@ int main(int argc,char*argv[]){
 
     while((getline(&buf, &length, fp)) != -1){
 		tokens = str_filler(buf, " ");
-		print_command_line(&tokens);
+		//print_command_line(&tokens);
 		n++;
         pid_ary[n] = fork();
 
@@ -60,7 +60,7 @@ int main(int argc,char*argv[]){
     
     int current = pid_ary[0];
     int next = -1;
-    for(int i = 0; i < n; i++){
+    while(1){
         if(current != n-1){
             for(int j = next + 1; j < n; j++){
             
