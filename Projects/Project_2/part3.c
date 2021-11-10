@@ -63,6 +63,7 @@ int main(int argc,char*argv[]){
     char test = 1;
     int total_p;
     while(test){
+        script_print(pid_ary, n);
         if(current != n-1){
             for(int j = next + 1; j < n; j++){
             
