@@ -60,7 +60,8 @@ int main(int argc,char*argv[]){
     
     int current = pid_ary[0];
     int next = -1;
-    while(1){
+    char test = 1;
+    while(test){
         if(current != n-1){
             for(int j = next + 1; j < n; j++){
             
@@ -70,6 +71,9 @@ int main(int argc,char*argv[]){
                 }
                 else if(current == n - 1){
                     j = 0;
+                }
+                else if(j == n){
+                    test = 0;
                 }
                 else{
                     continue;
