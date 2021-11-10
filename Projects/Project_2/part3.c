@@ -95,7 +95,7 @@ int main(int argc,char*argv[]){
         waitpid(pid_ary[i], &count, 0);
     }
     */
-
+    free(done_ary);
 	free(buf);
     free(pid_ary);
     fclose(fp);

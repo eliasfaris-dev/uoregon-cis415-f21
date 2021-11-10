@@ -30,4 +30,7 @@ int main(int argc, char* argv[]){
     else{
         printf("Incorrect Usage");
     }
+    fclose(fp);
+    free(buf);
+    free(pid_ary);
 }
