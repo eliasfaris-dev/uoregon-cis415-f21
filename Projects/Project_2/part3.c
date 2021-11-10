@@ -96,6 +96,7 @@ int main(int argc,char*argv[]){
     for(int i = 0; i < n; i++){
         done_ary[i] = -1;
     }
+    int s;
     while(1){
         for(int i = 0; i < n; i++){
             
@@ -108,7 +109,7 @@ int main(int argc,char*argv[]){
                 kill(pid_ary[i], SIGSTOP);
             
 
-                if((waitpid(pid_ary[i]), &count, WNOHANG) != 0){
+                if((waitpid(pid_ary[i]), &s, WNOHANG) != 0){
                     printf("process %d DONE\n", i);
                     done += 1;
                     done_ary[i] = 100;
