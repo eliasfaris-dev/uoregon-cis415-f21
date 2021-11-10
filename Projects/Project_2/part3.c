@@ -96,39 +96,35 @@ int main(int argc,char*argv[]){
     int done = 0;
     int* done_ary = (int*)malloc(sizeof(int)* n);
     for(int i = 0; i < n; i++){
-        done_ary[i] = 0;
+        done_ary[i] = -1;
     }
     int s;
     while(1){
 
-        // To see if round robin is done
-        if(done == n){
-            break;
-        }
 
         for(int i = 0; i < n; i++){
             if(done == n){
                 break;
             }
-            if(done_ary[i] != 1){
+            if(done_ary[i] != 99){
                 printf("cont process %d\n", i);
                 kill(pid_ary[i], SIGCONT);
                 alarm(2);
                 sigwait(&signal_set, &signal);
                 printf("stop process %d\n", i);
                 kill(pid_ary[i], SIGSTOP);
-            
-                if((waitpid(pid_ary[i], &s, WNOHANG)) == -1){
-                    perror("wait");
-                }
 
                 if((waitpid(pid_ary[i], &s, WNOHANG)) != 0){
                     printf("process %d DONE\n", i);
                     done += 1;
-                    done_ary[i] = 1;
+                    done_ary[i] = 99;
                 }
             }
             
+        }
+        // To see if round robin is done
+        if(done == n){
+            break;
         }
         
         
