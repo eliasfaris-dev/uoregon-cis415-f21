@@ -60,7 +60,7 @@ int main(int argc,char*argv[]){
     
     int current = pid_ary[0];
     int next = -1;
-    while(1){
+    for(int i = 0; i < n; i++){
         if(current != n-1){
             for(int j = next + 1; j < n; j++){
             
@@ -79,10 +79,10 @@ int main(int argc,char*argv[]){
         else{
             next = -1;
         }
+        int answer = sigwait(&signal_set, alarm(2));
         kill(pid_ary[current], SIGSTOP);
         kill(pid_ary[next], SIGCONT);
         current = next;
-        
     }
 
 
