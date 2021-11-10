@@ -103,7 +103,7 @@ int main(int argc,char*argv[]){
         if(done == n){
             break;
         }
-        
+
         for(int i = 0; i < n; i++){
             if(done == n){
                 break;
@@ -116,6 +116,9 @@ int main(int argc,char*argv[]){
                 printf("stop process %d\n", i);
                 kill(pid_ary[i], SIGSTOP);
             
+                if((waitpid(pid_ary[i]), &s, WNOHANG) == -1){
+                    perror("wait");
+                }
 
                 if((waitpid(pid_ary[i]), &s, WNOHANG) != 0){
                     printf("process %d DONE\n", i);
