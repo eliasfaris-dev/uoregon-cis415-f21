@@ -60,10 +60,9 @@ int main(int argc,char*argv[]){
     
     int current = pid_ary[0];
     int next = -1;
-    char test = 1;
     int total_p;
-    while(test){
-        script_print(pid_ary, n);
+    while(1){
+        //script_print(pid_ary, n);
         if(current != n-1){
             for(int j = next + 1; j < n; j++){
             
@@ -74,18 +73,14 @@ int main(int argc,char*argv[]){
                 else if(current == n - 1){
                     j = 0;
                 }
-                else if(WIFEXITED(count)){
-                    total_p++;
-                }
+                
                 else{
                     continue;
                 }
             }
 
         }
-        else if(total_p == n){
-            test = 0;
-        }
+        
         else{
             next = -1;
         }
