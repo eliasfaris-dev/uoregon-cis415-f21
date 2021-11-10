@@ -76,7 +76,7 @@ int main(int argc,char*argv[]){
                 else{
                     continue;
                 }
-
+                printf("test");
             }
 
         }
@@ -89,7 +89,6 @@ int main(int argc,char*argv[]){
         kill(pid_ary[current], SIGSTOP);
         kill(pid_ary[next], SIGCONT);
         current = next;
-        printf("test");
     }
 
 
