@@ -106,12 +106,13 @@ int main(int argc,char*argv[]){
                 sigwait(&signal_set, &signal);
                 printf("stop process %d\n", i);
                 kill(pid_ary[i], SIGSTOP);
-            }
+            
 
-            if(waitpid(pid_ary[i]), &count, WNOHANG) != 0){
-                printf("process %d DONE\n", j);
-                done += 1;
-                done_ary[i] = 100;
+                if((waitpid(pid_ary[i]), &count, WNOHANG) != 0){
+                    printf("process %d DONE\n", j);
+                    done += 1;
+                    done_ary[i] = 100;
+                }
             }
         }
         // To see if round robin is done
