@@ -94,13 +94,21 @@ int main(int argc,char*argv[]){
     int done;
     int* done_ary = (int*)malloc(sizeof(int)* n);
     for(int i = 0; i < n; i++){
-        done_ary[i] = -1;
+        done_ary[i] = 0;
     }
     int s;
     while(1){
+
+        // To see if round robin is done
+        if(done == n){
+            break;
+        }
+        
         for(int i = 0; i < n; i++){
-            
-            if(done_ary[i] != 100){
+            if(done == n){
+                break;
+            }
+            if(done_ary[i] != 1){
                 printf("cont process %d\n", i);
                 kill(pid_ary[i], SIGCONT);
                 alarm(2);
@@ -112,18 +120,12 @@ int main(int argc,char*argv[]){
                 if((waitpid(pid_ary[i]), &s, WNOHANG) != 0){
                     printf("process %d DONE\n", i);
                     done += 1;
-                    done_ary[i] = 100;
+                    done_ary[i] = 1;
                 }
             }
-            // To see if round robin is done
-            if(done == n){
-                break;
-            }
+            
         }
-        // To see if round robin is done
-        if(done == n){
-            break;
-        }
+        
         
     }
 
