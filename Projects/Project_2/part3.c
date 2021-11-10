@@ -59,7 +59,7 @@ int main(int argc,char*argv[]){
     
     
     int current = pid_ary[0];
-    int next;
+    int next = -1;
     while(1){
         if(current != n-1){
             for(int j = next + 1; j < n; j++){
