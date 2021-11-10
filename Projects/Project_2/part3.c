@@ -56,7 +56,7 @@ int main(int argc,char*argv[]){
         }
         free_command_line(&tokens);
     }
-    
+    /*
     int done;
     int current = pid_ary[0];
     int next = -1;
@@ -90,7 +90,33 @@ int main(int argc,char*argv[]){
         kill(pid_ary[next], SIGCONT);
         current = next;
     }
-    
+    */
+    int done;
+    int* done_ary = (int*)malloc(sizeof(int)* n);
+    for(int i = 0; i < n; i++){
+        done_ary[i] = -1;
+    }
+    while(1){
+        for(int i = 0; i < n; i++){
+            
+            if(done_ary[i] != n){
+                kill(pid_ary[i], SIGCONT);
+                alarm(2);
+                sigwait(&signal_set, &signal);
+                kill(pid_ary[i], SIGSTOP);
+            }
+
+            if(waitpid(pid_ary[i]), &count, WNOHANG) != 0){
+                done += 1;
+                done_ary[i] = 100;
+            }
+        }
+        // To see if round robin is done
+        if(done == n){
+            break;
+        }
+    }
+
 
 
 	free(buf);
