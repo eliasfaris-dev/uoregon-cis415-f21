@@ -57,14 +57,14 @@ int main(int argc,char*argv[]){
         free_command_line(&tokens);
     }
     
-    
-    int current = pid_ary[0];
+    int done;
+    int current = 0;
     int next = -1;
     while(1){
         //script_print(pid_ary, n);
-        if(current != n-1){
+        //if(current != n-1){
             for(int j = next + 1; j < n; j++){
-            
+                
                 if((waitpid(pid_ary[j], &count, WNOHANG))){
                     next = pid_ary[j];
                     break;
@@ -76,13 +76,12 @@ int main(int argc,char*argv[]){
                 else{
                     continue;
                 }
-                printf("test");
             }
 
-        }
-        else{
-            next = -1;
-        }
+        //}
+        //else{
+            //next = -1;
+        //}
         script_print(pid_ary, n);
         alarm(2);
         int answer = sigwait(&signal_set, &signal);
@@ -90,6 +89,7 @@ int main(int argc,char*argv[]){
         kill(pid_ary[next], SIGCONT);
         current = next;
     }
+    
 
 
 	free(buf);
