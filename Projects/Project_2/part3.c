@@ -64,16 +64,16 @@ int main(int argc,char*argv[]){
         if(current != n-1){
             for(int j = next + 1; j < n; j++){
             
-            if((waitpid(pid_ary[j], &count, WNOHANG))){
-                next = pid_ary[j];
-                break;
-            }
-            else if(current == n - 1){
-                j = 0;
-            }
-            else{
-                continue;
-            }
+                if((waitpid(pid_ary[j], &count, WNOHANG))){
+                    next = pid_ary[j];
+                    break;
+                }
+                else if(current == n - 1){
+                    j = 0;
+                }
+                else{
+                    continue;
+                }
             }
         }
         else{
@@ -82,6 +82,7 @@ int main(int argc,char*argv[]){
         kill(pid_ary[current], SIGSTOP);
         kill(pid_ary[next], SIGCONT);
         current = next;
+        
     }
 
 
