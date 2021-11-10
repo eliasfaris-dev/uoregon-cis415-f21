@@ -114,11 +114,12 @@ int main(int argc,char*argv[]){
                     done_ary[i] = 100;
                 }
             }
+            // To see if round robin is done
+            if(done == n){
+                break;
+            }
         }
-        // To see if round robin is done
-        if(done == n){
-            break;
-        }
+        
     }
 
 
