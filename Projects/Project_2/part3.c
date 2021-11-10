@@ -56,41 +56,7 @@ int main(int argc,char*argv[]){
         }
         free_command_line(&tokens);
     }
-    /*
-    int done;
-    int current = pid_ary[0];
-    int next = -1;
-    while(1){
-        //script_print(pid_ary, n);
-        //if(current != n-1){
-            for(int j = next + 1; j < n; j++){
-                
-                if((waitpid(pid_ary[j], &count, WNOHANG))){
-                    next = pid_ary[j];
-                    break;
-                }
-                else if(current == n - 1){
-                    j = 0;
-                }
-                
-                else{
-                    continue;
-                }
-            }
-
-        //}
-        //else{
-            //next = -1;
-        //}
-        script_print(pid_ary, n);
-        kill(pid_ary[current], SIGCONT);
-        alarm(2);
-        int answer = sigwait(&signal_set, &signal);
-        kill(pid_ary[current], SIGSTOP);
-        kill(pid_ary[next], SIGCONT);
-        current = next;
-    }
-    */
+    
 
     script_print(pid_ary, n);
     int done = 0;
@@ -98,10 +64,7 @@ int main(int argc,char*argv[]){
     for(int i = 0; i < n; i++){
         done_ary[i] = -1;
     }
-    int s;
     while(1){
-
-
         for(int i = 0; i < n; i++){
             if(done == n){
                 break;
@@ -114,7 +77,7 @@ int main(int argc,char*argv[]){
                 printf("stop process %d\n", i);
                 kill(pid_ary[i], SIGSTOP);
 
-                if((waitpid(pid_ary[i], &s, WNOHANG)) != 0){
+                if((waitpid(pid_ary[i], &count, WNOHANG)) != 0){
                     printf("process %d DONE\n", i);
                     done += 1;
                     done_ary[i] = 99;
@@ -126,8 +89,6 @@ int main(int argc,char*argv[]){
         if(done == n){
             break;
         }
-        
-        
     }
     /*
     for(int i = 0; i < n; i++){
