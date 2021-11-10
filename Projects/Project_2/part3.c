@@ -62,7 +62,7 @@ int main(int argc,char*argv[]){
     int next = -1;
     while(1){
         //script_print(pid_ary, n);
-        if(current != n-1){
+        //if(current != n-1){
             for(int j = next + 1; j < n; j++){
             
                 if((waitpid(pid_ary[j], &count, WNOHANG))){
@@ -79,10 +79,10 @@ int main(int argc,char*argv[]){
 
             }
 
-        }
-        else{
-            next = -1;
-        }
+        //}
+        //else{
+            //next = -1;
+        //}
         script_print(pid_ary, n);
         alarm(2);
         int answer = sigwait(&signal_set, &signal);
