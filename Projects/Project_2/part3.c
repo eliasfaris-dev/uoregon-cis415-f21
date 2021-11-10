@@ -43,7 +43,7 @@ int main(int argc,char*argv[]){
 		
         if(found != getpid()){
             
-            int answer1 = sigwait(&signal_set, &signal);
+            //int answer1 = sigwait(&signal_set, &signal);
 
             if(execvp(tokens.command_list[0], tokens.command_list) == -1){
                 printf("New process couldn't be made\n");
@@ -71,9 +71,6 @@ int main(int argc,char*argv[]){
                 }
                 else if(current == n - 1){
                     j = 0;
-                }
-                else if(j == n){
-                    test = 0;
                 }
                 else{
                     continue;
