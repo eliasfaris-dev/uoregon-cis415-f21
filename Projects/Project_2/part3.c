@@ -58,7 +58,7 @@ int main(int argc,char*argv[]){
     }
     
     int done;
-    int current = 0;
+    int current = pid_ary[0];
     int next = -1;
     while(1){
         //script_print(pid_ary, n);
@@ -83,6 +83,7 @@ int main(int argc,char*argv[]){
             //next = -1;
         //}
         script_print(pid_ary, n);
+        kill(pid_ary[current], SIGCONT);
         alarm(2);
         int answer = sigwait(&signal_set, &signal);
         kill(pid_ary[current], SIGSTOP);
