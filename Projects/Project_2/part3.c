@@ -64,21 +64,19 @@ int main(int argc,char*argv[]){
     for(int i = 0; i < n; i++){
         done_ary[i] = -1;
     }
-    while(1){
+    int check = 1;
+    while(check){
         for(int i = 0; i < n; i++){
             if(done == n){
                 break;
             }
             if(done_ary[i] != 99){
-                printf("cont process %d\n", i);
                 kill(pid_ary[i], SIGCONT);
                 alarm(2);
                 sigwait(&signal_set, &signal);
-                printf("stop process %d\n", i);
                 kill(pid_ary[i], SIGSTOP);
 
                 if((waitpid(pid_ary[i], &count, WNOHANG)) != 0){
-                    printf("process %d DONE\n", i);
                     done += 1;
                     done_ary[i] = 99;
                 }
@@ -87,7 +85,7 @@ int main(int argc,char*argv[]){
         }
         // To see if round robin is done
         if(done == n){
-            break;
+            check = 0;
         }
     }
     /*
