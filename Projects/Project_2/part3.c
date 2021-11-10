@@ -118,11 +118,11 @@ int main(int argc,char*argv[]){
                 printf("stop process %d\n", i);
                 kill(pid_ary[i], SIGSTOP);
             
-                if((waitpid(pid_ary[i]), &s, WNOHANG) == -1){
+                if((waitpid(pid_ary[i], &s, WNOHANG) == -1){
                     perror("wait");
                 }
 
-                if((waitpid(pid_ary[i]), &s, WNOHANG) != 0){
+                if((waitpid(pid_ary[i], &s, WNOHANG) != 0){
                     printf("process %d DONE\n", i);
                     done += 1;
                     done_ary[i] = 1;
