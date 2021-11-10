@@ -91,6 +91,10 @@ int main(int argc,char*argv[]){
         current = next;
     }
     */
+    for(int i = 0; i < n; i++){
+        waitpid(pid_ary[i], &count, 0);
+    }
+
     script_print(pid_ary, n);
     int done = 0;
     int* done_ary = (int*)malloc(sizeof(int)* n);
