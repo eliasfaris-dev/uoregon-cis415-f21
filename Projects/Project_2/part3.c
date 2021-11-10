@@ -119,6 +119,10 @@ int main(int argc,char*argv[]){
                 break;
             }
         }
+        // To see if round robin is done
+        if(done == n){
+            break;
+        }
         
     }
 
