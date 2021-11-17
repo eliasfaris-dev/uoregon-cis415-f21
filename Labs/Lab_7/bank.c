@@ -14,11 +14,22 @@ int main(int argc, char** argv){
         command_line tokens;
         size_t length = 128;
         char* buf = malloc(length);
-		pthread_t thread;
+		//pthread_t thread;
+		account index0;
+		account index1;
+		account index2;
+		account index3;
+		account index4;
+		account index5;
+		account index6;
+		account index7;
+		account index8;
+		account index9;
+
 
         while((getline(&buf, &length, fp)) != -1){
             tokens = str_filler(buf, " ");
-			printf(buf);
+			
         }
 
 
