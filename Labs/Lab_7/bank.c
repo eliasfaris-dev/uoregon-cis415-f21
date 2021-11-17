@@ -4,11 +4,35 @@
 #include <pthread.h>
 #include "string_parser.h"
 
+
 int main(int argc, char** argv){
+    if(argc == 2){
+        FILE* fp;
+        fp = fopen(argv[1], "r");
+
+        command_line tokens;
+        size_t length = 128;
+        char* buf = malloc(length);
+		pthread_t thread;
+
+        while((getline(&buf, &length, fp)) != -1){
+            tokens = str_filler(buf, " ");
+			printf(buf);
+        }
+
+
+
+
+    }
+    else{
+        printf("Error! Only ./part1 <inputfile.txt>");
+    }
+
 
 }
 
 void process_transaction(char** arg){
+
 
 }
 
