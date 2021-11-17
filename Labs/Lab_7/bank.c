@@ -3,6 +3,7 @@
 #include "account.h"
 #include <pthread.h>
 #include "string_parser.h"
+#include <string.h>
 
 
 int main(int argc, char** argv){
