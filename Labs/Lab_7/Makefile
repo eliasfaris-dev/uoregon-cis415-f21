@@ -1,7 +1,7 @@
-all: part1
+all: bank
 
-part1: part1.c
-	gcc -o part1 part1.c
+part1: bank.c
+	gcc -o bank bank.c
 
 clean:
-	rm -f core *.o part1
+	rm -f core *.o bank
