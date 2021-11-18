@@ -26,10 +26,21 @@ int main(int argc, char** argv){
 		account index8;
 		account index9;
 
-
+		// 
         while((getline(&buf, &length, fp)) != -1){
             tokens = str_filler(buf, " ");
-			
+			if(strcmp(tokens.command_list[0], "D") == 0){
+
+			}
+			else if(strcmp(tokens.command_list[0], "T") == 0){
+
+			}
+			else if(strcmp(tokens.command_list[0], "C") == 0){
+
+			}
+			else if(strcmp(tokens.command_list[0], "W") == 0){
+
+			}
         }
 
 
