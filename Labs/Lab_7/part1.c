@@ -7,6 +7,8 @@
 
 account* the_acc;
 int total_acc = 0;
+char file = argv[1];
+
 
 int main(int argc, char** argv){
 	if(argc != 2){
@@ -59,7 +61,7 @@ int main(int argc, char** argv){
 void process_transaction(){
 	size_t len = 128;
 	char* buf = malloc(len);
-	FILE* fp = fopen(argv[1], "r");
+	FILE* fp = fopen(file, "r");
 	while(fgets(buf, len, fp) != -1){
 		//NEED TO DO THIS
 	}
@@ -69,9 +71,8 @@ void process_transaction(){
 
 void update_balance(){
 	for(int i = 0; i < total_acc; i++){
-		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracker;
+		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
 	}
-	fclose(fp);
 	free(the_acc);
 }
 
