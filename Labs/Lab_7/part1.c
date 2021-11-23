@@ -42,7 +42,7 @@ int main(int argc, char** argv){
 
 				the_acc[i].transaction_tracter = 0;
 
-				printf("The account %d", the_acc[i].account_number);
+				printf("The account %s\n", the_acc[i].account_number);
 			}
 		}
 		
