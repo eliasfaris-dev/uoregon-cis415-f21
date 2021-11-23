@@ -5,54 +5,50 @@
 #include "string_parser.h"
 #include <string.h>
 
+account* the_acc;
 
 int main(int argc, char** argv){
-    if(argc == 2){
-        FILE* fp;
-        fp = fopen(argv[1], "r");
+	if(argc != 2){
+		printf("Incorrect call of function");
+	}
+	else{
+		size_t len = 128;
+		char* buf = malloc(len);
+		FILE* fp = fopen(argv[1], "r");
+		if(fp == NULL){
+			printf("File not found");
+		}
+		else{
+			fgets(buf, len, fp);
+			int total_acc = atoi(buf);
+			the_acc = malloc(sizeof(account) * total_acc);
 
-        command_line tokens;
-        size_t length = 128;
-        char* buf = malloc(length);
-		//pthread_t thread;
-		account index0;
-		account index1;
-		account index2;
-		account index3;
-		account index4;
-		account index5;
-		account index6;
-		account index7;
-		account index8;
-		account index9;
+			for(int i = 0; i < the_acc; i++){
+				fgets(buf, len, fp);
+				buf[strcspn(buf, "\n")] = 0;
+				strcpy(the_acc[i].account_number, buf);
 
-		// 
-        while((getline(&buf, &length, fp)) != -1){
-            tokens = str_filler(buf, " ");
-			if(strcmp(tokens.command_list[0], "D") == 0){
+				fgets(buf, len, fp);
+				buf[strcspn(buf, "\n")] = 0;
+				strcpy(the_acc[i].password, buf);
 
+				fgets(buf, len, fp);
+				buf[strcspn(buf, "\n")] = 0;
+				the_acc[i].balance = atof(buf);
+
+				fgets(buf, len, fp);
+				buf[strcspn(buf, "\n")] = 0;
+				the_acc[i].reward_rate = atof(buf);
+
+				the_acc[i].transaction_tracter = 0;
+
+				print("The account %d", the_acc[i].account_number);
 			}
-			else if(strcmp(tokens.command_list[0], "T") == 0){
-
-			}
-			else if(strcmp(tokens.command_list[0], "C") == 0){
-
-			}
-			else if(strcmp(tokens.command_list[0], "W") == 0){
-
-			}
-        }
-
-
-
-
-    }
-    else{
-        printf("Error! Only ./part1 <inputfile.txt>");
-    }
-
-
+		}
+		
+	}
 }
+
 
 void process_transaction(char** arg){
 
