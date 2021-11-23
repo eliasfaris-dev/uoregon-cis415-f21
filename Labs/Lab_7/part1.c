@@ -6,6 +6,7 @@
 #include <string.h>
 
 account* the_acc;
+int total_acc = 0;
 
 int main(int argc, char** argv){
 	if(argc != 2){
@@ -20,10 +21,14 @@ int main(int argc, char** argv){
 		}
 		else{
 			fgets(buf, len, fp);
-			int total_acc = atoi(buf);
+			total_acc = atoi(buf);
 			the_acc = malloc(sizeof(account) * total_acc);
 
-			for(int i = 0; i < the_acc; i++){
+			for(int i = 0; i < total_acc; i++){
+				fgets(buf, len, fp);
+				buf[strcspn(buf, "\n")] = 0;
+				strcpy(the_acc[i].index, buf);
+
 				fgets(buf, len, fp);
 				buf[strcspn(buf, "\n")] = 0;
 				strcpy(the_acc[i].account_number, buf);
@@ -42,21 +47,32 @@ int main(int argc, char** argv){
 
 				the_acc[i].transaction_tracter = 0;
 
-				printf("The account %s\n", the_acc[i].account_number);
 			}
+			// NEED TO FIGURE OUT WHAT TO PASS INTO PROCESS_TRANSACTION
+			//process_transaction();
 		}
 		
 	}
 }
 
 
-void process_transaction(char** arg){
+void process_transaction(){
+	size_t len = 128;
+	char* buf = malloc(len);
+	FILE* fp = fopen(argv[1], "r");
+	while(fgets(buf, len, fp) != -1){
+		//NEED TO DO THIS
+	}
 
-
+	update_balance();
 }
 
 void update_balance(){
-
+	for(int i = 0; i < total_acc; i++){
+		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracker;
+	}
+	fclose(fp);
+	free(the_acc);
 }
 
 int count_token (char* buf, const char* delim)

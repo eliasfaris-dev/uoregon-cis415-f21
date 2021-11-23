@@ -2,9 +2,12 @@
 #define ACCOUNT_H_
 
 typedef struct
-{
+{   
+
 	char account_number[17];
 	char password[9];
+    char index[9];
+    
     double balance;
     double reward_rate;
     
