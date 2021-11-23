@@ -7,7 +7,7 @@
 
 account* the_acc;
 int total_acc = 0;
-char file = argv[1];
+char file;
 
 
 int main(int argc, char** argv){
@@ -24,6 +24,7 @@ int main(int argc, char** argv){
 		else{
 			fgets(buf, len, fp);
 			total_acc = atoi(buf);
+			file = argv[1];
 			the_acc = malloc(sizeof(account) * total_acc);
 
 			for(int i = 0; i < total_acc; i++){
