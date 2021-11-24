@@ -11,10 +11,6 @@ char file;
 command_line tokens;
 
 int main(int argc, char** argv){
-	if(argc != 2){
-		printf("Incorrect call of function");
-	}
-	else{
 		printf("Begenning of main");
 		size_t len = 128;
 		char* buf = malloc(len);
@@ -57,7 +53,7 @@ int main(int argc, char** argv){
 			process_transaction();
 		}
 		
-	}
+	
 }
 
 
