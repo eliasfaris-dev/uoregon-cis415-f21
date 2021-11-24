@@ -62,8 +62,8 @@ int main(int argc, char** argv){
 
 
 void process_transaction(){
-	size_t size = 0;
-	char* buf = NULL;
+	size_t size = 128;
+	char* buf = (char*)malloc(size);
 	FILE* fp = fopen(file, "r");
 	while((getline(&buf, &size,fp)) != -1){
 		tokens = str_filler(buf, " ");
