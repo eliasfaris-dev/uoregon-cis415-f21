@@ -62,10 +62,10 @@ int main(int argc, char** argv){
 
 
 void process_transaction(){
-	size_t len = 128;
-	char* buf = malloc(len);
+	size_t size = 0;
+	char* buf = NULL;
 	FILE* fp = fopen(file, "r");
-	while((fgets(buf, len, fp)) != -1){
+	while(getline(&buf, &size,fp)) != -1){
 		tokens = str_filler(buf, " ");
 		if(strcmp(tokens.command_list[0], "C") == 0){
             for(int i = 0; i < total_acc; i++){
