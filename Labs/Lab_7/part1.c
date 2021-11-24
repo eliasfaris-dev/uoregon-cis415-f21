@@ -11,37 +11,41 @@ char file;
 command_line tokens;
 
 int main(int argc, char** argv){
+	if(argc != 2){
+		printf("Incorrect call of function");
+	}
+	else{
 		printf("Begenning of main");
-		size_t len = 128;
-		char* buf = malloc(len);
 		FILE* fp = fopen(argv[1], "r");
 		if(fp == NULL){
 			printf("File not found");
 		}
 		else{
-			fgets(buf, len, fp);
+			char* buf = NULL;
+			size_t size = 0;
+			getline(&buf, &size,fp);
 			total_acc = atoi(buf);
 			file = argv[1];
 			the_acc = malloc(sizeof(account) * total_acc);
 
 			for(int i = 0; i < total_acc; i++){
-				fgets(buf, len, fp);
+				getline(&buf, &size,fp);
 				buf[strcspn(buf, "\n")] = 0;
 				strcpy(the_acc[i].index, buf);
 
-				fgets(buf, len, fp);
+				getline(&buf, &size,fp);
 				buf[strcspn(buf, "\n")] = 0;
 				strcpy(the_acc[i].account_number, buf);
 
-				fgets(buf, len, fp);
+				getline(&buf, &size,fp);
 				buf[strcspn(buf, "\n")] = 0;
 				strcpy(the_acc[i].password, buf);
 
-				fgets(buf, len, fp);
+				getline(&buf, &size,fp);
 				buf[strcspn(buf, "\n")] = 0;
 				the_acc[i].balance = atof(buf);
 
-				fgets(buf, len, fp);
+				getline(&buf, &size,fp);
 				buf[strcspn(buf, "\n")] = 0;
 				the_acc[i].reward_rate = atof(buf);
 
@@ -53,7 +57,7 @@ int main(int argc, char** argv){
 			process_transaction();
 		}
 		
-	
+	}
 }
 
 
