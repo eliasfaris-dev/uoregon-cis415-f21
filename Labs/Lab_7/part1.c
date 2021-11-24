@@ -15,6 +15,7 @@ int main(int argc, char** argv){
 		printf("Incorrect call of function");
 	}
 	else{
+		printf("Begenning of main");
 		size_t len = 128;
 		char* buf = malloc(len);
 		FILE* fp = fopen(argv[1], "r");
