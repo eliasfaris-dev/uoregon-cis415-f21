@@ -8,7 +8,7 @@
 account* the_acc;
 int total_acc = 0;
 char file;
-
+command_line tokens;
 
 int main(int argc, char** argv){
 	if(argc != 2){
@@ -52,7 +52,7 @@ int main(int argc, char** argv){
 
 			}
 			// NEED TO FIGURE OUT WHAT TO PASS INTO PROCESS_TRANSACTION
-			//process_transaction();
+			process_transaction();
 		}
 		
 	}
@@ -63,8 +63,61 @@ void process_transaction(){
 	size_t len = 128;
 	char* buf = malloc(len);
 	FILE* fp = fopen(file, "r");
-	while(fgets(buf, len, fp) != -1){
-		//NEED TO DO THIS
+	while((fgets(buf, len, fp)) != -1){
+		tokens = str_filler(buf, " ");
+		if(strcmp(tokens.command_list[0], "C") == 0){
+            for(int i = 0; i < total_acc; i++){
+                if((strcmp(tokens.command_list[1], the_acc[i].account_number) == 0)){
+                    if(strcmp(tokens.command_list[2], the_acc[i].password) == 0){
+                        break;
+                    }
+                }
+            }
+        }
+
+		else if(tokens.command_list[0], "D"){
+			double amount = atof(tokens.command_list[3]);
+			for(int i = 0; i < total_acc; i++){
+				if((strcmp(tokens.command_list[1], the_acc[i].account_number) == 0)){
+                    if(strcmp(tokens.command_list[2], the_acc[i].password) == 0){
+                        the_acc[i].transaction_tracter += amount;
+						the_acc[i].balance += amount;
+                        break;
+                    }
+                }
+			}
+		}
+
+		else if(tokens.command_list[0], "W"){
+			double amount = atof(tokens.command_list[3]);
+            for(int i = 0; i < total_acc; i++){
+                if((strcmp(tokens.command_list[1], the_acc[i].account_number) == 0)){
+                    if(strcmp(tokens.command_list[2], the_acc[i].password) == 0){
+                        the_acc[i].transaction_tracter += amount;
+						the_acc[i].balance -= amount;
+                        break;
+                    }
+                }
+            }
+		}
+
+		else if(tokens.command_list[0], "T"){
+			double amount = atof(tokens.command_list[4]);
+            for(int i = 0; i < total_acc; i++){
+                if((strcmp(tokens.command_list[1], the_acc[i].account_number) == 0)){
+                    if(strcmp(tokens.command_list[2], the_acc[i].password) == 0){
+                        for(int j = 0; j < total_acc; j++){
+                            if(strcmp(tokens.command_list[3], the_acc[j].account_number) == 0){
+                                the_acc[i].balance -= amount;
+                                the_acc[i].transaction_tracter += amount;
+                                the_acc[j].balance += amount;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+		}
 	}
 
 	update_balance();
@@ -83,10 +136,7 @@ int count_token (char* buf, const char* delim)
 	if (buf == NULL){
 		return EXIT_FAILURE;
 	}
-
 	int count = 0;
-
-	
 	char* copy = strdup(buf);
 
 	char* token;
@@ -104,12 +154,8 @@ int count_token (char* buf, const char* delim)
 			break;
 		}
 	}
-	
-
-	
 	free(copy);
 	return count + 1;
-
 }
 
 command_line str_filler (char* buf, const char* delim)
