@@ -127,7 +127,14 @@ void update_balance(){
 	for(int i = 0; i < total_acc; i++){
 		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
 	}
+	
 	free(the_acc);
+}
+
+void printFunc(){
+	for(int i = 0; i < total_acc; i++){
+		printf("%d balance:  %0.2f\n", i, the_acc[i].balance);
+	}
 }
 
 int count_token (char* buf, const char* delim)
