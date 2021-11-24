@@ -21,8 +21,8 @@ int main(int argc, char** argv){
 			printf("File not found");
 		}
 		else{
-			char* buf = NULL;
-			size_t size = 0;
+			size_t size = 128;
+			char* buf = (char*)malloc(size);
 			getline(&buf, &size,fp);
 			total_acc = atoi(buf);
 			file = argv[1];
