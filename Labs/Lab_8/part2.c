@@ -80,7 +80,7 @@ void process_transaction(char** argv){
                 }
             }
         }
-		printf("Before segfault\n");
+		//printf("Before segfault\n");
 		//HERE IS SEGFAULT
 		if (strcmp(tokens.command_list[0], "D") == 0){
 			double amount = atof(tokens.command_list[3]);
@@ -93,7 +93,7 @@ void process_transaction(char** argv){
                     }
                 }
 			}
-			printf("After Deposit\n");
+			//printf("After Deposit\n");
 		}
 		
 	
@@ -109,7 +109,7 @@ void process_transaction(char** argv){
                     }
                 }
             }
-			printf("After Withdraw\n");
+			//printf("After Withdraw\n");
 		}
 
 		if(strcmp(tokens.command_list[0], "T") == 0){
@@ -128,10 +128,10 @@ void process_transaction(char** argv){
                     }
                 }
             }
-			printf("After Withdraw\n");
+			//printf("After Withdraw\n");
 		}
 	}
-	printf("After process transaction");
+	printf("After process transaction\n");
 	//update_balance();
 }
 /*
