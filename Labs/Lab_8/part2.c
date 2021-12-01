@@ -29,7 +29,7 @@ int main(int argc, char** argv){
 			total_acc = atoi(buf);
 			the_acc = malloc(sizeof(account) * total_acc);
             //pthread_create();
-			/*
+			
 			for(int i = 0; i < total_acc; i++){
 				getline(&buf, &size,fp);
 				buf[strcspn(buf, "\n")] = 0;
@@ -54,6 +54,7 @@ int main(int argc, char** argv){
 				the_acc[i].transaction_tracter = 0;
 
 			}
+			/*
 			// NEED TO FIGURE OUT WHAT TO PASS INTO PROCESS_TRANSACTION
 			printf("Before process_transaction");
 			process_transaction(argv);
