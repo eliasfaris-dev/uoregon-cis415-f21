@@ -81,7 +81,7 @@ void process_transaction(char** argv){
             }
         }
 	
-	
+		//HERE IS SEGFAULT
 		else if(tokens.command_list[0], "D"){
 			double amount = atof(tokens.command_list[3]);
 			for(int i = 0; i < total_acc; i++){
