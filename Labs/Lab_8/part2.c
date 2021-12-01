@@ -80,7 +80,7 @@ void process_transaction(char** argv){
                 }
             }
         }
-	
+		printf("Before segfault\n")
 		//HERE IS SEGFAULT
 		else if(tokens.command_list[0], "D"){
 			double amount = atof(tokens.command_list[3]);
@@ -94,6 +94,7 @@ void process_transaction(char** argv){
                 }
 			}
 		}
+		printf("After first else if\n")
 	}
 	/*
 		else if(tokens.command_list[0], "W"){
