@@ -58,11 +58,11 @@ int main(int argc, char** argv){
 			printf("Before process_transaction");
 			process_transaction(argv);
 		}
-		
+		*/
 	}
 }
-
-
+	
+/*
 void process_transaction(char** argv){
 	size_t size = 128;
 	char* buf = (char*)malloc(size);
