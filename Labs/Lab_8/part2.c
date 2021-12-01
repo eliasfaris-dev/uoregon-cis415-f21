@@ -68,6 +68,7 @@ void process_transaction(char** argv){
 	size_t size = 128;
 	char* buf = (char*)malloc(size);
 	FILE* fp = fopen(argv[1], "r");
+	/*
 	while((getline(&buf, &size,fp)) != -1){
 		tokens = str_filler(buf, " ");
 		if(strcmp(tokens.command_list[0], "C") == 0){
@@ -126,6 +127,7 @@ void process_transaction(char** argv){
 	}
 	printf("After process transaction");
 	//update_balance();
+	*/
 }
 /*
 void update_balance(){
