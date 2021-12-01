@@ -6,7 +6,7 @@
 #include <string.h>
 
 pthread_t thread;
-account the_acc;
+account* the_acc;
 int total_acc = 0;
 char file;
 command_line tokens;
