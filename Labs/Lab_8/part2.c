@@ -13,10 +13,10 @@ command_line tokens;
 
 int main(int argc, char** argv){
 	if(argc != 2){
-		printf("Incorrect call of function\n");
+		printf("Incorrect call of function");
 	}
 	else{
-		printf("Begenning of main");
+		printf("Begenning of main\n");
 		FILE* fp = fopen(argv[1], "r");
 		if(fp == NULL){
 			printf("File not found");
