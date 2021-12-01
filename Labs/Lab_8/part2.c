@@ -31,23 +31,23 @@ int main(int argc, char** argv){
             //pthread_create();
 			
 			for(int i = 0; i < total_acc; i++){
-				getline(&buf, &size,fp);
+				getline(&buf, &size, fp);
 				buf[strcspn(buf, "\n")] = 0;
 				strcpy(the_acc[i].index, buf);
 
-				getline(&buf, &size,fp);
+				getline(&buf, &size, fp);
 				buf[strcspn(buf, "\n")] = 0;
 				strcpy(the_acc[i].account_number, buf);
 
-				getline(&buf, &size,fp);
+				getline(&buf, &size, fp);
 				buf[strcspn(buf, "\n")] = 0;
 				strcpy(the_acc[i].password, buf);
 
-				getline(&buf, &size,fp);
+				getline(&buf, &size, fp);
 				buf[strcspn(buf, "\n")] = 0;
 				the_acc[i].balance = atof(buf);
 
-				getline(&buf, &size,fp);
+				getline(&buf, &size, fp);
 				buf[strcspn(buf, "\n")] = 0;
 				the_acc[i].reward_rate = atof(buf);
 
