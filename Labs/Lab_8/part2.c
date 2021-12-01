@@ -147,7 +147,7 @@ void process_transaction(char** argv){
 			//printf("After Withdraw\n");
 		}
 	}
-	printf("After process transaction\n");
+	//printf("After process transaction\n");
 	fclose(fp);
 	free(buf);
 	free_command_line(&tokens);
