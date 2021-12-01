@@ -141,7 +141,7 @@ void printFunc(){
 		printf("%d balance:  %0.2f\n", i, the_acc[i].balance);
 	}
 }
-
+*/
 int count_token (char* buf, const char* delim)
 {
 
@@ -212,4 +212,3 @@ void free_command_line(command_line* command)
 
 	free(command->command_list);
 }
-*/
