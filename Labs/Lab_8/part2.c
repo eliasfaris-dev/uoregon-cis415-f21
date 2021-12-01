@@ -68,7 +68,7 @@ void process_transaction(char** argv){
 	size_t size = 128;
 	char* buf = (char*)malloc(size);
 	FILE* fp = fopen(argv[1], "r");
-	/*
+	
 	while((getline(&buf, &size,fp)) != -1){
 		tokens = str_filler(buf, " ");
 		if(strcmp(tokens.command_list[0], "C") == 0){
@@ -80,7 +80,8 @@ void process_transaction(char** argv){
                 }
             }
         }
-
+	}
+	/*
 		else if(tokens.command_list[0], "D"){
 			double amount = atof(tokens.command_list[3]);
 			for(int i = 0; i < total_acc; i++){
