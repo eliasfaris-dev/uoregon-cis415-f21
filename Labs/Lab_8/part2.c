@@ -8,9 +8,9 @@
 pthread_t thread;
 account* the_acc;
 int total_acc = 0;
-char file = argv[1];
+char file;
 command_line tokens;
-/*
+
 int main(int argc, char** argv){
 	if(argc != 2){
 		printf("Incorrect call of function");
@@ -56,17 +56,17 @@ int main(int argc, char** argv){
 			}
 			// NEED TO FIGURE OUT WHAT TO PASS INTO PROCESS_TRANSACTION
 			printf("Before process_transaction");
-			process_transaction();
+			process_transaction(argv);
 		}
 		
 	}
 }
 
-*/
-void process_transaction(){
+
+void process_transaction(char** argv){
 	size_t size = 128;
 	char* buf = (char*)malloc(size);
-	FILE* fp = fopen(file, "r");
+	FILE* fp = fopen(argv[1], "r");
 	while((getline(&buf, &size,fp)) != -1){
 		tokens = str_filler(buf, " ");
 		if(strcmp(tokens.command_list[0], "C") == 0){
