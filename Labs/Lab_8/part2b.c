@@ -235,4 +235,3 @@ void free_command_line(command_line* command)
 
 	free(command->command_list);
 }
-
