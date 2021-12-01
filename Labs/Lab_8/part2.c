@@ -21,6 +21,7 @@ int main(int argc, char** argv){
 		if(fp == NULL){
 			printf("File not found");
 		}
+		/*
 		else{
 			size_t size = 128;
 			char* buf = (char*)malloc(size);
@@ -210,3 +211,4 @@ void free_command_line(command_line* command)
 
 	free(command->command_list);
 }
+*/
