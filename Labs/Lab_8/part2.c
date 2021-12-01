@@ -135,6 +135,7 @@ void process_transaction(char** argv){
 	printf("After process transaction\n");
 	fclose(fp);
 	free(buf);
+	free_command_line(&tokens);
 	update_balance();
 }
 
@@ -150,6 +151,7 @@ void printFunc(){
 	for(int i = 0; i < total_acc; i++){
 		printf("%d balance:  %0.2f\n", i, the_acc[i].balance);
 	}
+	
 }
 
 int count_token (char* buf, const char* delim)
