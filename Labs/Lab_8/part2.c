@@ -13,7 +13,7 @@ command_line tokens;
 
 int main(int argc, char** argv){
 	if(argc != 2){
-		printf("Incorrect call of function");
+		printf("Incorrect call of function\n");
 	}
 	else{
 		printf("Begenning of main");
@@ -56,7 +56,7 @@ int main(int argc, char** argv){
 			}
 			
 			// NEED TO FIGURE OUT WHAT TO PASS INTO PROCESS_TRANSACTION
-			printf("Before process_transaction");
+			printf("Before process_transaction\n");
 			
 		}
 	}
