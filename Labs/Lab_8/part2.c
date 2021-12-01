@@ -8,7 +8,7 @@
 pthread_t thread;
 account* the_acc;
 int total_acc = 0;
-char file;
+char file = argv[1];
 command_line tokens;
 /*
 int main(int argc, char** argv){
