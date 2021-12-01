@@ -21,7 +21,7 @@ int main(int argc, char** argv){
 		if(fp == NULL){
 			printf("File not found");
 		}
-		/*
+		
 		else{
 			size_t size = 128;
 			char* buf = (char*)malloc(size);
@@ -29,7 +29,7 @@ int main(int argc, char** argv){
 			total_acc = atoi(buf);
 			the_acc = malloc(sizeof(account) * total_acc);
             //pthread_create();
-
+			/*
 			for(int i = 0; i < total_acc; i++){
 				getline(&buf, &size,fp);
 				buf[strcspn(buf, "\n")] = 0;
@@ -57,8 +57,8 @@ int main(int argc, char** argv){
 			// NEED TO FIGURE OUT WHAT TO PASS INTO PROCESS_TRANSACTION
 			printf("Before process_transaction");
 			process_transaction(argv);
+			*/
 		}
-		*/
 	}
 }
 	
