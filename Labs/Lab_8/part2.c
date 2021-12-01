@@ -132,14 +132,14 @@ void process_transaction(char** argv){
 		}
 	}
 	printf("After process transaction\n");
-	//update_balance();
+	update_balance();
 }
-/*
+
 void update_balance(){
 	for(int i = 0; i < total_acc; i++){
 		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
 	}
-	
+	printFunc();
 	free(the_acc);
 }
 
@@ -148,7 +148,7 @@ void printFunc(){
 		printf("%d balance:  %0.2f\n", i, the_acc[i].balance);
 	}
 }
-*/
+
 int count_token (char* buf, const char* delim)
 {
 
