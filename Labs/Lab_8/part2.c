@@ -10,7 +10,7 @@ account* the_acc;
 int total_acc = 0;
 char file;
 command_line tokens;
-
+/*
 int main(int argc, char** argv){
 	if(argc != 2){
 		printf("Incorrect call of function");
@@ -62,7 +62,7 @@ int main(int argc, char** argv){
 	}
 }
 
-
+*/
 void process_transaction(){
 	size_t size = 128;
 	char* buf = (char*)malloc(size);
