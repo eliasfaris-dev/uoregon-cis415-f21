@@ -25,7 +25,7 @@ int main(int argc, char** argv){
 		else{
 			size_t size = 128;
 			char* buf = (char*)malloc(size);
-			getline(&buf, &size,fp);
+			getline(&buf, &size, fp);
 			total_acc = atoi(buf);
 			the_acc = malloc(sizeof(account) * total_acc);
             //pthread_create();

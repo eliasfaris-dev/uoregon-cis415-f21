@@ -5,6 +5,7 @@
 #include "string_parser.h"
 #include <string.h>
 
+pthread_t thread;
 account* the_acc;
 int total_acc = 0;
 char file;
@@ -15,19 +16,20 @@ int main(int argc, char** argv){
 		printf("Incorrect call of function");
 	}
 	else{
-		printf("Begenning of main");
+		printf("Begenning of main\n");
 		FILE* fp = fopen(argv[1], "r");
 		if(fp == NULL){
 			printf("File not found");
 		}
+		
 		else{
 			size_t size = 128;
 			char* buf = (char*)malloc(size);
-			getline(&buf, &size,fp);
+			getline(&buf, &size, fp);
 			total_acc = atoi(buf);
-			file = argv[1];
 			the_acc = malloc(sizeof(account) * total_acc);
-
+            //pthread_create();
+			
 			for(int i = 0; i < total_acc; i++){
 				getline(&buf, &size,fp);
 				buf[strcspn(buf, "\n")] = 0;
@@ -52,19 +54,22 @@ int main(int argc, char** argv){
 				the_acc[i].transaction_tracter = 0;
 
 			}
+			
 			// NEED TO FIGURE OUT WHAT TO PASS INTO PROCESS_TRANSACTION
-			printf("Before process_transaction");
-			process_transaction();
+			printf("Before process_transaction\n");
+			fclose(fp);
+			free(buf);
+			process_transaction(argv);
 		}
-		
 	}
 }
+	
 
-
-void process_transaction(){
+void process_transaction(char** argv){
 	size_t size = 128;
 	char* buf = (char*)malloc(size);
-	FILE* fp = fopen(file, "r");
+	FILE* fp = fopen(argv[1], "r");
+	
 	while((getline(&buf, &size,fp)) != -1){
 		tokens = str_filler(buf, " ");
 		if(strcmp(tokens.command_list[0], "C") == 0){
@@ -76,8 +81,9 @@ void process_transaction(){
                 }
             }
         }
-
-		else if(tokens.command_list[0], "D"){
+		//printf("Before segfault\n");
+		//HERE IS SEGFAULT
+		if (strcmp(tokens.command_list[0], "D") == 0){
 			double amount = atof(tokens.command_list[3]);
 			for(int i = 0; i < total_acc; i++){
 				if((strcmp(tokens.command_list[1], the_acc[i].account_number) == 0)){
@@ -88,9 +94,12 @@ void process_transaction(){
                     }
                 }
 			}
+			//printf("After Deposit\n");
 		}
-
-		else if(tokens.command_list[0], "W"){
+		
+	
+	
+		if(strcmp(tokens.command_list[0], "W") == 0){
 			double amount = atof(tokens.command_list[3]);
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens.command_list[1], the_acc[i].account_number) == 0)){
@@ -101,9 +110,10 @@ void process_transaction(){
                     }
                 }
             }
+			//printf("After Withdraw\n");
 		}
 
-		else if(tokens.command_list[0], "T"){
+		if(strcmp(tokens.command_list[0], "T") == 0){
 			double amount = atof(tokens.command_list[4]);
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens.command_list[1], the_acc[i].account_number) == 0)){
@@ -119,9 +129,13 @@ void process_transaction(){
                     }
                 }
             }
+			//printf("After Withdraw\n");
 		}
 	}
-	printf("After process transaction");
+	printf("After process transaction\n");
+	fclose(fp);
+	free(buf);
+	free_command_line(&tokens);
 	update_balance();
 }
 
@@ -129,7 +143,7 @@ void update_balance(){
 	for(int i = 0; i < total_acc; i++){
 		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
 	}
-	
+	printFunc();
 	free(the_acc);
 }
 
@@ -137,6 +151,7 @@ void printFunc(){
 	for(int i = 0; i < total_acc; i++){
 		printf("%d balance:  %0.2f\n", i, the_acc[i].balance);
 	}
+	
 }
 
 int count_token (char* buf, const char* delim)
