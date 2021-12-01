@@ -54,11 +54,11 @@ int main(int argc, char** argv){
 				the_acc[i].transaction_tracter = 0;
 
 			}
-			/*
+			
 			// NEED TO FIGURE OUT WHAT TO PASS INTO PROCESS_TRANSACTION
 			printf("Before process_transaction");
 			process_transaction(argv);
-			*/
+			
 		}
 	}
 }
