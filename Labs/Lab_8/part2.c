@@ -58,6 +58,7 @@ int main(int argc, char** argv){
 			// NEED TO FIGURE OUT WHAT TO PASS INTO PROCESS_TRANSACTION
 			printf("Before process_transaction\n");
 			fclose(fp);
+			free(buf);
 			process_transaction(argv);
 		}
 	}
@@ -132,6 +133,8 @@ void process_transaction(char** argv){
 		}
 	}
 	printf("After process transaction\n");
+	fclose(fp);
+	free(buf);
 	update_balance();
 }
 
