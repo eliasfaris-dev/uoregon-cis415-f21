@@ -16,7 +16,7 @@ int main(int argc, char** argv){
 		printf("Incorrect call of function");
 	}
 	else{
-		printf("Begenning of main\n");
+		//printf("Begenning of main\n");
 		FILE* fp = fopen(argv[1], "r");
 		if(fp == NULL){
 			printf("File not found");
@@ -56,7 +56,7 @@ int main(int argc, char** argv){
 			}
 			
 			// NEED TO FIGURE OUT WHAT TO PASS INTO PROCESS_TRANSACTION
-			printf("Before process_transaction\n");
+			//printf("Before process_transaction\n");
 			fclose(fp);
 			free(buf);
 			process_transaction(argv);
