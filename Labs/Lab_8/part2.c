@@ -58,7 +58,7 @@ int main(int argc, char** argv){
 			}
 
 			for(int i = 0; i < total_acc; i++){
-				error = pthread_create(&(tid[1]), NULL, &process_transaction, (void *) argv);
+				int error = pthread_create(&(tid[1]), NULL, &process_transaction, (void *) argv);
 				if(error != 0){
 					printf("Thread can't be created : [%s]\n", strerror(error));
 				}
