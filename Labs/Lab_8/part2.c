@@ -57,12 +57,13 @@ int main(int argc, char** argv){
 			
 			// NEED TO FIGURE OUT WHAT TO PASS INTO PROCESS_TRANSACTION
 			printf("Before process_transaction\n");
-			
+			fclose(fp);
+			process_transaction(char** argv);
 		}
 	}
 }
 	
-/*
+
 void process_transaction(char** argv){
 	size_t size = 128;
 	char* buf = (char*)malloc(size);
@@ -124,9 +125,9 @@ void process_transaction(char** argv){
 		}
 	}
 	printf("After process transaction");
-	update_balance();
+	//update_balance();
 }
-
+/*
 void update_balance(){
 	for(int i = 0; i < total_acc; i++){
 		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
