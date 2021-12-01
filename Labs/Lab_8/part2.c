@@ -80,8 +80,8 @@ void process_transaction(char** argv){
                 }
             }
         }
-	}
-	/*
+	
+	
 		else if(tokens.command_list[0], "D"){
 			double amount = atof(tokens.command_list[3]);
 			for(int i = 0; i < total_acc; i++){
@@ -94,7 +94,8 @@ void process_transaction(char** argv){
                 }
 			}
 		}
-
+	}
+	/*
 		else if(tokens.command_list[0], "W"){
 			double amount = atof(tokens.command_list[3]);
             for(int i = 0; i < total_acc; i++){
