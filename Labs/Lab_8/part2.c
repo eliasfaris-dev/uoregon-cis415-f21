@@ -10,7 +10,7 @@ void process_transaction();
 void update_balance();
 void printFunc();
 
-pthread_mutex_t lock;
+//pthread_mutex_t lock;
 pthread_t tid[MAX_THREAD];
 account* the_acc;
 int total_acc = 0;
@@ -81,7 +81,7 @@ int main(int argc, char** argv){
 			for(int i = 0; i < total_acc; i++){
 				pthread_join(tid[i], NULL);
 			}
-			
+		
 			
 			//printf("Before process_transaction\n");
 			fclose(fp);
