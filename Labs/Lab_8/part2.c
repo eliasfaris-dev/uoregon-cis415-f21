@@ -82,6 +82,7 @@ int main(int argc, char** argv){
 				pthread_join(tid[i], NULL);
 			}
 			
+			update_balance();
 			//printf("Before process_transaction\n");
 			fclose(fp);
 			free(buf);
@@ -156,7 +157,7 @@ void process_transaction(void* arg){
 		}
 	}
 	printf("After process transaction\n");
-	//free_command_line(&tokens);
+	free_command_line(&tokens);
 	//update_balance();
 }
 
@@ -164,7 +165,7 @@ void update_balance(){
 	for(int i = 0; i < total_acc; i++){
 		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
 	}
-	printFunc();
+	//printFunc();
 	
 }
 
