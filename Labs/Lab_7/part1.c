@@ -73,6 +73,7 @@ int main(int argc, char** argv){
 				
 			}
 			process_transaction(tokens);
+			update_balance();
 			
 			for(int i = 0; i < total_acc; i++){
 				printf("%d balance:  %0.2f\n", i, the_acc[i].balance);
@@ -143,7 +144,6 @@ void process_transaction(void* arg){
 		//free_command_line(&tokens);
 	}
 	//pthread_exit(NULL);
-	update_balance();
 }
 
 void update_balance(void* arg){
