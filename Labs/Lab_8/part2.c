@@ -93,7 +93,7 @@ int main(int argc, char** argv){
 
 void process_transaction(void* arg){
 	command_line* tokens = (command_line*)(arg);
-	printf("Begenning process_transaction\n");
+	//printf("Begenning process_transaction\n");
 	for(int j = 0; j < 12000; j++){
 		if(strcmp(tokens[j].command_list[0], "C") == 0){
             for(int i = 0; i < total_acc; i++){
@@ -122,7 +122,7 @@ void process_transaction(void* arg){
 	
 	
 		if(strcmp(tokens[j].command_list[0], "W") == 0){
-			printf("Made it in W\n");
+			//printf("Made it in W\n");
 			double amount = atof(tokens[j].command_list[3]);
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
@@ -155,9 +155,9 @@ void process_transaction(void* arg){
 			//printf("After Withdraw\n");
 		}
 	}
-	//printf("After process transaction\n");
-	free_command_line(&tokens);
-	update_balance();
+	printf("After process transaction\n");
+	//free_command_line(&tokens);
+	//update_balance();
 }
 
 void update_balance(){
