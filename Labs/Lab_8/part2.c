@@ -15,7 +15,7 @@ pthread_t tid[MAX_THREAD];
 account* the_acc;
 int total_acc = 0;
 char file;
-command_line tokens;
+command_line* tokens;
 
 int main(int argc, char** argv){
 	if(argc != 2){
@@ -59,9 +59,15 @@ int main(int argc, char** argv){
 				the_acc[i].transaction_tracter = 0;
 
 			}
+			tokens = malloc(sizeof(command_line) * 120000);
+			for(int i = 0; i < 120000; i++){
+				tokens[i] = str_filler(buf, " ");
+			}
+			
+
 			/*
 			for(int i = 0; i < total_acc; i++){
-				int error = pthread_create(&(tid[1]), NULL, &process_transaction, (void *) argv);
+				int error = pthread_create(&(tid[1]), NULL, &process_transaction, );
 				if(error != 0){
 					printf("Thread can't be created : [%s]\n", strerror(error));
 				}
@@ -74,24 +80,20 @@ int main(int argc, char** argv){
 			//printf("Before process_transaction\n");
 			fclose(fp);
 			free(buf);
-			process_transaction(argv);
+			process_transaction();
 			free(the_acc);
 		}
 	}
 }
 	
 
-void process_transaction(char** argv){
-	size_t size = 128;
-	char* buf = (char*)malloc(size);
-	FILE* fp = fopen(argv[1], "r");
+void process_transaction(void* arg){
 	
-	while((getline(&buf, &size,fp)) != -1){
-		tokens = str_filler(buf, " ");
-		if(strcmp(tokens.command_list[0], "C") == 0){
+	for(int j = 0; j < 120000; j++){
+		if(strcmp(tokens[j].command_list[0], "C") == 0){
             for(int i = 0; i < total_acc; i++){
-                if((strcmp(tokens.command_list[1], the_acc[i].account_number) == 0)){
-                    if(strcmp(tokens.command_list[2], the_acc[i].password) == 0){
+                if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
+                    if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
                         break;
                     }
                 }
@@ -99,11 +101,11 @@ void process_transaction(char** argv){
         }
 		//printf("Before segfault\n");
 		//HERE IS SEGFAULT
-		if (strcmp(tokens.command_list[0], "D") == 0){
-			double amount = atof(tokens.command_list[3]);
+		if (strcmp(tokens[j].command_list[0], "D") == 0){
+			double amount = atof(tokens[j].command_list[3]);
 			for(int i = 0; i < total_acc; i++){
-				if((strcmp(tokens.command_list[1], the_acc[i].account_number) == 0)){
-                    if(strcmp(tokens.command_list[2], the_acc[i].password) == 0){
+				if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
+                    if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
                         the_acc[i].transaction_tracter += amount;
 						the_acc[i].balance += amount;
                         break;
@@ -115,11 +117,11 @@ void process_transaction(char** argv){
 		
 	
 	
-		if(strcmp(tokens.command_list[0], "W") == 0){
-			double amount = atof(tokens.command_list[3]);
+		if(strcmp(tokens[j].command_list[0], "W") == 0){
+			double amount = atof(tokens[j].command_list[3]);
             for(int i = 0; i < total_acc; i++){
-                if((strcmp(tokens.command_list[1], the_acc[i].account_number) == 0)){
-                    if(strcmp(tokens.command_list[2], the_acc[i].password) == 0){
+                if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
+                    if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
                         the_acc[i].transaction_tracter += amount;
 						the_acc[i].balance -= amount;
                         break;
@@ -129,13 +131,13 @@ void process_transaction(char** argv){
 			//printf("After Withdraw\n");
 		}
 
-		if(strcmp(tokens.command_list[0], "T") == 0){
-			double amount = atof(tokens.command_list[4]);
+		if(strcmp(tokens[j].command_list[0], "T") == 0){
+			double amount = atof(tokens[j].command_list[4]);
             for(int i = 0; i < total_acc; i++){
-                if((strcmp(tokens.command_list[1], the_acc[i].account_number) == 0)){
-                    if(strcmp(tokens.command_list[2], the_acc[i].password) == 0){
+                if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
+                    if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
                         for(int j = 0; j < total_acc; j++){
-                            if(strcmp(tokens.command_list[3], the_acc[j].account_number) == 0){
+                            if(strcmp(tokens[j].command_list[3], the_acc[j].account_number) == 0){
                                 the_acc[i].balance -= amount;
                                 the_acc[i].transaction_tracter += amount;
                                 the_acc[j].balance += amount;
