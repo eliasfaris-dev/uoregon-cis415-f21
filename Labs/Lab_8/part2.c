@@ -66,9 +66,10 @@ int main(int argc, char** argv){
 				}
 			}
 
-			/*
+			
 			for(int i = 0; i < total_acc; i++){
-				int error = pthread_create(&(tid[1]), NULL, &process_transaction, );
+				int b = i * (120000/10)
+				int error = pthread_create(&(tid[i]), NULL, &process_transaction, (void*) (tokens + b));
 				if(error != 0){
 					printf("Thread can't be created : [%s]\n", strerror(error));
 				}
@@ -77,11 +78,10 @@ int main(int argc, char** argv){
 			for(int i = 0; i < total_acc; i++){
 				pthread_join(tid[i], NULL);
 			}
-			*/
+			
 			//printf("Before process_transaction\n");
 			fclose(fp);
 			free(buf);
-			process_transaction();
 			free(the_acc);
 		}
 	}
@@ -89,7 +89,7 @@ int main(int argc, char** argv){
 	
 
 void process_transaction(void* arg){
-	
+	command_line* tokens = (command_line*)(arg);
 	for(int j = 0; j < sizeof(tokens); j++){
 		if(strcmp(tokens[j].command_list[0], "C") == 0){
             for(int i = 0; i < total_acc; i++){
@@ -101,7 +101,6 @@ void process_transaction(void* arg){
             }
         }
 		//printf("Before segfault\n");
-		//HERE IS SEGFAULT
 		if (strcmp(tokens[j].command_list[0], "D") == 0){
 			double amount = atof(tokens[j].command_list[3]);
 			for(int i = 0; i < total_acc; i++){
