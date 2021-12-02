@@ -71,7 +71,7 @@ int main(int argc, char** argv){
 
 			printf("Before process_transaction\n");
 			for(int i = 0; i < total_acc; i++){
-				int b = i * (120000/10);
+				int b = i * (index/10);
 				int error = pthread_create(&(tid[i]), NULL, &process_transaction, (void*) (tokens + b));
 				if(error != 0){
 					printf("Thread can't be created : [%s]\n", strerror(error));
@@ -94,7 +94,7 @@ int main(int argc, char** argv){
 void process_transaction(void* arg){
 	command_line* tokens = (command_line*)(arg);
 	printf("Begenning process_transaction\n");
-	for(int j = 0; j < sizeof(tokens); j++){
+	for(int j = 0; j < 12000; j++){
 		if(strcmp(tokens[j].command_list[0], "C") == 0){
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
