@@ -75,6 +75,7 @@ int main(int argc, char** argv){
 			fclose(fp);
 			free(buf);
 			process_transaction(argv);
+			free(the_acc);
 		}
 	}
 }
