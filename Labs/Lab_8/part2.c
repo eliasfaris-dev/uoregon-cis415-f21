@@ -22,12 +22,14 @@ pthread_mutex_t lock;
 int main(int argc, char** argv){
 	if(argc != 2){
 		printf("Incorrect call of function");
+		exit(EXIT_FAILURE);
 	}
 	else{
 		
 		FILE* fp = fopen(argv[1], "r");
 		if(fp == NULL){
 			printf("File not found");
+			exit(EXIT_FAILURE);
 		}
 		
 		else{
@@ -168,7 +170,9 @@ void process_transaction(void* arg){
                 }
             }
 		}
+		free_command_line(&tokens);
 	}
+	pthread_exit(NULL);
 }
 
 void update_balance(void* arg){
