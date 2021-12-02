@@ -160,7 +160,7 @@ void update_balance(){
 		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
 	}
 	printFunc();
-	free(the_acc);
+	
 }
 
 void printFunc(){
