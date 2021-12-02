@@ -12,6 +12,7 @@ void printFunc();
 
 
 pthread_t tid[MAX_THREAD];
+pthread_t b_thread;
 account* the_acc;
 int total_acc = 0;
 char file;
@@ -69,11 +70,12 @@ int main(int argc, char** argv){
 				index++;
 				
 			}
+			int error;
 
 			printf("Before process_transaction\n");
 			for(int i = 0; i < total_acc; i++){
 				int b = i * (index/10);
-				int error = pthread_create(&(tid[i]), NULL, &process_transaction, (void*) (tokens + b));
+				error = pthread_create(&(tid[i]), NULL, &process_transaction, (void*) (tokens + b));
 				if(error != 0){
 					printf("Thread can't be created : [%s]\n", strerror(error));
 				}
@@ -83,7 +85,19 @@ int main(int argc, char** argv){
 				pthread_join(tid[i], NULL);
 			}
 		
+			error = pthread_create(&b_thread, NULL, &update_balance, NULL);
+			if(error != 0){
+				printf("Bank thread can't be created\n", strerror(error));
+			}
 			
+			pthread_join(b_thread, NULL);
+
+			// Print the balances
+			for(int i = 0; i < total_acc; i++){
+				printf("%d balance:  %0.2f\n", i, the_acc[i].balance);
+			}
+
+
 			//printf("Before process_transaction\n");
 			fclose(fp);
 			free(buf);
@@ -165,13 +179,6 @@ void update_balance(){
 		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
 	}
 	//printFunc();
-	
-}
-
-void printFunc(){
-	for(int i = 0; i < total_acc; i++){
-		printf("%d balance:  %0.2f\n", i, the_acc[i].balance);
-	}
 	
 }
 
