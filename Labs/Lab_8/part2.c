@@ -64,7 +64,6 @@ int main(int argc, char** argv){
 			printf("tokens malloced\n");
 			int index = 0;
 			while((getline(&buf, &size, fp)) != -1){
-				
 				tokens[index] = str_filler(buf, " ");
 				index++;
 				
@@ -94,6 +93,7 @@ int main(int argc, char** argv){
 
 void process_transaction(void* arg){
 	command_line* tokens = (command_line*)(arg);
+	printf("Begenning process_transaction\n");
 	for(int j = 0; j < sizeof(tokens); j++){
 		if(strcmp(tokens[j].command_list[0], "C") == 0){
             for(int i = 0; i < total_acc; i++){
