@@ -1,6 +1,6 @@
 all: part2
 
-part1: part2.c
+part2: part2.c
 	gcc -pthread -o part2 part2.c
 
 clean:
