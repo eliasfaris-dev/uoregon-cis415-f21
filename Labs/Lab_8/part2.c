@@ -140,11 +140,11 @@ void process_transaction(void* arg){
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
                     if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
-                        for(int j = 0; j < total_acc; j++){
-                            if(strcmp(tokens[j].command_list[3], the_acc[j].account_number) == 0){
+                        for(int k = 0; k < total_acc; k++){
+                            if(strcmp(tokens[j].command_list[3], the_acc[k].account_number) == 0){
                                 the_acc[i].balance -= amount;
                                 the_acc[i].transaction_tracter += amount;
-                                the_acc[j].balance += amount;
+                                the_acc[k].balance += amount;
                                 break;
                             }
                         }
