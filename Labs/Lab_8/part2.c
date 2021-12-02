@@ -90,7 +90,7 @@ int main(int argc, char** argv){
 
 void process_transaction(void* arg){
 	
-	for(int j = 0; j < 120000; j++){
+	for(int j = 0; j < sizeof(tokens); j++){
 		if(strcmp(tokens[j].command_list[0], "C") == 0){
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
