@@ -61,10 +61,13 @@ int main(int argc, char** argv){
 			}
 			printf("Before tokenizing\n");
 			tokens = malloc(sizeof(command_line) * 120000);
+			printf("tokens malloced\n");
+			int index = 0;
 			while((getline(&buf, &size, fp)) != -1){
-				for(int i = 0; i < 120000; i++){
-					tokens[i] = str_filler(buf, " ");
-				}
+				
+				tokens[index] = str_filler(buf, " ");
+				index++;
+				
 			}
 
 			printf("Before process_transaction\n");
