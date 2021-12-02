@@ -105,7 +105,7 @@ void process_transaction(void* arg){
                 }
             }
         }
-		pthread_mutex_unlock(lock);
+		pthread_mutex_unlock(&lock);
 		//printf("Before segfault\n");
 		pthread_mutex_lock(&lock);
 
@@ -122,7 +122,7 @@ void process_transaction(void* arg){
 			}
 			//printf("After Deposit\n");
 		}
-		pthread_mutex_unlock(lock);
+		pthread_mutex_unlock(&lock);
 		pthread_mutex_lock(&lock);
 		if(strcmp(tokens[j].command_list[0], "W") == 0){
 			//printf("Made it in W\n");
@@ -138,7 +138,7 @@ void process_transaction(void* arg){
             }
 			//printf("After Withdraw\n");
 		}
-		pthread_mutex_unlock(lock);
+		pthread_mutex_unlock(&lock);
 		pthread_mutex_lock(&lock);
 		if(strcmp(tokens[j].command_list[0], "T") == 0){
 			double amount = atof(tokens[j].command_list[4]);
@@ -158,7 +158,7 @@ void process_transaction(void* arg){
             }
 			//printf("After Withdraw\n");
 		}
-		pthread_mutex_unlock(lock);
+		pthread_mutex_unlock(&lock);
 	}
 	printf("After process transaction\n");
 	free_command_line(&tokens);
