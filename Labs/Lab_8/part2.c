@@ -122,6 +122,7 @@ void process_transaction(void* arg){
 	
 	
 		if(strcmp(tokens[j].command_list[0], "W") == 0){
+			printf("Made it in W\n")
 			double amount = atof(tokens[j].command_list[3]);
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
