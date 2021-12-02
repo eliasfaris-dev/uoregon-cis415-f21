@@ -24,7 +24,7 @@ int main(int argc, char** argv){
 		printf("Incorrect call of function");
 	}
 	else{
-		//printf("Begenning of main\n");
+		
 		FILE* fp = fopen(argv[1], "r");
 		if(fp == NULL){
 			printf("File not found");
@@ -61,9 +61,9 @@ int main(int argc, char** argv){
 				the_acc[i].transaction_tracter = 0;
 
 			}
-			printf("Before tokenizing\n");
+			
 			tokens = malloc(sizeof(command_line) * 120000);
-			printf("tokens malloced\n");
+			
 			int index = 0;
 			while((getline(&buf, &size, fp)) != -1){
 				tokens[index] = str_filler(buf, " ");
@@ -72,7 +72,7 @@ int main(int argc, char** argv){
 			}
 			int error;
 
-			printf("Before process_transaction\n");
+			
 			for(int i = 0; i < total_acc; i++){
 				int b = i * (index/10);
 				error = pthread_create(&(tid[i]), NULL, &process_transaction, (void*) (tokens + b));
@@ -92,13 +92,13 @@ int main(int argc, char** argv){
 			
 			pthread_join(b_thread, NULL);
 
-			// Print the balances
+			
 			for(int i = 0; i < total_acc; i++){
 				printf("%d balance:  %0.2f\n", i, the_acc[i].balance);
 			}
 
 
-			//printf("Before process_transaction\n");
+			
 			fclose(fp);
 			free(buf);
 			free(the_acc);
@@ -169,16 +169,12 @@ void process_transaction(void* arg){
             }
 		}
 	}
-	printf("After process transaction\n");
-	//free_command_line(&tokens);
-	//update_balance();
 }
 
-void update_balance(){
+void update_balance(void* arg){
 	for(int i = 0; i < total_acc; i++){
 		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
 	}
-	//printFunc();
 	
 }
 
