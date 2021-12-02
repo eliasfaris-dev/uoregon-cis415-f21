@@ -10,12 +10,13 @@ void process_transaction();
 void update_balance();
 void printFunc();
 
-pthread_mutex_t lock;
+
 pthread_t tid[MAX_THREAD];
 account* the_acc;
 int total_acc = 0;
 char file;
 command_line* tokens;
+pthread_mutex_t lock;
 
 int main(int argc, char** argv){
 	if(argc != 2){
