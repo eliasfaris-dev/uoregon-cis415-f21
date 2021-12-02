@@ -68,7 +68,7 @@ int main(int argc, char** argv){
 
 			
 			for(int i = 0; i < total_acc; i++){
-				int b = i * (120000/10)
+				int b = i * (120000/10);
 				int error = pthread_create(&(tid[i]), NULL, &process_transaction, (void*) (tokens + b));
 				if(error != 0){
 					printf("Thread can't be created : [%s]\n", strerror(error));
