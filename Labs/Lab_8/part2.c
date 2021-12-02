@@ -60,10 +60,11 @@ int main(int argc, char** argv){
 
 			}
 			tokens = malloc(sizeof(command_line) * 120000);
-			for(int i = 0; i < 120000; i++){
-				tokens[i] = str_filler(buf, " ");
+			while((getline(&buf, &size, fp)) != -1){
+				for(int i = 0; i < 120000; i++){
+					tokens[i] = str_filler(buf, " ");
+				}
 			}
-			
 
 			/*
 			for(int i = 0; i < total_acc; i++){
@@ -151,8 +152,6 @@ void process_transaction(void* arg){
 		}
 	}
 	//printf("After process transaction\n");
-	fclose(fp);
-	free(buf);
 	free_command_line(&tokens);
 	update_balance();
 }
