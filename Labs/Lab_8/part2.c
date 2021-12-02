@@ -59,6 +59,7 @@ int main(int argc, char** argv){
 				the_acc[i].transaction_tracter = 0;
 
 			}
+			printf("Before tokenizing\n");
 			tokens = malloc(sizeof(command_line) * 120000);
 			while((getline(&buf, &size, fp)) != -1){
 				for(int i = 0; i < 120000; i++){
@@ -66,7 +67,7 @@ int main(int argc, char** argv){
 				}
 			}
 
-			
+			printf("Before process_transaction\n");
 			for(int i = 0; i < total_acc; i++){
 				int b = i * (120000/10);
 				int error = pthread_create(&(tid[i]), NULL, &process_transaction, (void*) (tokens + b));
