@@ -156,7 +156,7 @@ void process_transaction(void* arg){
 		}
 	}
 	printf("After process transaction\n");
-	free_command_line(&tokens);
+	//free_command_line(&tokens);
 	//update_balance();
 }
 
