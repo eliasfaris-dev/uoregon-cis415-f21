@@ -64,6 +64,7 @@ int main(int argc, char** argv){
 			fclose(fp);
 			free(the_acc);
 			free(buf);
+			
 		}
 	}
 }
@@ -137,6 +138,9 @@ void process_transaction(char** argv){
 		}
 	}
 	update_balance();
+	free_command_line(&tokens);
+	free(buf);
+	fclose(fp);
 }
 
 void update_balance(){
