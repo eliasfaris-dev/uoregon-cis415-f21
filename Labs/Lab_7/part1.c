@@ -60,6 +60,10 @@ int main(int argc, char** argv){
 			}
 
 			process_transaction(argv);
+
+			fclose(fp);
+			free(the_acc);
+			free(buf);
 		}
 	}
 }
