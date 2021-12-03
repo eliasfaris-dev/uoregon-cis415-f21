@@ -6,7 +6,9 @@
 #include <string.h>
 #define MAX_THREAD 10
 
-
+void printFunc();
+void process_transaction();
+void update_balance();
 
 pthread_t tid[MAX_THREAD];
 account* the_acc;
