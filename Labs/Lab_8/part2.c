@@ -104,8 +104,6 @@ int main(int argc, char** argv){
 			fclose(fp);
 			free(buf);
 			free(the_acc);
-			free(tokens);
-			free_command_line(&tokens);
 		}
 	}
 }
