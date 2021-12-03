@@ -170,9 +170,7 @@ void process_transaction(void* arg){
                 }
             }
 		}
-		//free_command_line(&tokens);
 	}
-	//pthread_exit(NULL);
 }
 
 void update_balance(void* arg){
