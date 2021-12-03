@@ -6,30 +6,23 @@
 #include <string.h>
 #define MAX_THREAD 10
 
-void process_transaction();
-void update_balance();
-void printFunc();
 
 
 pthread_t tid[MAX_THREAD];
-pthread_t b_thread;
 account* the_acc;
 int total_acc = 0;
 char file;
-command_line* tokens;
-pthread_mutex_t lock;
+command_line tokens;
 
 int main(int argc, char** argv){
 	if(argc != 2){
 		printf("Incorrect call of function");
-		exit(EXIT_FAILURE);
 	}
 	else{
-		
+		//printf("Begenning of main\n");
 		FILE* fp = fopen(argv[1], "r");
 		if(fp == NULL){
 			printf("File not found");
-			exit(EXIT_FAILURE);
 		}
 		
 		else{
@@ -63,92 +56,102 @@ int main(int argc, char** argv){
 				the_acc[i].transaction_tracter = 0;
 
 			}
-			
-			tokens = malloc(sizeof(command_line) * 120000);
-			
-			int index = 0;
-			while((getline(&buf, &size, fp)) != -1){
-				tokens[index] = str_filler(buf, " ");
-				index++;
-				
-			}
-			process_transaction(tokens);
-			update_balance();
-			
-			for(int i = 0; i < total_acc; i++){
-				printf("%d balance:  %0.2f\n", i, the_acc[i].balance);
-			}
 
 
+			//printf("Before process_transaction\n");
 			fclose(fp);
 			free(buf);
-			free(the_acc);
+			process_transaction(argv);
 		}
 	}
 }
 	
-void process_transaction(void* arg){
-	command_line* tokens = (command_line*)(arg);
-	for(int j = 0; j < 12000; j++){	
-		if(strcmp(tokens[j].command_list[0], "C") == 0){
+
+void process_transaction(char** argv){
+	size_t size = 128;
+	char* buf = (char*)malloc(size);
+	FILE* fp = fopen(argv[1], "r");
+	
+	while((getline(&buf, &size,fp)) != -1){
+		tokens = str_filler(buf, " ");
+		if(strcmp(tokens.command_list[0], "C") == 0){
             for(int i = 0; i < total_acc; i++){
-                if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
-                    if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
+                if((strcmp(tokens.command_list[1], the_acc[i].account_number) == 0)){
+                    if(strcmp(tokens.command_list[2], the_acc[i].password) == 0){
                         break;
                     }
                 }
             }
         }
-		if (strcmp(tokens[j].command_list[0], "D") == 0){
-			double amount = atof(tokens[j].command_list[3]);
+		//printf("Before segfault\n");
+		//HERE IS SEGFAULT
+		if (strcmp(tokens.command_list[0], "D") == 0){
+			double amount = atof(tokens.command_list[3]);
 			for(int i = 0; i < total_acc; i++){
-				if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
-                    if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
+				if((strcmp(tokens.command_list[1], the_acc[i].account_number) == 0)){
+                    if(strcmp(tokens.command_list[2], the_acc[i].password) == 0){
                         the_acc[i].transaction_tracter += amount;
 						the_acc[i].balance += amount;
                         break;
                     }
                 }
 			}
+			//printf("After Deposit\n");
 		}
-		if(strcmp(tokens[j].command_list[0], "W") == 0){
-			double amount = atof(tokens[j].command_list[3]);
+		
+	
+	
+		if(strcmp(tokens.command_list[0], "W") == 0){
+			double amount = atof(tokens.command_list[3]);
             for(int i = 0; i < total_acc; i++){
-                if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
-                    if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
+                if((strcmp(tokens.command_list[1], the_acc[i].account_number) == 0)){
+                    if(strcmp(tokens.command_list[2], the_acc[i].password) == 0){
                         the_acc[i].transaction_tracter += amount;
 						the_acc[i].balance -= amount;
                         break;
                     }
                 }
             }
+			//printf("After Withdraw\n");
 		}
 
-		if(strcmp(tokens[j].command_list[0], "T") == 0){
-			double amount = atof(tokens[j].command_list[4]);
+		if(strcmp(tokens.command_list[0], "T") == 0){
+			double amount = atof(tokens.command_list[4]);
             for(int i = 0; i < total_acc; i++){
-                if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
-                    if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
-                        for(int k = 0; k < total_acc; k++){
-                            if(strcmp(tokens[j].command_list[3], the_acc[k].account_number) == 0){
+                if((strcmp(tokens.command_list[1], the_acc[i].account_number) == 0)){
+                    if(strcmp(tokens.command_list[2], the_acc[i].password) == 0){
+                        for(int j = 0; j < total_acc; j++){
+                            if(strcmp(tokens.command_list[3], the_acc[j].account_number) == 0){
                                 the_acc[i].balance -= amount;
                                 the_acc[i].transaction_tracter += amount;
-                                the_acc[k].balance += amount;
+                                the_acc[j].balance += amount;
                                 break;
                             }
                         }
                     }
                 }
             }
+			//printf("After Withdraw\n");
 		}
-		//free_command_line(&tokens);
 	}
-	//pthread_exit(NULL);
+	printf("After process transaction\n");
+	fclose(fp);
+	free(buf);
+	free_command_line(&tokens);
+	update_balance();
 }
 
-void update_balance(void* arg){
+void update_balance(){
 	for(int i = 0; i < total_acc; i++){
 		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
+	}
+	printFunc();
+	free(the_acc);
+}
+
+void printFunc(){
+	for(int i = 0; i < total_acc; i++){
+		printf("%d balance:  %0.2f\n", i, the_acc[i].balance);
 	}
 	
 }

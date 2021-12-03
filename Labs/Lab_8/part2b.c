@@ -57,21 +57,11 @@ int main(int argc, char** argv){
 
 			}
 
-			for(int i = 0; i < total_acc; i++){
-				int error = pthread_create(&(tid[1]), NULL, &process_transaction, (void *) argv);
-				if(error != 0){
-					printf("Thread can't be created : [%s]\n", strerror(error));
-				}
-			}
-			
-			for(int i = 0; i < total_acc; i++){
-				pthread_join(tid[i], NULL);
-			}
 
 			//printf("Before process_transaction\n");
 			fclose(fp);
 			free(buf);
-			//process_transaction(argv);
+			process_transaction(argv);
 		}
 	}
 }
