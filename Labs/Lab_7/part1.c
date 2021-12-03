@@ -59,10 +59,6 @@ int main(int argc, char** argv){
 
 			}
 
-
-			//printf("Before process_transaction\n");
-			fclose(fp);
-			free(buf);
 			process_transaction(argv);
 		}
 	}
@@ -136,10 +132,6 @@ void process_transaction(char** argv){
 			//printf("After Withdraw\n");
 		}
 	}
-	printf("After process transaction\n");
-	fclose(fp);
-	free(buf);
-	free_command_line(&tokens);
 	update_balance();
 }
 
@@ -148,7 +140,7 @@ void update_balance(){
 		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
 	}
 	printFunc();
-	free(the_acc);
+	
 }
 
 void printFunc(){
