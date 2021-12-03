@@ -68,7 +68,6 @@ int main(int argc, char** argv){
 			while((getline(&buf, &size, fp)) != -1){
 				tokens[index] = str_filler(buf, " ");
 				index++;
-				
 			}
 			int error;
 
@@ -98,7 +97,10 @@ int main(int argc, char** argv){
 			}
 
 
-			
+			for(int i = 0; i < index; i++){
+				free_command_line(&tokens[i]);
+			}
+			free_command_line(&tokens);
 			fclose(fp);
 			free(buf);
 			free(the_acc);
