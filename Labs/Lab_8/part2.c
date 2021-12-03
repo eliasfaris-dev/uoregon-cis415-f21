@@ -91,17 +91,16 @@ int main(int argc, char** argv){
 			
 			pthread_join(b_thread, NULL);
 
-			
 			for(int i = 0; i < total_acc; i++){
 				printf("%d balance:  %0.2f\n", i, the_acc[i].balance);
 			}
 
-			/*
+			
 			for(int i = 0; i < index; i++){
-				free_command_line(&tokens[i]);
+				free_command_line(tokens[i]);
 			}
 			free_command_line(&tokens);
-			*/
+			
 			fclose(fp);
 			free(buf);
 			free(the_acc);
