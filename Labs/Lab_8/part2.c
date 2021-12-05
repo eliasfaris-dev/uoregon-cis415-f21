@@ -17,7 +17,7 @@ account* the_acc;
 int total_acc = 0;
 char file;
 command_line* tokens;
-pthread_mutex_t lock;
+pthread_mutex_t lock[MAX_THREAD];
 
 int main(int argc, char** argv){
 	if(argc != 2){
