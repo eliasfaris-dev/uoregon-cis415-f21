@@ -59,7 +59,7 @@ int main(int argc, char** argv){
 				the_acc[i].reward_rate = atof(buf);
 
 				the_acc[i].transaction_tracter = 0;
-				pthread_mutex_init(&the_acc[i].ac_lock, NULL);
+				pthread_mutex_init(the_acc[i].ac_lock, NULL);
 			}
 			
 			tokens = malloc(sizeof(command_line) * 120000);
