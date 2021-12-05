@@ -59,7 +59,7 @@ int main(int argc, char** argv){
 				the_acc[i].reward_rate = atof(buf);
 
 				the_acc[i].transaction_tracter = 0;
-				pthread_mutex_init(the_acc[i].ac_lock, NULL);
+				pthread_mutex_init(&the_acc[i].ac_lock, NULL);
 			}
 			
 			tokens = malloc(sizeof(command_line) * 120000);
@@ -115,14 +115,12 @@ void process_transaction(void* arg){
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
                     if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
-						pthread_mutex_lock(&the_acc[i].ac_lock);
-						pthread_mutex_unlock(&the_acc[i].ac_lock);
                         break;
                     }
                 }
             }
         }
-		if (strcmp(tokens[j].command_list[0], "D") == 0){
+		else if (strcmp(tokens[j].command_list[0], "D") == 0){
 			double amount = atof(tokens[j].command_list[3]);
 			for(int i = 0; i < total_acc; i++){
 				if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
@@ -136,7 +134,7 @@ void process_transaction(void* arg){
                 }
 			}
 		}
-		if(strcmp(tokens[j].command_list[0], "W") == 0){
+		else if(strcmp(tokens[j].command_list[0], "W") == 0){
 			double amount = atof(tokens[j].command_list[3]);
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
@@ -151,7 +149,7 @@ void process_transaction(void* arg){
             }
 		}
 
-		if(strcmp(tokens[j].command_list[0], "T") == 0){
+		else if(strcmp(tokens[j].command_list[0], "T") == 0){
 			double amount = atof(tokens[j].command_list[4]);
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
