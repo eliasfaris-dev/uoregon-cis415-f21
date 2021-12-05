@@ -60,8 +60,7 @@ int main(int argc, char** argv){
 
 				the_acc[i].transaction_tracter = 0;
 				//pthread_mutex_init(&the_acc[i].ac_lock, NULL);
-				
-				
+				the_acc[i].ac_lock = lock[i];
 			}
 			
 			tokens = malloc(sizeof(command_line) * 120000);
@@ -127,10 +126,10 @@ void process_transaction(void* arg){
 			for(int i = 0; i < total_acc; i++){
 				if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
                     if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
-						pthread_mutex_lock(&lock);
+						pthread_mutex_lock(&the_acc[i].ac_lock);
                         the_acc[i].transaction_tracter += amount;
 						the_acc[i].balance += amount;
-						pthread_mutex_unlock(&lock);
+						pthread_mutex_unlock(&the_acc[i].ac_lock);
                         break;
                     }
                 }
