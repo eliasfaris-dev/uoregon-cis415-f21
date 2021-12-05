@@ -71,7 +71,7 @@ int main(int argc, char** argv){
 			}
 			int error;
 
-			
+		
 			for(int i = 0; i < total_acc; i++){
 				int b = i * (index/10);
 				error = pthread_create(&(tid[i]), NULL, &process_transaction, (void*) (tokens + b));
@@ -115,8 +115,8 @@ void process_transaction(void* arg){
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
                     if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
-						pthread_mutex_lock(&lock);
-						pthread_mutex_unlock(&lock);
+						pthread_mutex_lock(&the_acc[i].ac_lock);
+						pthread_mutex_unlock(&the_acc[i].ac_lock);
                         break;
                     }
                 }
@@ -127,10 +127,10 @@ void process_transaction(void* arg){
 			for(int i = 0; i < total_acc; i++){
 				if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
                     if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
-						pthread_mutex_lock(&lock);
+						pthread_mutex_lock(&the_acc[i].ac_lock);
                         the_acc[i].transaction_tracter += amount;
 						the_acc[i].balance += amount;
-						pthread_mutex_unlock(&lock);
+						pthread_mutex_unlock(&the_acc[i].ac_lock);
                         break;
                     }
                 }
@@ -141,10 +141,10 @@ void process_transaction(void* arg){
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
                     if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
-						pthread_mutex_lock(&lock);
+						pthread_mutex_lock(&the_acc[i].ac_lock);
                         the_acc[i].transaction_tracter += amount;
 						the_acc[i].balance -= amount;
-						pthread_mutex_unlock(&lock);
+						pthread_mutex_unlock(&the_acc[i].ac_lock);
                         break;
                     }
                 }
@@ -158,11 +158,13 @@ void process_transaction(void* arg){
                     if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
                         for(int k = 0; k < total_acc; k++){
                             if(strcmp(tokens[j].command_list[3], the_acc[k].account_number) == 0){
-								pthread_mutex_lock(&lock);
+								pthread_mutex_lock(&the_acc[i].ac_lock);
+								pthread_mutex_lock(&the_acc[k].ac_lock);
                                 the_acc[i].balance -= amount;
                                 the_acc[i].transaction_tracter += amount;
                                 the_acc[k].balance += amount;
-								pthread_mutex_unlock(&lock);
+								pthread_mutex_unlock(&the_acc[i].ac_lock);
+								pthread_mutex_unlock(&the_acc[k].ac_lock);
                                 break;
                             }
                         }
