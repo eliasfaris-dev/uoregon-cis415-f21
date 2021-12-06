@@ -72,7 +72,7 @@ int main(int argc, char** argv){
 				pthread_mutex_init(&the_acc[i].ac_lock, NULL);
 			}
 			
-			//pthread_barrier_init(&bar, NULL, (MAX_THREAD + 1));
+			pthread_barrier_init(&bar, NULL, (MAX_THREAD + 1));
 			tokens = malloc(sizeof(command_line) * 120000);
 
 			while((getline(&buf, &size, fp)) != -1){
@@ -81,7 +81,7 @@ int main(int argc, char** argv){
 			}
 			int error;
 
-			//threadActive = MAX_THREAD;
+			
 			for(int i = 0; i < total_acc; i++){
 				int b = i * (in/ MAX_THREAD);
 				error = pthread_create(&(tid[i]), NULL, &process_transaction, (void*) (tokens + b));
@@ -93,12 +93,11 @@ int main(int argc, char** argv){
 			pthread_mutex_lock(&fixLock);
 			pthread_barrier_wait(&bar);
 			
-			//threadActive = MAX_THREAD;
-			// Might need to change this 
+			
 			threadActive = MAX_THREAD;
-			//printf("active: %d\n", threadActive);
+			
 			error = pthread_create(&b_thread, NULL, &update_balance, NULL);
-			//error = pthread_create(&b_thread, NULL, &update_balance, &update);
+			
 			if(error != 0){
 				printf("Bank thread can't be created\n", strerror(error));
 			}
@@ -113,12 +112,7 @@ int main(int argc, char** argv){
 				printf("%d balance:  %0.2f\n", i, the_acc[i].balance);
 			}
 
-			/*
-			for(int i = 0; i < index; i++){
-				free_command_line(tokens[i]);
-			}
-			free_command_line(&tokens);
-			*/
+			
 			fclose(fp);
 			free(buf);
 			//free(the_acc);
@@ -127,12 +121,12 @@ int main(int argc, char** argv){
 }
 	
 void process_transaction(void* arg){
-	//pthread_barrier_wait(&bar);
+
 	int threshold = in/MAX_THREAD;
 	int curr = pthread_self();
 	
 	command_line* tokens = (command_line*)(arg);
-	//printf("in completed %d\n", curr);
+	
 	pthread_barrier_wait(&bar);
 	
 	for(int j = 0; j < threshold; j++){	
@@ -226,8 +220,6 @@ void process_transaction(void* arg){
 	}
 	
 	threadActive--;
-	
-	
 	if(threadWaiting == threadActive){
 		
 		pthread_mutex_lock(&fixLock);
@@ -240,11 +232,7 @@ void process_transaction(void* arg){
 }
 
 void update_balance(void* arg){
-	/*
-	for(int i = 0; i < total_acc; i++){
-		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
-	}
-	*/
+
 	
 	while((completed > 0) || (threadActive > 0)){
 		pthread_cond_wait(&fixCond, &fixLock);
