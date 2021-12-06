@@ -133,7 +133,7 @@ void process_transaction(void* arg){
 	printf("in completed %d\n", curr);
 	pthread_barrier_wait(&bar);
 	for(int j = 0; j < threshold; j++){	
-		
+		printf("%d\n", j);
 		if(completed >= 5000){
 			printf("in completed %d\n", curr);
 			pthread_mutex_lock(&lock);
