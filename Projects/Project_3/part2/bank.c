@@ -4,6 +4,7 @@
 #include <pthread.h>
 #include "string_parser.h"
 #include <string.h>
+#include <sys/stat.h>
 #define MAX_THREAD 10
 
 void process_transaction();
@@ -36,7 +37,12 @@ int main(int argc, char** argv){
 			getline(&buf, &size, fp);
 			total_acc = atoi(buf);
 			the_acc = malloc(sizeof(account) * total_acc);
-			
+
+			char* dir = "Output";
+			int makeDir = mkdir(dir, 0777);
+			char myOutFile[64];
+
+
 			for(int i = 0; i < total_acc; i++){
 				getline(&buf, &size, fp);
 				buf[strcspn(buf, "\n")] = 0;
@@ -60,6 +66,15 @@ int main(int argc, char** argv){
 
 				the_acc[i].transaction_tracter = 0;
 				pthread_mutex_init(&the_acc[i].ac_lock, NULL);
+
+				strcpy(myOutFile, "Output/");
+				strcat(myOutFile, the_acc[i].account_number);
+				strcat(myOutFile, ".txt");
+				strcpy(the_acc[i].out_file, myOutFile);
+				strcpy(myOutFile, "");
+				FILE* fp1 = fopen(the_acc[i].out_file, "w");
+				fprintf(fp1, "account %d:\n", i);
+				fclose(fp1);
 			}
 			
 			tokens = malloc(sizeof(command_line) * 120000);
