@@ -130,15 +130,15 @@ void process_transaction(void* arg){
 	//pthread_barrier_wait(&bar);
 	int threshold = in/MAX_THREAD;
 	int curr = pthread_self();
-	printf("In process\n");
+	
 	command_line* tokens = (command_line*)(arg);
 	//printf("in completed %d\n", curr);
 	pthread_barrier_wait(&bar);
-	printf("completed: %d\n");
+	
 	for(int j = 0; j < threshold; j++){	
-		//printf("%d\n", j);
+		
 		if(completed >= 5000){
-			printf("in completed %d\n", curr);
+			
 			pthread_mutex_lock(&lock);
 			threadWaiting++;
 			if(threadActive == threadWaiting){
@@ -149,7 +149,7 @@ void process_transaction(void* arg){
 			pthread_cond_wait(&cond, &lock);
 			pthread_mutex_unlock(&lock);
 
-			printf("TEst\n");
+			
 		}
 		
 		if(strcmp(tokens[j].command_list[0], "C") == 0){
@@ -230,12 +230,12 @@ void process_transaction(void* arg){
             }
 		}
 	}
-	printf("HELLOOOO");
+	
 	threadActive--;
-	printf("active: %d\n", threadActive);
-	printf("waiting: %d\n", threadWaiting);
+	
+	
 	if(threadWaiting == threadActive){
-		printf("testtt");
+		
 		pthread_mutex_lock(&fixLock);
 		pthread_cond_signal(&fixCond);
 		pthread_mutex_unlock(&fixLock);
@@ -251,11 +251,11 @@ void update_balance(void* arg){
 		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
 	}
 	*/
-	printf("Got into update\n");
+	
 	while((completed > 0) || (threadActive > 0)){
 		pthread_cond_wait(&fixCond, &fixLock);
 		pthread_mutex_unlock(&fixLock);
-		printf("Gets into update while");
+		
 		pthread_mutex_lock(&lock);
 		for(int i = 0; i < total_acc; i++){
 			the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
@@ -266,7 +266,6 @@ void update_balance(void* arg){
 		completed = 0;
 
 		if(threadActive > 0){
-			printf("thread active\n");
 			pthread_cond_broadcast(&cond);
 		}
 
