@@ -230,7 +230,8 @@ void process_transaction(void* arg){
 		}
 	}
 	threadActive--;
-	
+	printf("active: %d\n", threadActive);
+	printf("waiting: %d\n", threadWaiting);
 	if(threadWaiting == threadActive){
 		printf("testtt");
 		pthread_mutex_lock(&fixLock);
