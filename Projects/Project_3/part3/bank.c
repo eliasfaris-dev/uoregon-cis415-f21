@@ -130,6 +130,7 @@ void process_transaction(void* arg){
 	int curr = pthread_self();
 	printf("In process\n");
 	command_line* tokens = (command_line*)(arg);
+	printf("in completed %d\n", curr);
 	pthread_barrier_wait(&bar);
 	for(int j = 0; j < threshold; j++){	
 		
@@ -147,7 +148,7 @@ void process_transaction(void* arg){
 
 			printf("TEst\n");
 		}
-		/*
+		
 		if(strcmp(tokens[j].command_list[0], "C") == 0){
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
@@ -160,8 +161,8 @@ void process_transaction(void* arg){
                 }
             }
         }
-		*/
-		if (strcmp(tokens[j].command_list[0], "D") == 0){
+		
+		else if (strcmp(tokens[j].command_list[0], "D") == 0){
 			double amount = atof(tokens[j].command_list[3]);
 			for(int i = 0; i < total_acc; i++){
 				if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
