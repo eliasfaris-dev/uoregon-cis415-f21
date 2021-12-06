@@ -89,13 +89,13 @@ int main(int argc, char** argv){
 					printf("Thread can't be created : [%s]\n", strerror(error));
 				}
 			}
-
-			pthread_mutex_lock(&fixLock);
-			pthread_barrier_wait(&bar);
-
 			for(int i = 0; i < total_acc; i++){
 				pthread_join(tid[i], NULL);
 			}
+			pthread_mutex_lock(&fixLock);
+			pthread_barrier_wait(&bar);
+
+			
 			
 			//threadActive = MAX_THREAD;
 			// Might need to change this 
