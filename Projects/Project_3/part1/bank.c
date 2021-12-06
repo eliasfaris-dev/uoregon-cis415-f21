@@ -63,7 +63,7 @@ int main(int argc, char** argv){
 				the_acc[i].transaction_tracter = 0;
 
 				strcpy(myOutFile, "Output/");
-				strcat(myOutFile, the_acc[i].index);
+				strcat(myOutFile, the_acc[i].account_number);
 				strcat(myOutFile, ".txt");
 				strcpy(the_acc[i].out_file, myOutFile);
 				strcpy(myOutFile, "");
