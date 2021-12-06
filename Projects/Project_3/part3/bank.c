@@ -24,7 +24,7 @@ pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 pthread_cond_t fixCond = PTHREAD_COND_INITIALIZER;
 int threadWaiting = 0;
 int completed = 0;
-int threadActive = 0;
+int threadActive = 10;
 int in = 0;
 
 int main(int argc, char** argv){
@@ -228,7 +228,7 @@ void process_transaction(void* arg){
             }
 		}
 	}
-	threadActive++;
+	threadActive--;
 	
 	if(threadWaiting == threadActive){
 		pthread_mutex_lock(&fixLock);
