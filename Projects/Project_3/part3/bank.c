@@ -125,7 +125,7 @@ int main(int argc, char** argv){
 }
 	
 void process_transaction(void* arg){
-	//pthread_barrier_wait(&bar);
+	pthread_barrier_wait(&bar);
 	int threshold = in/MAX_THREAD;
 	int curr = pthread_self();
 	printf("In process\n");
@@ -213,7 +213,7 @@ void process_transaction(void* arg){
 								pthread_mutex_unlock(&the_acc[i].ac_lock);
 								pthread_mutex_lock(&the_acc[k].ac_lock);
                                 the_acc[k].balance += amount;
-								printf("T2\n");
+								
 								pthread_mutex_unlock(&the_acc[k].ac_lock);
 
 								pthread_mutex_lock(&lock);
