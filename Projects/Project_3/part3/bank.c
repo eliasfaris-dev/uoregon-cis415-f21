@@ -125,7 +125,7 @@ int main(int argc, char** argv){
 }
 	
 void process_transaction(void* arg){
-	pthread_barrier_wait(&bar);
+	//pthread_barrier_wait(&bar);
 	int threshold = in/MAX_THREAD;
 	int curr = pthread_self();
 	printf("In process\n");
