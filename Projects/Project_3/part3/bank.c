@@ -44,7 +44,7 @@ int main(int argc, char** argv){
 			getline(&buf, &size, fp);
 			total_acc = atoi(buf);
 			the_acc = malloc(sizeof(account) * total_acc);
-			
+			printf("here");
 			for(int i = 0; i < total_acc; i++){
 				getline(&buf, &size, fp);
 				buf[strcspn(buf, "\n")] = 0;
