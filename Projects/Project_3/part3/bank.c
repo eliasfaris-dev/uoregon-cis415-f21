@@ -228,7 +228,7 @@ void process_transaction(void* arg){
             }
 		}
 	}
-	threadActive--;
+	threadActive++;
 	
 	if(threadWaiting == threadActive){
 		pthread_mutex_lock(&fixLock);
