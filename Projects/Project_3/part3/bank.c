@@ -81,7 +81,7 @@ int main(int argc, char** argv){
 			}
 			int error;
 
-			threadActive = MAX_THREAD;
+			
 			for(int i = 0; i < total_acc; i++){
 				int b = i * (in/ MAX_THREAD);
 				error = pthread_create(&(tid[i]), NULL, &process_transaction, (void*) (tokens + b));
@@ -95,7 +95,7 @@ int main(int argc, char** argv){
 			
 			//threadActive = MAX_THREAD;
 			// Might need to change this 
-			
+			threadActive = MAX_THREAD;
 			error = pthread_create(&b_thread, NULL, &update_balance, NULL);
 			//error = pthread_create(&b_thread, NULL, &update_balance, &update);
 			if(error != 0){
