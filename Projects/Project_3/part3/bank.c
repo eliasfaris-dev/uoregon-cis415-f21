@@ -266,7 +266,7 @@ void update_balance(void* arg){
 		}
 		pthread_mutex_unlock(&lock);
 		pthread_mutex_lock(&fixLock);
-		
+	}
 	//pthread_exit(NULL);
 	
 }
