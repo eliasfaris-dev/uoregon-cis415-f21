@@ -221,7 +221,7 @@ void process_transaction(void* arg){
 
 								pthread_mutex_lock(&lock);
 								completed++;
-								pthread_mutex_lock(&lock);
+								pthread_mutex_unlock(&lock);
                                 
                             }
                         }
