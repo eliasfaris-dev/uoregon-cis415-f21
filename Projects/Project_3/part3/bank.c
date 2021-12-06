@@ -90,8 +90,6 @@ int main(int argc, char** argv){
 				}
 			}
 
-			
-			
 			pthread_mutex_lock(&fixLock);
 			pthread_barrier_wait(&bar);
 
@@ -101,7 +99,7 @@ int main(int argc, char** argv){
 			
 			//threadActive = MAX_THREAD;
 			// Might need to change this 
-			int update = 0;
+			
 			error = pthread_create(&b_thread, NULL, &update_balance, NULL);
 			//error = pthread_create(&b_thread, NULL, &update_balance, &update);
 			if(error != 0){
@@ -111,7 +109,7 @@ int main(int argc, char** argv){
 			for(int i = 0; i < total_acc; i++){
 				pthread_join(tid[i], NULL);
 			}
-			
+
 			pthread_join(b_thread, NULL);
 
 			for(int i = 0; i < total_acc; i++){
@@ -164,7 +162,7 @@ void process_transaction(void* arg){
                         
 						printf("C\n");
 						
-						break;
+						
                     }
                 }
             }
@@ -183,7 +181,7 @@ void process_transaction(void* arg){
 						pthread_mutex_lock(&lock);
 						completed++;
 						pthread_mutex_unlock(&lock);
-                        break;
+                        
                     }
                 }
 			}
@@ -201,7 +199,7 @@ void process_transaction(void* arg){
 						pthread_mutex_lock(&lock);
 						completed++;
 						pthread_mutex_unlock(&lock);
-                        break;
+                        
                     }
                 }
             }
@@ -227,7 +225,7 @@ void process_transaction(void* arg){
 								pthread_mutex_lock(&lock);
 								completed++;
 								pthread_mutex_lock(&lock);
-                                break;
+                                
                             }
                         }
                     }
