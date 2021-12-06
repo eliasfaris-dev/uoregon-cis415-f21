@@ -67,9 +67,9 @@ int main(int argc, char** argv){
 				strcat(myOutFile, ".txt");
 				strcpy(the_acc[i].out_file, myOutFile);
 				strcpy(myOutFile, "");
-				FILE* fp = fopen(the_acc[i].out_file, "w");
-				fprintf(fp, "account %d:\n", i);
-				fclose(fp);
+				FILE* fp1 = fopen(the_acc[i].out_file, "w");
+				fprintf(fp1, "account %d:\n", i);
+				fclose(fp1);
 			}
 
 			process_transaction(argv);
