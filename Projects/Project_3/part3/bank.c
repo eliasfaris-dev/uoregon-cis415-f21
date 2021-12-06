@@ -246,6 +246,7 @@ void update_balance(void* arg){
 		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
 	}
 	*/
+	printf("Got into update\n");
 	while((completed > 0) || (threadActive > 0)){
 		pthread_cond_wait(&fixCond, &fixLock);
 		pthread_mutex_unlock(&fixLock);
