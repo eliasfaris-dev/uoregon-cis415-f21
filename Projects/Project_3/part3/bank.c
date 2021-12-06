@@ -131,7 +131,7 @@ void process_transaction(void* arg){
 	printf("In process\n");
 	command_line* tokens = (command_line*)(arg);
 	pthread_barrier_wait(&bar);
-	for(int j = 0; j < threshold; j++){	
+	for(int j = 0; j < 12000; j++){	
 		
 		if(completed >= 5000){
 			printf("in completed %d\n", curr);
