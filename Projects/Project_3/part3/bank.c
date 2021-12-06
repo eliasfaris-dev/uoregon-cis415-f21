@@ -259,6 +259,7 @@ void update_balance(void* arg){
 		pthread_mutex_lock(&lock);
 		for(int i = 0; i < total_acc; i++){
 			the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
+			the_acc[i].transaction_tracter = 0;
 		}
 		//(*((int*)arg))++;
 		threadWaiting = 0;
