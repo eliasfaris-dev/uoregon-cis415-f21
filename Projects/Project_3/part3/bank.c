@@ -70,7 +70,7 @@ int main(int argc, char** argv){
 				pthread_mutex_init(&the_acc[i].ac_lock, NULL);
 			}
 			
-			pthread_barrier_init(&bar, NULL, (MAX_THREAD + 1));
+			//pthread_barrier_init(&bar, NULL, (MAX_THREAD + 1));
 			tokens = malloc(sizeof(command_line) * 120000);
 
 			while((getline(&buf, &size, fp)) != -1){
@@ -79,7 +79,7 @@ int main(int argc, char** argv){
 			}
 			int error;
 
-			printf("Before process transaction");
+			
 			for(int i = 0; i < total_acc; i++){
 				int b = i * (in/ MAX_THREAD);
 				error = pthread_create(&(tid[i]), NULL, &process_transaction, (void*) (tokens + b));
@@ -88,8 +88,8 @@ int main(int argc, char** argv){
 				}
 			}
 
-			pthread_mutex_lock(&fixLock);
-			pthread_barrier_wait(&bar);
+			//pthread_mutex_lock(&fixLock);
+			//pthread_barrier_wait(&bar);
 			
 			// Might need to change this 
 			int update = 0;
@@ -124,7 +124,7 @@ int main(int argc, char** argv){
 void process_transaction(void* arg){
 	//pthread_barrier_wait(&bar);
 	int threshold = in/MAX_THREAD;
-	printf("Beg process");
+	
 	
 	command_line* tokens = (command_line*)(arg);
 	for(int j = 0; j < threshold; j++){	
@@ -210,7 +210,7 @@ void process_transaction(void* arg){
             }
 		}
 	}
-	threadActive--;
+	//threadActive--;
 	/*
 	if(threadWaiting == threadActive){
 		pthread_mutex_lock(&fixLock);
