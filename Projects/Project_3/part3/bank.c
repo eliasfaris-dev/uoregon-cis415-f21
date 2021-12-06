@@ -96,6 +96,7 @@ int main(int argc, char** argv){
 			//threadActive = MAX_THREAD;
 			// Might need to change this 
 			threadActive = MAX_THREAD;
+			printf("active: %d\n", threadActive);
 			error = pthread_create(&b_thread, NULL, &update_balance, NULL);
 			//error = pthread_create(&b_thread, NULL, &update_balance, &update);
 			if(error != 0){
