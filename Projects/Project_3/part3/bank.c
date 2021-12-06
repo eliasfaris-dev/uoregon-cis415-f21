@@ -91,15 +91,16 @@ int main(int argc, char** argv){
 			pthread_mutex_lock(&fixLock);
 			pthread_barrier_wait(&bar);
 			
-			for(int i = 0; i < total_acc; i++){
-				pthread_join(tid[i], NULL);
-			}
 			// Might need to change this 
-			error = pthread_create(&b_thread, NULL, &update_balance, NULL);
+			int update = 0;
+			error = pthread_create(&b_thread, NULL, &update_balance, &update);
 			if(error != 0){
 				printf("Bank thread can't be created\n", strerror(error));
 			}
-			
+
+			for(int i = 0; i < total_acc; i++){
+				pthread_join(tid[i], NULL);
+			}
 			pthread_join(b_thread, NULL);
 
 			for(int i = 0; i < total_acc; i++){
@@ -224,7 +225,7 @@ void update_balance(void* arg){
 		for(int i = 0; i < total_acc; i++){
 			the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
 		}
-
+		(*((int*)arg))++;
 		threadWaiting = 0;
 		completed = 0;
 
@@ -235,6 +236,7 @@ void update_balance(void* arg){
 		pthread_mutex_lock(&fixLock);
 		pthread_mutex_unlock(&lock);
 	}
+	pthread_exit(arg);
 }
 
 int count_token (char* buf, const char* delim)
