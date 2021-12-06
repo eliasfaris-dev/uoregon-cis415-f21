@@ -10,7 +10,7 @@ void process_transaction();
 void update_balance();
 void printFunc();
 
-int index = 0;
+
 pthread_t tid[MAX_THREAD];
 pthread_t b_thread;
 pthread_barrier_t bar;
@@ -25,6 +25,7 @@ pthread_cond_t fixCond;
 int threadWaiting = 0;
 int completed = 0;
 int threadActive = 0;
+int in = 0;
 
 int main(int argc, char** argv){
 	if(argc != 2){
@@ -73,14 +74,14 @@ int main(int argc, char** argv){
 			tokens = malloc(sizeof(command_line) * 120000);
 
 			while((getline(&buf, &size, fp)) != -1){
-				tokens[index] = str_filler(buf, " ");
-				index++;
+				tokens[in] = str_filler(buf, " ");
+				in++;
 			}
 			int error;
 
 		
 			for(int i = 0; i < total_acc; i++){
-				int b = i * (index/ MAX_THREAD);
+				int b = i * (in/ MAX_THREAD);
 				error = pthread_create(&(tid[i]), NULL, &process_transaction, (void*) (tokens + b));
 				if(error != 0){
 					printf("Thread can't be created : [%s]\n", strerror(error));
@@ -120,7 +121,7 @@ int main(int argc, char** argv){
 	
 void process_transaction(void* arg){
 	pthread_barrier_wait(&bar);
-	int threshold = index/MAX_THREAD;
+	int threshold = in/MAX_THREAD;
 	
 	command_line* tokens = (command_line*)(arg);
 	for(int j = 0; j < threshold; j++){	
