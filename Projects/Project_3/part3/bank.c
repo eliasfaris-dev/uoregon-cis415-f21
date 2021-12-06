@@ -88,6 +88,9 @@ int main(int argc, char** argv){
 				}
 			}
 
+			for(int i = 0; i < total_acc; i++){
+				pthread_join(tid[i], NULL);
+			}
 			//pthread_mutex_lock(&fixLock);
 			//pthread_barrier_wait(&bar);
 			
@@ -97,10 +100,6 @@ int main(int argc, char** argv){
 			//error = pthread_create(&b_thread, NULL, &update_balance, &update);
 			if(error != 0){
 				printf("Bank thread can't be created\n", strerror(error));
-			}
-
-			for(int i = 0; i < total_acc; i++){
-				pthread_join(tid[i], NULL);
 			}
 			pthread_join(b_thread, NULL);
 
