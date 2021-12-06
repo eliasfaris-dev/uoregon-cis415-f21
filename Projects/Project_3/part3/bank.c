@@ -127,7 +127,7 @@ int main(int argc, char** argv){
 void process_transaction(void* arg){
 	//pthread_barrier_wait(&bar);
 	int threshold = in/MAX_THREAD;
-	int curr pthread_self();
+	int curr = pthread_self();
 	printf("In process\n");
 	command_line* tokens = (command_line*)(arg);
 	pthread_barrier_wait(&bar);
