@@ -211,7 +211,7 @@ void process_transaction(void* arg){
 								pthread_mutex_unlock(&the_acc[i].ac_lock);
 								pthread_mutex_lock(&the_acc[k].ac_lock);
                                 the_acc[k].balance += amount;
-								printf("T\n");
+								printf("T2\n");
 								pthread_mutex_unlock(&the_acc[k].ac_lock);
 
 								pthread_mutex_lock(&lock);
