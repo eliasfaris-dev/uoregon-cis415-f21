@@ -24,7 +24,7 @@ pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 pthread_cond_t fixCond = PTHREAD_COND_INITIALIZER;
 int threadWaiting = 0;
 int completed = 0;
-int threadActive = 10;
+int threadActive = 0;
 int in = 0;
 
 int main(int argc, char** argv){
@@ -97,7 +97,7 @@ int main(int argc, char** argv){
 				pthread_join(tid[i], NULL);
 			}
 			
-			
+			threadActive = MAX_THREAD;
 			// Might need to change this 
 			int update = 0;
 			error = pthread_create(&b_thread, NULL, &update_balance, NULL);
