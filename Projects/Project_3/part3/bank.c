@@ -79,7 +79,7 @@ int main(int argc, char** argv){
 			}
 			int error;
 
-		
+			printf("Before process transaction");
 			for(int i = 0; i < total_acc; i++){
 				int b = i * (in/ MAX_THREAD);
 				error = pthread_create(&(tid[i]), NULL, &process_transaction, (void*) (tokens + b));
@@ -123,6 +123,7 @@ int main(int argc, char** argv){
 void process_transaction(void* arg){
 	pthread_barrier_wait(&bar);
 	int threshold = in/MAX_THREAD;
+	printf("Beg process");
 	
 	command_line* tokens = (command_line*)(arg);
 	for(int j = 0; j < threshold; j++){	
