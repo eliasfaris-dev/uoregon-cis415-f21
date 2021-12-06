@@ -131,7 +131,7 @@ void process_transaction(void* arg){
 	printf("In process\n");
 	command_line* tokens = (command_line*)(arg);
 	pthread_barrier_wait(&bar);
-	for(int j = 0; j < 12000; j++){	
+	for(int j = 0; j < threshold; j++){	
 		
 		if(completed >= 5000){
 			printf("in completed %d\n", curr);
@@ -152,7 +152,9 @@ void process_transaction(void* arg){
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
                     if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
-                        break;
+                        pthread_mutex_lock(&the_acc[i].ac_lock);
+						pthread_mutex_unlock(&the_acc[i].ac_lock);
+						break;
                     }
                 }
             }
