@@ -125,13 +125,13 @@ int main(int argc, char** argv){
 }
 	
 void process_transaction(void* arg){
-	//pthread_barrier_wait(&bar);
+	pthread_barrier_wait(&bar);
 	int threshold = in/MAX_THREAD;
 	int curr = pthread_self();
 	printf("In process\n");
 	command_line* tokens = (command_line*)(arg);
 	//printf("in completed %d\n", curr);
-	pthread_barrier_wait(&bar);
+	//pthread_barrier_wait(&bar);
 	printf("completed: %d\n");
 	for(int j = 0; j < threshold; j++){	
 		//printf("%d\n", j);
