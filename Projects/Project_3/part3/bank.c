@@ -232,6 +232,7 @@ void process_transaction(void* arg){
 	threadActive--;
 	
 	if(threadWaiting == threadActive){
+		printf("testtt");
 		pthread_mutex_lock(&fixLock);
 		pthread_cond_signal(&fixCond);
 		pthread_mutex_unlock(&fixLock);
@@ -251,7 +252,7 @@ void update_balance(void* arg){
 	while((completed > 0) || (threadActive > 0)){
 		pthread_cond_wait(&fixCond, &fixLock);
 		pthread_mutex_unlock(&fixLock);
-
+		printf("Gets into update while");
 		pthread_mutex_lock(&lock);
 		for(int i = 0; i < total_acc; i++){
 			the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
