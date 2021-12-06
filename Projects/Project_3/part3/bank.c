@@ -92,7 +92,7 @@ int main(int argc, char** argv){
 
 			pthread_mutex_lock(&fixLock);
 			pthread_barrier_wait(&bar);
-			
+
 			for(int i = 0; i < total_acc; i++){
 				pthread_join(tid[i], NULL);
 			}
@@ -127,13 +127,14 @@ int main(int argc, char** argv){
 void process_transaction(void* arg){
 	//pthread_barrier_wait(&bar);
 	int threshold = in/MAX_THREAD;
-	
-	
+	int curr pthread_self();
+	printf("In process\n");
 	command_line* tokens = (command_line*)(arg);
 	pthread_barrier_wait(&bar);
 	for(int j = 0; j < threshold; j++){	
 		
 		if(completed >= 5000){
+			printf("in completed %d\n", curr);
 			pthread_mutex_lock(&lock);
 			threadWaiting++;
 			if(threadActive == threadWaiting){
@@ -143,6 +144,8 @@ void process_transaction(void* arg){
 			}
 			pthread_cond_wait(&cond, &lock);
 			pthread_mutex_unlock(&lock);
+
+			printf("TEst\n");
 		}
 		
 		if(strcmp(tokens[j].command_list[0], "C") == 0){
