@@ -45,6 +45,8 @@ int main(int argc, char** argv){
 			total_acc = atoi(buf);
 			the_acc = malloc(sizeof(account) * total_acc);
 			
+			pthread_barrier_init(&bar, NULL, (MAX_THREAD + 1));
+
 			for(int i = 0; i < total_acc; i++){
 				getline(&buf, &size, fp);
 				buf[strcspn(buf, "\n")] = 0;
@@ -70,7 +72,7 @@ int main(int argc, char** argv){
 				pthread_mutex_init(&the_acc[i].ac_lock, NULL);
 			}
 			
-			pthread_barrier_init(&bar, NULL, (MAX_THREAD + 1));
+			//pthread_barrier_init(&bar, NULL, (MAX_THREAD + 1));
 			tokens = malloc(sizeof(command_line) * 120000);
 
 			while((getline(&buf, &size, fp)) != -1){
@@ -88,11 +90,13 @@ int main(int argc, char** argv){
 				}
 			}
 
+			pthread_mutex_lock(&fixLock);
+			pthread_barrier_wait(&bar);
+			
 			for(int i = 0; i < total_acc; i++){
 				pthread_join(tid[i], NULL);
 			}
-			pthread_mutex_lock(&fixLock);
-			pthread_barrier_wait(&bar);
+			
 			
 			// Might need to change this 
 			int update = 0;
@@ -121,11 +125,12 @@ int main(int argc, char** argv){
 }
 	
 void process_transaction(void* arg){
-	pthread_barrier_wait(&bar);
+	//pthread_barrier_wait(&bar);
 	int threshold = in/MAX_THREAD;
 	
 	
 	command_line* tokens = (command_line*)(arg);
+	pthread_barrier_wait(&bar);
 	for(int j = 0; j < threshold; j++){	
 		
 		if(completed >= 5000){
@@ -235,7 +240,7 @@ void update_balance(void* arg){
 		for(int i = 0; i < total_acc; i++){
 			the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
 		}
-		(*((int*)arg))++;
+		//(*((int*)arg))++;
 		threadWaiting = 0;
 		completed = 0;
 
@@ -246,7 +251,7 @@ void update_balance(void* arg){
 		pthread_mutex_lock(&fixLock);
 		pthread_mutex_unlock(&lock);
 	}
-	pthread_exit(NULL);
+	//pthread_exit(NULL);
 	
 }
 
