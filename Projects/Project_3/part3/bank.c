@@ -153,6 +153,7 @@ void process_transaction(void* arg){
                 if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
                     if(strcmp(tokens[j].command_list[2], the_acc[i].password) == 0){
                         pthread_mutex_lock(&the_acc[i].ac_lock);
+						printf("C\n");
 						pthread_mutex_unlock(&the_acc[i].ac_lock);
 						break;
                     }
@@ -167,6 +168,7 @@ void process_transaction(void* arg){
 						pthread_mutex_lock(&the_acc[i].ac_lock);
                         the_acc[i].transaction_tracter += amount;
 						the_acc[i].balance += amount;
+						printf("D\n");
 						pthread_mutex_unlock(&the_acc[i].ac_lock);
 						pthread_mutex_lock(&lock);
 						completed++;
@@ -184,6 +186,7 @@ void process_transaction(void* arg){
 						pthread_mutex_lock(&the_acc[i].ac_lock);
                         the_acc[i].transaction_tracter += amount;
 						the_acc[i].balance -= amount;
+						printf("W\n");
 						pthread_mutex_unlock(&the_acc[i].ac_lock);
 						pthread_mutex_lock(&lock);
 						completed++;
@@ -204,6 +207,7 @@ void process_transaction(void* arg){
 								pthread_mutex_lock(&the_acc[i].ac_lock);
                                 the_acc[i].balance -= amount;
                                 the_acc[i].transaction_tracter += amount;
+								printf("W\n");
 								pthread_mutex_unlock(&the_acc[i].ac_lock);
 								pthread_mutex_lock(&the_acc[k].ac_lock);
                                 the_acc[k].balance += amount;
