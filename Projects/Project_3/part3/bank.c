@@ -228,7 +228,7 @@ void process_transaction(void* arg){
             }
 		}
 	}
-	//threadActive--;
+	threadActive--;
 	
 	if(threadWaiting == threadActive){
 		pthread_mutex_lock(&fixLock);
@@ -259,6 +259,7 @@ void update_balance(void* arg){
 		completed = 0;
 
 		if(threadActive > 0){
+			printf("thread active\n");
 			pthread_cond_broadcast(&cond);
 		}
 
