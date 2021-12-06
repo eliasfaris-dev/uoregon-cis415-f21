@@ -147,7 +147,7 @@ void process_transaction(void* arg){
 
 			printf("TEst\n");
 		}
-		
+		/*
 		if(strcmp(tokens[j].command_list[0], "C") == 0){
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
@@ -160,7 +160,8 @@ void process_transaction(void* arg){
                 }
             }
         }
-		else if (strcmp(tokens[j].command_list[0], "D") == 0){
+		*/
+		if (strcmp(tokens[j].command_list[0], "D") == 0){
 			double amount = atof(tokens[j].command_list[3]);
 			for(int i = 0; i < total_acc; i++){
 				if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
