@@ -264,10 +264,9 @@ void update_balance(void* arg){
 			printf("thread active\n");
 			pthread_cond_broadcast(&cond);
 		}
-
-		pthread_mutex_lock(&fixLock);
 		pthread_mutex_unlock(&lock);
-	}
+		pthread_mutex_lock(&fixLock);
+		
 	//pthread_exit(NULL);
 	
 }
