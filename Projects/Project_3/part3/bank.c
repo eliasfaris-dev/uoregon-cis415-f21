@@ -10,14 +10,21 @@ void process_transaction();
 void update_balance();
 void printFunc();
 
-
+int index = 0;
 pthread_t tid[MAX_THREAD];
 pthread_t b_thread;
+pthread_barrier_t bar;
 account* the_acc;
 int total_acc = 0;
 char file;
 command_line* tokens;
-//pthread_mutex_t lock[MAX_THREAD];
+pthread_mutex_t lock[MAX_THREAD];
+pthread_mutex_t fixLock;
+pthread_cond_t cond;
+pthread_cond_t fixCond;
+int threadWaiting = 0;
+int completed = 0;
+int threadActive = 0;
 
 int main(int argc, char** argv){
 	if(argc != 2){
@@ -62,9 +69,9 @@ int main(int argc, char** argv){
 				pthread_mutex_init(&the_acc[i].ac_lock, NULL);
 			}
 			
+			pthread_barrier_init(&bar, NULL, (MAX_THREAD + 1));
 			tokens = malloc(sizeof(command_line) * 120000);
-			
-			int index = 0;
+
 			while((getline(&buf, &size, fp)) != -1){
 				tokens[index] = str_filler(buf, " ");
 				index++;
@@ -73,17 +80,20 @@ int main(int argc, char** argv){
 
 		
 			for(int i = 0; i < total_acc; i++){
-				int b = i * (index/10);
+				int b = i * (index/ MAX_THREAD);
 				error = pthread_create(&(tid[i]), NULL, &process_transaction, (void*) (tokens + b));
 				if(error != 0){
 					printf("Thread can't be created : [%s]\n", strerror(error));
 				}
 			}
+
+			pthread_mutex_lock(&fixLock);
+			pthread_barrier_wait(&bar);
 			
 			for(int i = 0; i < total_acc; i++){
 				pthread_join(tid[i], NULL);
 			}
-		
+			// Might need to change this 
 			error = pthread_create(&b_thread, NULL, &update_balance, NULL);
 			if(error != 0){
 				printf("Bank thread can't be created\n", strerror(error));
@@ -109,8 +119,22 @@ int main(int argc, char** argv){
 }
 	
 void process_transaction(void* arg){
+	pthread_barrier_wait(&bar);
+	int threshold = index/MAX_THREAD;
+	
 	command_line* tokens = (command_line*)(arg);
-	for(int j = 0; j < 12000; j++){	
+	for(int j = 0; j < threshold; j++){	
+		if(completed >= 5000){
+			pthread_mutex_lock(&lock);
+			threadWaiting++;
+			if(threadActive == threadWaiting){
+				pthread_mutex_lock(&fixLock);
+				pthread_cond_signal(&fixCond);
+				pthread_mutex_unlock(&fixLock);
+			}
+			pthread_cond_wait(&cond, &lock);
+			pthread_mutex_unlock(&lock);
+		}
 		if(strcmp(tokens[j].command_list[0], "C") == 0){
             for(int i = 0; i < total_acc; i++){
                 if((strcmp(tokens[j].command_list[1], the_acc[i].account_number) == 0)){
@@ -129,6 +153,9 @@ void process_transaction(void* arg){
                         the_acc[i].transaction_tracter += amount;
 						the_acc[i].balance += amount;
 						pthread_mutex_unlock(&the_acc[i].ac_lock);
+						pthread_mutex_lock(&lock);
+						completed++;
+						pthread_mutex_unlock(&lock);
                         break;
                     }
                 }
@@ -143,6 +170,9 @@ void process_transaction(void* arg){
                         the_acc[i].transaction_tracter += amount;
 						the_acc[i].balance -= amount;
 						pthread_mutex_unlock(&the_acc[i].ac_lock);
+						pthread_mutex_lock(&lock);
+						completed++;
+						pthread_mutex_unlock(&lock);
                         break;
                     }
                 }
@@ -163,6 +193,9 @@ void process_transaction(void* arg){
 								pthread_mutex_lock(&the_acc[k].ac_lock);
                                 the_acc[k].balance += amount;
 								pthread_mutex_unlock(&the_acc[k].ac_lock);
+								pthread_mutex_lock(&lock);
+								completed++;
+								pthread_mutex_lock(&lock);
                                 break;
                             }
                         }
@@ -171,13 +204,36 @@ void process_transaction(void* arg){
             }
 		}
 	}
+	threadActive--;
+	if(threadWaiting == threadActive){
+		pthread_mutex_lock(&fixLock);
+		pthread_cond_signal(&fixCond);
+		pthread_mutex_unlock(&fixLock);
+	}
+
+	pthread_exit(NULL);
 }
 
 void update_balance(void* arg){
-	for(int i = 0; i < total_acc; i++){
-		the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
+	while((completed > 0) || (threadActive > 0)){
+		pthread_cond_wait(&fixCond, &fixLock);
+		pthread_mutex_unlock(&fixLock);
+
+		pthread_mutex_lock(&lock);
+		for(int i = 0; i < total_acc; i++){
+			the_acc[i].balance += the_acc[i].reward_rate * the_acc[i].transaction_tracter;
+		}
+
+		threadWaiting = 0;
+		completed = 0;
+
+		if(threadActive > 0){
+			pthread_cond_broadcast(&cond);
+		}
+
+		pthread_mutex_lock(&fixLock);
+		pthread_mutex_unlock(&lock);
 	}
-	
 }
 
 int count_token (char* buf, const char* delim)
